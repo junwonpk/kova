@@ -39,6 +39,7 @@ class Kova:
         self.send_message(message)
 
     def send_message(self, message):
+        app.app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = False
         ctx = app.app.test_request_context('/')
         ctx.push()
         app.send_message(self.user_id, message)
