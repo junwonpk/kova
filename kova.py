@@ -22,7 +22,7 @@ class Kova:
         self.user_id = user_id
         if user_id not in self.redis.keys(): # if user first time talking
             self.initUser(user_id)
-            return 'you messaged for the first time'
+            return
 
         user_data = self.getData(user_id)
 
@@ -33,16 +33,17 @@ class Kova:
             user_data['chapter'] += 1
 
         self.setData(user_id, user_data)
-        return 'you already messaged'
+        return 
 
     def kovatype(self, message):
-        time.sleep(len(message) * 0.1)
+        time.sleep(len(message) * 0.15)
         self.send_message(message)
 
     def send_message(self, message):
         ctx = app.app.test_request_context('/', method='POST')
         ctx.push()
         app.send_message(self.user_id, message)
+
     def initUser(self, user_id):
         user_data = {'chapter': 0, 'cardkey': 0, 'username': ''}
         self.redis.set(user_id, cPickle.dumps(user_data))
