@@ -14,11 +14,16 @@ class Kova:
         self.next = 0
 
     def chat(self, input, user_id):
-        self.user_id = user_id
+        #debugging
         if input == 'redis flushall':
             self.redis.flushall()
+        #debugging
+
+        self.user_id = user_id
         if user_id not in self.redis.keys(): # if user first time talking
             self.initUser(user_id)
+            return 'you messaged for the first time'
+
         user_data = self.getData(user_id)
 
         if user_data['chapter'] == 1:
@@ -26,8 +31,9 @@ class Kova:
 
         if self.next == 1:
             user_data['chapter'] += 1
+
         self.setData(user_id, user_data)
-        return 'you messaged'
+        return 'you already messaged'
 
     def kovatype(self, message):
         time.sleep(len(message) * 0.1)
