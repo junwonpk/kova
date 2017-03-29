@@ -1,11 +1,11 @@
 import os
 import sys
 import json
-from kova import *
+from kovat import *
 
 if __name__ == '__main__':
-    kova = Kova()
+    kovat = Kovat()
     while(1):
         message = raw_input('User: ')
-        response = kova.chat(message)
+        response = kovat.chat(message)
         print 'Kova: ' + response
