@@ -25,15 +25,15 @@ class Kova:
         user_data = self.getData(user_id)
 
         if user_data['chapter'] == 1:
-            user_data = self.chapter1(user_data)
+            user_data = self.chapter1(input, user_data)
         if user_data['chapter'] == 2:
-            user_data = self.chapter2(user_data)
+            user_data = self.chapter2(input, user_data)
         if user_data['chapter'] == 3:
-            user_data = self.chapter3(user_data)
+            user_data = self.chapter3(input, user_data)
         if user_data['chapter'] == 4:
-            user_data = self.chapter4(user_data)
+            user_data = self.chapter4(input, user_data)
         if user_data['chapter'] == 5:
-            user_data = self.chapter5(user_data)
+            user_data = self.chapter5(input, user_data)
         if user_data['chapter'] == 6:
             user_data = self.chapter6(user_data)
         if user_data['chapter'] == 7:
@@ -98,7 +98,7 @@ class Kova:
         self.kovatype("Please.. I'm scared.. Let me know if you can hear me...")
         self.next = 1
 
-    def chapter1(self):
+    def chapter1(self, input, user_data):
         self.kovatype("Oh my god! Thank goodness. I'm so glad to meet you.")
         self.kovatype("What should I call you?")
         self.next = 1
