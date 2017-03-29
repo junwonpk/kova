@@ -33,14 +33,14 @@ class Kova:
             user_data['chapter'] += 1
 
         self.setData(user_id, user_data)
-        return 
+        return
 
     def kovatype(self, message):
         time.sleep(len(message) * 0.15)
         self.send_message(message)
 
     def send_message(self, message):
-        ctx = app.app.test_request_context('/', method='POST')
+        ctx = app.app.test_request_context('/')
         ctx.push()
         app.send_message(self.user_id, message)
 
