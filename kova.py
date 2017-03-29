@@ -4,7 +4,7 @@ import time
 import redis
 import cPickle
 
-from app import *
+from flask import current_app as app
 
 class Kova:
 
