@@ -70,8 +70,6 @@ class Kova:
         if self.next == 1:
             user_data['chapter'] += 1
 
-        print user_data
-
         self.setData(user_id, user_data)
         return
 
