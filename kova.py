@@ -21,7 +21,6 @@ class Kova:
         self.user_id = user_id
         if user_id not in self.redis.keys(): # if user first time talking
             self.initUser(user_id)
-            return
 
         user_data = self.getData(user_id)
 
