@@ -93,6 +93,22 @@ class Kova:
     def setData(self, user_id, user_data):
         self.redis.set(user_id, cPickle.dumps(user_data))
 
+    def extract_name(self, input):
+        name = []
+        name = re.findall('.*is\s(\w+).*', input.lower())
+        if not name:
+            name = re.findall('.*\'m\s(\w+).*', input.lower())
+        if not name:
+            name = re.findall('.*am\s(\w+).*', input.lower())
+        if not name:
+            name = re.findall('.*call\sme\s(\w+).*', input.lower())
+        if not name:
+            name = re.findall('.*known\sas\s(\w+).*', input.lower())
+        if name:
+            return name[0].title()
+        else:
+            return []
+
     def chapter0(self):
         self.kovatype("Hello?")
         self.kovatype("Is someone there?")
@@ -122,22 +138,6 @@ class Kova:
             self.kovatype("I'm just really scared and want to get out of here.")
             self.next = 1
         return user_data
-
-    def extract_name(self, input):
-        name = []
-        name = re.findall('.*is\s(\w+).*', input.lower())
-        if not name:
-            name = re.findall('.*\'m\s(\w+).*', input.lower())
-        if not name:
-            name = re.findall('.*am\s(\w+).*', input.lower())
-        if not name:
-            name = re.findall('.*call\sme\s(\w+).*', input.lower())
-        if not name:
-            name = re.findall('.*known\sas\s(\w+).*', input.lower())
-        if name:
-            return name[0].title()
-        else:
-            return []
 
     def chapter3(self, input, user_data):
         self.kovatype("There is a dead woman on the ground. Her nametag says Lena Kova.")
