@@ -85,6 +85,7 @@ class Kova:
         user_data = {"chapter": 0, "cardkey": 0, "username": ''}
         self.redis.set(user_id, cPickle.dumps(user_data))
         self.chapter0()
+        self.next = 1
 
     def getData(self, user_id):
         return cPickle.loads(self.redis.get(user_id))
