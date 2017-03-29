@@ -35,35 +35,35 @@ class Kova:
         if user_data['chapter'] == 5:
             user_data = self.chapter5(input, user_data)
         if user_data['chapter'] == 6:
-            user_data = self.chapter6(user_data)
+            user_data = self.chapter6(input, user_data)
         if user_data['chapter'] == 7:
-            user_data = self.chapter7(user_data)
+            user_data = self.chapter7(input, user_data)
         if user_data['chapter'] == 8:
-            user_data = self.chapter8(user_data)
+            user_data = self.chapter8(input, user_data)
         if user_data['chapter'] == 9:
-            user_data = self.chapter9(user_data)
+            user_data = self.chapter9(input, user_data)
         if user_data['chapter'] == 10:
-            user_data = self.chapter10(user_data)
+            user_data = self.chapter10(input, user_data)
         if user_data['chapter'] == 11:
-            user_data = self.chapter11(user_data)
+            user_data = self.chapter11(input, user_data)
         if user_data['chapter'] == 12:
-            user_data = self.chapter12(user_data)
+            user_data = self.chapter12(input, user_data)
         if user_data['chapter'] == 13:
-            user_data = self.chapter13(user_data)
+            user_data = self.chapter13(input, user_data)
         if user_data['chapter'] == 14:
-            user_data = self.chapter14(user_data)
+            user_data = self.chapter14(input, user_data)
         if user_data['chapter'] == 15:
-            user_data = self.chapter15(user_data)
+            user_data = self.chapter15(input, user_data)
         if user_data['chapter'] == 16:
-            user_data = self.chapter16(user_data)
+            user_data = self.chapter16(input, user_data)
         if user_data['chapter'] == 17:
-            user_data = self.chapter17(user_data)
+            user_data = self.chapter17(input, user_data)
         if user_data['chapter'] == 18:
-            user_data = self.chapter18(user_data)
+            user_data = self.chapter18(input, user_data)
         if user_data['chapter'] == 19:
-            user_data = self.chapter19(user_data)
+            user_data = self.chapter19(input, user_data)
         if user_data['chapter'] == 20:
-            user_data = self.chapter20(user_data)
+            user_data = self.chapter20(input, user_data)
 
         if self.next == 1:
             user_data['chapter'] += 1
@@ -102,6 +102,7 @@ class Kova:
         self.kovatype("Oh my god! Thank goodness. I'm so glad to meet you.")
         self.kovatype("What should I call you?")
         self.next = 1
+        return user_data
 
     def chapter2(self, input, user_data):
         username = self.extract_name(input)
@@ -137,11 +138,12 @@ class Kova:
         else:
             return []
 
-    def chapter3(self):
+    def chapter3(self, input, user_data):
         self.kovatype("There is a dead woman on the ground. Her nametag says Lena Kova.")
         self.kovatype("There is a prison cell behind me, and a locked metal gate in front.")
         self.kovatype("What should I do?")
         self.next = 1
+        return user_data
 
     def chapter4(self, input, user_data):
         if 'gate' in input:
@@ -155,55 +157,65 @@ class Kova:
             user_data["cardkey"] = 1
         elif 'prison' in input:
             kovatype('The prison is bloody.')
+        return user_data
 
-    def chapter5(self):
+    def chapter5(self, input, user_data):
         kovatype("Yes! I opened the door!")
         kovatype("Now I hear footsteps... What should I do?")
+        return user_data
 
-    def chapter6ask(self):
+    def chapter6ask(self, input, user_data):
         kovatype("OMG. I asked for help and they tried to shoot me.")
         kovatype("I escaped to a room and locked the door.")
         kovatype("The door is not gonna last long. What should I do!!")
+        return user_data
 
-    def chapter6run(self):
+    def chapter6run(self, input, user_data):
         kovatype("I escaped to a room and locked the door.")
         kovatype("The door is not gonna last long. What should I do!!")
+        return user_data
 
-    def chapter7(self):
+    def chapter7(self, input, user_data):
         kovatype("I can see an air chamber and a few other useless things.")
         kovatype("What should I do?")
+        return user_data
 
-    def chapter8(self):
+    def chapter8(self, input, user_data):
         kovatype("I climbed through the air vent")
         kovatype("and arrived at a dark weird research lab.")
         kovatype("Tell me to do something")
+        return user_data
 
-    def chapter9(self):
+    def chapter9(self, input, user_data):
         kovatype("I found a notebook.")
         kovatype("They are using children for testing since")
         kovatype("some aliens don't hurt kids.")
         kovatype("Soldiers kill these kids after tests to prevent")
         kovatype("info or virus from leaking")
+        return user_data
 
-    def chapter10(self):
+    def chapter10(self, input, user_data):
         kovatype("also MAE kills everyone")
         kovatype("including children, and is deadly")
         kovatype("OMG so scary")
         kovatype("OMGOMG I heard some sound from behind the curtains")
+        return user_data
 
-    def chapter11(self):
+    def chapter11(self, input, user_data):
         kovatype("There are aliens detained here.")
         kovatype("Poor things... Look so sad...")
         kovatype("Let's free them. Should we?")
         kovatype("It will also distract the soldiers")
+        return user_data
 
-    def chapter12(self):
+    def chapter12(self, input, user_data):
         kovatype("Alright! I freed them!")
         kovatype("Oh no. Breach alarm went on")
         kovatype("Oh no! The alarm says MAE also escaped.")
         kovatype("Must have been one of the aliens. Let's run away")
+        return user_data
 
-    def chapter13(self):
+    def chapter13(self, input, user_data):
         kovatype("I ran out of the office")
         kovatype("I hear something from left. I'll run right")
         kovatype("I faced a door. It's asking a question.")
@@ -211,38 +223,46 @@ class Kova:
         kovatype("I hear aliens and soldiers fighting in the back!")
         kovatype("That should give us some time!")
         #time.sleep. Then if redis status is x, then kill. Next message, change redis status to prevent.
+        return user_data
 
-    def chapter14(self):
+    def chapter14(self, input, user_data):
         kovatype("Yes! That was the answer!")
         kovatype("hip hip hurray!")
         kovatype("Oh my god. I see detained children")
         kovatype("I'll take them with me, since either soldiers")
         kovatype("or MAE will kill them")
+        return user_data
 
-    def chapter15(self):
+    def chapter15(self, input, user_data):
         kovatype("I'm taking them all")
         kovatype("Last door is near")
         kovatype("OMG There is a soldier what do i do")
+        return user_data
 
-    def chapter16kill(self):
+    def chapter16kill(self, input, user_data):
         kovatype("I hid then attacked with flame")
         kovatype("water is falling and there is blood")
+        return user_data
 
-    def chapter17(self):
+    def chapter17(self, input, user_data):
         kovatype("kids are waking up thx to water")
         kovatype("they screamed when they saw me. why?")
         kovatype("uh oh.. the rflection")
         kovatype("i am mae")
+        return user_data
 
-    def chapter18(self):
+    def chapter18(self, input, user_data):
         kovatype("I dont know what i should do?")
         kovatype("but we've done so much together. I can't kill humans")
+        return user_data
 
-    def chapter19(self):
+    def chapter19(self, input, user_data):
         kovatype("I decided to kill my self.") #regardless of user answer
+        return user_data
 
-    def chapter20(self):
+    def chapter20(self, input, user_data):
         kovatype("Goodbye. Goodbye Junwon")
         kovatype("I was really happy to be your friend")
         kovatype("I hope this moment would have lasted forever")
         kovatype("DEAD")
+        return user_data
