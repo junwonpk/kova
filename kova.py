@@ -41,7 +41,7 @@ class Kova:
         self.send_message(message)
 
     def send_message(self, message):
-        with app.test_request_context('/'):
+        with app.app.test_request_context('/'):
             app.send_message(self.user_id, message)
 
     def initUser(self, user_id):
