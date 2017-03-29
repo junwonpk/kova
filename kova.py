@@ -149,121 +149,121 @@ class Kova:
     def chapter4(self, input, user_data):
         if 'gate' in input:
             if user_data['cardkey'] == 1:
-                kovatype('Let me try Lena\'s key. Wow! It works!')
+                self.kovatype('Let me try Lena\'s key. Wow! It works!')
                 self.next = 1
             else:
-                kovatype('The gate is locked. I need a card key. Where could I find it?')
+                self.kovatype('The gate is locked. I need a card key. Where could I find it?')
         elif 'dead' in input:
-            kovatype('I found a card key!')
+            self.kovatype('I found a card key!')
             user_data["cardkey"] = 1
         elif 'prison' in input:
-            kovatype('The prison is bloody.')
+            self.kovatype('The prison is bloody.')
         return user_data
 
     def chapter5(self, input, user_data):
-        kovatype("Yes! I opened the door!")
-        kovatype("Now I hear footsteps... What should I do?")
+        self.kovatype("Yes! I opened the door!")
+        self.kovatype("Now I hear footsteps... What should I do?")
         return user_data
 
     def chapter6ask(self, input, user_data):
-        kovatype("OMG. I asked for help and they tried to shoot me.")
-        kovatype("I escaped to a room and locked the door.")
-        kovatype("The door is not gonna last long. What should I do!!")
+        self.kovatype("OMG. I asked for help and they tried to shoot me.")
+        self.kovatype("I escaped to a room and locked the door.")
+        self.kovatype("The door is not gonna last long. What should I do!!")
         return user_data
 
     def chapter6run(self, input, user_data):
-        kovatype("I escaped to a room and locked the door.")
-        kovatype("The door is not gonna last long. What should I do!!")
+        self.kovatype("I escaped to a room and locked the door.")
+        self.kovatype("The door is not gonna last long. What should I do!!")
         return user_data
 
     def chapter7(self, input, user_data):
-        kovatype("I can see an air chamber and a few other useless things.")
-        kovatype("What should I do?")
+        self.kovatype("I can see an air chamber and a few other useless things.")
+        self.kovatype("What should I do?")
         return user_data
 
     def chapter8(self, input, user_data):
-        kovatype("I climbed through the air vent")
-        kovatype("and arrived at a dark weird research lab.")
-        kovatype("Tell me to do something")
+        self.kovatype("I climbed through the air vent")
+        self.kovatype("and arrived at a dark weird research lab.")
+        self.kovatype("Tell me to do something")
         return user_data
 
     def chapter9(self, input, user_data):
-        kovatype("I found a notebook.")
-        kovatype("They are using children for testing since")
-        kovatype("some aliens don't hurt kids.")
-        kovatype("Soldiers kill these kids after tests to prevent")
-        kovatype("info or virus from leaking")
+        self.kovatype("I found a notebook.")
+        self.kovatype("They are using children for testing since")
+        self.kovatype("some aliens don't hurt kids.")
+        self.kovatype("Soldiers kill these kids after tests to prevent")
+        self.kovatype("info or virus from leaking")
         return user_data
 
     def chapter10(self, input, user_data):
-        kovatype("also MAE kills everyone")
-        kovatype("including children, and is deadly")
-        kovatype("OMG so scary")
-        kovatype("OMGOMG I heard some sound from behind the curtains")
+        self.kovatype("also MAE kills everyone")
+        self.kovatype("including children, and is deadly")
+        self.kovatype("OMG so scary")
+        self.kovatype("OMGOMG I heard some sound from behind the curtains")
         return user_data
 
     def chapter11(self, input, user_data):
-        kovatype("There are aliens detained here.")
-        kovatype("Poor things... Look so sad...")
-        kovatype("Let's free them. Should we?")
-        kovatype("It will also distract the soldiers")
+        self.kovatype("There are aliens detained here.")
+        self.kovatype("Poor things... Look so sad...")
+        self.kovatype("Let's free them. Should we?")
+        self.kovatype("It will also distract the soldiers")
         return user_data
 
     def chapter12(self, input, user_data):
-        kovatype("Alright! I freed them!")
-        kovatype("Oh no. Breach alarm went on")
-        kovatype("Oh no! The alarm says MAE also escaped.")
-        kovatype("Must have been one of the aliens. Let's run away")
+        self.kovatype("Alright! I freed them!")
+        self.kovatype("Oh no. Breach alarm went on")
+        self.kovatype("Oh no! The alarm says MAE also escaped.")
+        self.kovatype("Must have been one of the aliens. Let's run away")
         return user_data
 
     def chapter13(self, input, user_data):
-        kovatype("I ran out of the office")
-        kovatype("I hear something from left. I'll run right")
-        kovatype("I faced a door. It's asking a question.")
-        kovatype("What is the answer?")
-        kovatype("I hear aliens and soldiers fighting in the back!")
-        kovatype("That should give us some time!")
+        self.kovatype("I ran out of the office")
+        self.kovatype("I hear something from left. I'll run right")
+        self.kovatype("I faced a door. It's asking a question.")
+        self.kovatype("What is the answer?")
+        self.kovatype("I hear aliens and soldiers fighting in the back!")
+        self.kovatype("That should give us some time!")
         #time.sleep. Then if redis status is x, then kill. Next message, change redis status to prevent.
         return user_data
 
     def chapter14(self, input, user_data):
-        kovatype("Yes! That was the answer!")
-        kovatype("hip hip hurray!")
-        kovatype("Oh my god. I see detained children")
-        kovatype("I'll take them with me, since either soldiers")
-        kovatype("or MAE will kill them")
+        self.kovatype("Yes! That was the answer!")
+        self.kovatype("hip hip hurray!")
+        self.kovatype("Oh my god. I see detained children")
+        self.kovatype("I'll take them with me, since either soldiers")
+        self.kovatype("or MAE will kill them")
         return user_data
 
     def chapter15(self, input, user_data):
-        kovatype("I'm taking them all")
-        kovatype("Last door is near")
-        kovatype("OMG There is a soldier what do i do")
+        self.kovatype("I'm taking them all")
+        self.kovatype("Last door is near")
+        self.kovatype("OMG There is a soldier what do i do")
         return user_data
 
     def chapter16kill(self, input, user_data):
-        kovatype("I hid then attacked with flame")
-        kovatype("water is falling and there is blood")
+        self.kovatype("I hid then attacked with flame")
+        self.kovatype("water is falling and there is blood")
         return user_data
 
     def chapter17(self, input, user_data):
-        kovatype("kids are waking up thx to water")
-        kovatype("they screamed when they saw me. why?")
-        kovatype("uh oh.. the rflection")
-        kovatype("i am mae")
+        self.kovatype("kids are waking up thx to water")
+        self.kovatype("they screamed when they saw me. why?")
+        self.kovatype("uh oh.. the rflection")
+        self.kovatype("i am mae")
         return user_data
 
     def chapter18(self, input, user_data):
-        kovatype("I dont know what i should do?")
-        kovatype("but we've done so much together. I can't kill humans")
+        self.kovatype("I dont know what i should do?")
+        self.kovatype("but we've done so much together. I can't kill humans")
         return user_data
 
     def chapter19(self, input, user_data):
-        kovatype("I decided to kill my self.") #regardless of user answer
+        self.kovatype("I decided to kill my self.") #regardless of user answer
         return user_data
 
     def chapter20(self, input, user_data):
-        kovatype("Goodbye. Goodbye Junwon")
-        kovatype("I was really happy to be your friend")
-        kovatype("I hope this moment would have lasted forever")
-        kovatype("DEAD")
+        self.kovatype("Goodbye. Goodbye Junwon")
+        self.kovatype("I was really happy to be your friend")
+        self.kovatype("I hope this moment would have lasted forever")
+        self.kovatype("DEAD")
         return user_data
