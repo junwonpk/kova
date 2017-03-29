@@ -28,6 +28,9 @@ class Kova:
         if user_data['chapter'] == 1:
             self.chapter1()
 
+        if user_data['chapter'] == 2:
+            user_data = self.chapter2()
+
         if self.next == 1:
             user_data['chapter'] += 1
 
@@ -39,9 +42,8 @@ class Kova:
         self.send_message(message)
 
     def send_message(self, message):
-        ctx = app.app.test_request_context('/')
-        ctx.push()
-        app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = False
+        #ctx = app.app.test_request_context('/')
+        #ctx.push()
         app.send_message(self.user_id, message)
 
     def initUser(self, user_id):
@@ -65,3 +67,35 @@ class Kova:
         self.kovatype("Oh my god! Thank goodness. I'm so glad to meet you.")
         self.kovatype("What should I call you?")
         self.next = 1
+
+    def chapter2(self, input, user_data):
+        user_name = self.extract_name(input)
+        if not user_name:
+            self.kovatype("Sorry. I didn't catch that!")
+            self.kovatype("Could you tell me your name again?")
+        else:
+            self.kovatype("Glad to meet you, " + self.username + "!")
+            self.kovatype("I'd love to tell you my name too")
+            self.kovatype("but..")
+            self.kovatype("the truth is...")
+            self.kovatype("I'm not sure what my name is...")
+            self.kovatype("or where I'm from")
+            self.kovatype("or where I am")
+            self.kovatype("I'm just really scared and want to get out of here.")
+            self.next = 1
+
+    def extract_name(self, input):
+        name = []
+        name = re.findall('.*is\s(\w+).*', input.lower())
+        if not name:
+            name = re.findall('.*\'m\s(\w+).*', input.lower())
+        if not name:
+            name = re.findall('.*am\s(\w+).*', input.lower())
+        if not name:
+            name = re.findall('.*call\sme\s(\w+).*', input.lower())
+        if not name:
+            name = re.findall('.*known\sas\s(\w+).*', input.lower())
+        if name:
+            return name[0].title()
+        else:
+            return []
