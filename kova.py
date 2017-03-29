@@ -11,6 +11,7 @@ class Kova:
         self.redis = redis.from_url(os.environ.get("REDISCLOUD_URL"))
         self.user_id = 0
         self.next = 0
+        self.typespeed = 0.10
 
     def chat(self, input, user_id):
         #debugging
@@ -75,7 +76,7 @@ class Kova:
         return
 
     def kovatype(self, message):
-        time.sleep(len(message) * 0.15)
+        time.sleep(len(message) * self.typespeed)
         self.send_message(message)
 
     def send_message(self, message):
