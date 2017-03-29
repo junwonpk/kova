@@ -1,10 +1,9 @@
 import os
 import re
+import app
 import time
 import redis
 import cPickle
-
-from app import *
 
 class Kova:
 
@@ -41,9 +40,9 @@ class Kova:
         self.send_message(message)
 
     def send_message(self, message):
-        with app.app.test_request_context('/'):
-            app.send_message(self.user_id, message)
-
+        ctx = app.app.test_request_context('/', method='POST')
+        ctx.push()
+        app.send_message(self.user_id, message)
     def initUser(self, user_id):
         user_data = {'chapter': 0, 'cardkey': 0, 'username': ''}
         self.redis.set(user_id, cPickle.dumps(user_data))
