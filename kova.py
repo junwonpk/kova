@@ -4,7 +4,7 @@ import time
 import redis
 import cPickle
 
-from flask import current_app as app
+from app import *
 
 class Kova:
 
@@ -38,7 +38,11 @@ class Kova:
 
     def kovatype(self, message):
         time.sleep(len(message) * 0.1)
-        app.process_message(message, self.user_id)
+        self.send_message(message)
+
+    def send_message(self, message):
+        with app.test_request_context('/'):
+            app.send_message(self.user_id, message)
 
     def initUser(self, user_id):
         user_data = {'chapter': 0, 'cardkey': 0, 'username': ''}
