@@ -176,8 +176,12 @@ class Kova:
             else:
                 self.kovatype('The gate is locked. I need a card key. Where could I find it?')
         elif len(re.findall(dead, input)) > 0:
-            self.kovatype('I found a card key!')
-            user_data["cardkey"] = 1
+            if re.findall(check, input) > 0:
+                self.kovatype('I found a card key!')
+                user_data["cardkey"] = 1
+            else:
+                verb = re.findall('(\w+)(\sthe)*\s'+dead, input)[0][0]
+                self.kovatype("I can't " + verb + " the corpse. What are you talking about!?")
         elif len(re.findall(prison, input)) > 0:
             self.kovatype('The prison is bloody.')
         else:

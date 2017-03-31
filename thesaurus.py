@@ -3,3 +3,4 @@ dead = '(woman|soldier|girl|body|deceased|dead|departed|mort|remain|bone|flesh|k
 prison = '(prison|cell|jail|confinement|lockup|penitentiary|bastille|dungeon|bars)'
 ask = '(ask|help|seek|meet|soldier|confront|fight)'
 run = '(run|hide|escape|exit|bounce)'
+check = '(check|inspect|find|look|strip)'
