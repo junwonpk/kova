@@ -45,7 +45,7 @@ def webhook():
                         message = messaging_event["message"]["text"]  # the message's text
                         process_message(message, sender_id)
                     else:
-                        message = messaging_event["message"]["attachments"]  # the message's image
+                        message = messaging_event["message"]  # the message's image
                         send_message(recipient_id, message, 0)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
@@ -74,17 +74,22 @@ def send_message(recipient_id, message, textflag):
         "Content-Type": "application/json"
     }
     if textflag == 1:
-        message_type = "text"
+        data = json.dumps({
+            "recipient": {
+                "id": recipient_id
+            },
+            "message": {
+                "text": message
+            }
+        })
     else:
-        message_type = "attachments"
-    data = json.dumps({
-        "recipient": {
-            "id": recipient_id
-        },
-        "message": {
-            message_type: message
-        }
-    })
+        data = json.dumps({
+            "recipient": {
+                "id": recipient_id
+            },
+            "message": message
+        })
+
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
     if r.status_code != 200:
         log(r.status_code)
