@@ -125,23 +125,31 @@ class Kova:
 
     def chapter2(self, input, user_data):
         username = self.extract_name(input)
+        print '1'
         if not username:
             self.kovatype("Sorry. I didn't catch that!")
             self.kovatype("Could you tell me your name again?")
         if username:
+            print '2'
             user_data["username"] = username
+            print '3'
             self.kovatype("Glad to meet you, " + username + "!")
             self.kovatype("I'd love to tell you my name too")
             self.kovatype("but..")
             self.kovatype("the truth is...")
+            print '4'
             self.kovatype("I'm not sure what my name is...")
             self.kovatype("or where I'm from..")
             self.kovatype("or where I'm at..")
             self.kovatype("I'm just really scared and want to get out of here.")
+            print '5'
             self.next = 1
+            print '6'
+        print '7'
         return user_data
 
     def chapter3(self, input, user_data):
+        print '8'
         self.kovatype("There is a dead woman on the ground. Her nametag says Lena Kova.")
         self.kovatype("There is a prison cell behind me, and a locked metal gate in front.")
         self.kovatype("What should I do?")
