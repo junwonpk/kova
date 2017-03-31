@@ -113,6 +113,7 @@ class Kova:
         self.kovatype("Is someone there?")
         self.kovatype("Please.. I'm scared.. Let me know if you can hear me...")
         self.next = 1
+        return
 
     def chapter1(self, input, user_data):
         self.kovatype("Oh my god! Thank goodness. I'm so glad to meet you.")
@@ -129,8 +130,7 @@ class Kova:
             user_data["username"] = username
             self.kovatype("Glad to meet you, " + username + "!")
             self.kovatype("I'd love to tell you my name too")
-            self.kovatype("but..")
-            self.kovatype("the truth is...")
+            self.kovatype("but.. the truth is...")
             self.kovatype("I'm not sure what my name is...")
             self.kovatype("or where I'm from")
             self.kovatype("or where I am")
