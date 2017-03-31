@@ -42,9 +42,11 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     if "text" in messaging_event["message"].keys():
-                        message_text = messaging_event["message"]["text"]  # the message's text
-                        process_message(message_text, sender_id)
-                    #else: return gif/sticker
+                        message = messaging_event["message"]["text"]  # the message's text
+                        process_message(message, sender_id)
+                    else:
+                        message = messaging_event["message"]["attachments"]  # the message's image
+                        send_message(recipient_id, message, 0)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -61,9 +63,9 @@ def process_message(message_text, sender_id):
     kova = Kova()
     kova.chat(message_text, sender_id)
 
-def send_message(recipient_id, message_text):
+def send_message(recipient_id, message, textflag):
 
-    log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
+    log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message))
 
     params = {
         "access_token": os.environ["PAGE_ACCESS_TOKEN"]
@@ -75,9 +77,14 @@ def send_message(recipient_id, message_text):
         "recipient": {
             "id": recipient_id
         },
-        "message": {
-            "text": message_text
-        }
+        if textflag == 1:
+            "message": {
+                "text": message
+            }
+        else:
+            "message": {
+                "attachments": message
+            }
     })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
     if r.status_code != 200:
