@@ -79,6 +79,7 @@ class Kova:
 
     def send_message(self, message):
         app.send_message(self.user_id, message)
+        app.close
 
     def initUser(self, user_id):
         user_data = {"chapter": 0, "cardkey": 0, "username": ''}
