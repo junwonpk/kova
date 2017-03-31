@@ -45,8 +45,12 @@ def webhook():
                         message = messaging_event["message"]["text"]  # the message's text
                         process_message(message, sender_id)
                     else:
-                        message = messaging_event["message"]["attachments"]  # the message's image
-                        send_message(sender_id, "/gif noidea")
+                        attachment = messaging_event["message"]["attachments"]  # the message's image
+                        message = attachment["payload"]["url"]
+                        message_type = attachment["type"]
+                        if message_type != "video" and message_type != "audio" and message_type != "file":
+                            message_type = "image"
+                        send_message(sender_id, message, message_type)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -63,7 +67,7 @@ def process_message(message_text, sender_id):
     kova = Kova()
     kova.chat(message_text, sender_id)
 
-def send_message(recipient_id, message):
+def send_message(recipient_id, message, message_type):
 
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message))
 
@@ -73,14 +77,30 @@ def send_message(recipient_id, message):
     headers = {
         "Content-Type": "application/json"
     }
-    data = json.dumps({
-        "recipient": {
-            "id": recipient_id
-        },
-        "message": {
-            "text": message
-        }
-    })
+    if message_type == "text":
+        data = json.dumps({
+            "recipient": {
+                "id": recipient_id
+            },
+            "message": {
+                "text": message
+            }
+        })
+    else:
+        data = json.dumps({
+            "recipient": {
+                "id": recipient_id
+            },
+            "message": {
+                "attachment":{
+                  "type": message_type,
+                  "payload":{
+                    "url": message
+                  }
+                }
+            }
+        })
+
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
     if r.status_code != 200:
         log(r.status_code)
