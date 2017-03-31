@@ -132,19 +132,19 @@ class Kova:
         if username:
             print '2'
             user_data["username"] = username
-            print '3'
             self.kovatype("Glad to meet you, " + username + "!")
             self.kovatype("I'd love to tell you my name too")
+            """
             self.kovatype("but..")
             self.kovatype("the truth is...")
-            print '4'
             self.kovatype("I'm not sure what my name is...")
             self.kovatype("or where I'm from..")
             self.kovatype("or where I'm at..")
+            """
+            print '3'
             self.kovatype("I'm just really scared and want to get out of here.")
-            print '5'
+            print '4'
             self.next = 1
-            print '6'
         print '7'
         return user_data
 
