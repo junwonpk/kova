@@ -4,8 +4,7 @@ import app
 import time
 import redis
 import cPickle
-
-gateSyn = '(gate|door)'
+import thesaurus
 
 class Kova:
 
@@ -165,17 +164,19 @@ class Kova:
         return user_data
 
     def chapter4(self, input, user_data):
-        if len(re.findall(gateSyn, input)) > 0:
+        if len(re.findall(gate, input)) > 0:
             if user_data['cardkey'] == 1:
                 self.kovatype('Let me try Lena\'s key. Wow! It works!')
                 self.next = 1
             else:
                 self.kovatype('The gate is locked. I need a card key. Where could I find it?')
-        elif 'dead' in input:
+        elif len(re.findall(dead, input)) > 0:
             self.kovatype('I found a card key!')
             user_data["cardkey"] = 1
-        elif 'prison' in input:
+        elif len(re.findall(prison, input)) > 0:
             self.kovatype('The prison is bloody.')
+        else:
+            self.kovatype("I'm not sure what I should do.")
         return user_data
 
     def chapter5(self, input, user_data):
@@ -185,11 +186,11 @@ class Kova:
         return user_data
 
     def chapter6(self, input, user_data, user_id):
-        if 'ask' in input:
+        if len(re.findall(ask, input)) > 0:
             self.kovatype("OMG. I asked for help and they tried to shoot me.")
             self.kovatype("I escaped to a room and locked the door.")
             self.kovatype("The door is not gonna last long. What should I do!!")
-        if 'run' in input:
+        if len(re.findall(run, input)) > 0:
             self.kovatype("I escaped to a room and locked the door.")
             self.kovatype("The door is not gonna last long. What should I do!!")
         user_data['chapter'] += 1

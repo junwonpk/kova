@@ -1,0 +1,5 @@
+gate = '(gate|door|lock)'
+dead = '(body|deceased|dead|departed|mort|remain|bone|flesh|killed|goner)'
+prison = '(prison|cell|jail|confinement|lockup|penitentiary|bastille|dungeon|bars)'
+ask = '(ask|help|seek|meet|soldier|confront|fight)'
+run = '(run|hide|escape|exit|bounce)'
