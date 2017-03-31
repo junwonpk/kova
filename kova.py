@@ -96,6 +96,8 @@ class Kova:
         name = []
         name = re.findall('.*is\s(\w+).*', input.lower())
         if not name:
+            name = re.findall('.*im\s(\w+).*', input.lower())
+        if not name:
             name = re.findall('.*\'m\s(\w+).*', input.lower())
         if not name:
             name = re.findall('.*am\s(\w+).*', input.lower())
@@ -129,11 +131,15 @@ class Kova:
         else:
             user_data["username"] = username
             self.kovatype("Glad to meet you, " + username + "!")
-            self.kovatype("I'd love to tell you my name too")
-            self.kovatype("but.. the truth is...")
-            self.kovatype("I'm not sure what my name is...")
-            self.kovatype("I'm just really scared and want to get out of here.")
+            #self.kovatype("I'd love to tell you my name too")
+            #self.kovatype("but..")
+            #self.kovatype("the truth is...")
+            #self.kovatype("I'm not sure what my name is...")
+            #self.kovatype("or where I'm from")
+            #self.kovatype("or where I am")
+            #self.kovatype("I'm just really scared and want to get out of here.")
             self.next = 1
+        print 'done to this'
         return user_data
 
     def chapter3(self, input, user_data):
