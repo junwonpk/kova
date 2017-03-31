@@ -42,7 +42,7 @@ class Kova:
         if user_data['chapter'] == 5:
             user_data = self.chapter5(input, user_data)
         if user_data['chapter'] == 6:
-            user_data = self.chapter6(input, user_data)
+            user_data = self.chapter6(input, user_data, user_id)
         if user_data['chapter'] == 7:
             user_data = self.chapter7(input, user_data)
         if user_data['chapter'] == 8:
@@ -88,7 +88,7 @@ class Kova:
         app.send_message(self.user_id, message, "text")
 
     def initUser(self, user_id):
-        user_data = {"chapter": 0, "cardkey": 0, "username": '', "lastmsg": ''}
+        user_data = {"chapter": 0, "cardkey": 0, "username": '', "lastmsg": '', "ch6flag": 0}
         self.redis.set(user_id, cPickle.dumps(user_data))
         self.chapter0()
         self.next = 1
@@ -175,7 +175,7 @@ class Kova:
         self.next = 1
         return user_data
 
-    def chapter6(self, input, user_data):
+    def chapter6(self, input, user_data, user_id):
         if 'ask' in input:
             self.kovatype("OMG. I asked for help and they tried to shoot me.")
             self.kovatype("I escaped to a room and locked the door.")
@@ -183,10 +183,22 @@ class Kova:
         if 'run' in input:
             self.kovatype("I escaped to a room and locked the door.")
             self.kovatype("The door is not gonna last long. What should I do!!")
-        self.next = 1
+        user_data['chapter'] += 1
+        self.setData(user_id, user_data)
+        time.sleep(10)
+        user_data = self.getData(user_id)
+        if user_data['ch6flag'] == 0:
+            self.kovatype("Hurry up! Tell me what to do! I can't hold on for much longer!!!")
+        time.sleep(10)
+        if user_data['ch6flag'] == 0:
+            self.kovatype("Oh no!! The soldier came into the room!")
+            self.kovatype("He's pointing a gun at me!")
+            self.kovatype("DEAD")
         return user_data
 
     def chapter7(self, input, user_data):
+        user_data['ch6flag'] = 1
+        self.setData(user_id, user_data)
         self.kovatype("I can see an air chamber and a few other useless things.")
         self.kovatype("What should I do?")
         self.next = 1
