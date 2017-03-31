@@ -259,7 +259,7 @@ class Kova:
         self.next = 1
         return user_data
 
-    def chapter16kill(self, input, user_data):
+    def chapter16(self, input, user_data):
         self.kovatype("I hid then attacked with flame")
         self.kovatype("water is falling and there is blood")
         self.next = 1
