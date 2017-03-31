@@ -46,7 +46,7 @@ class Kova:
         if user_data['chapter'] == 6:
             user_data = self.chapter6(input, user_data, user_id)
         if user_data['chapter'] == 7:
-            user_data = self.chapter7(input, user_data)
+            user_data = self.chapter7(input, user_data, user_id)
         if user_data['chapter'] == 8:
             user_data = self.chapter8(input, user_data)
         if user_data['chapter'] == 9:
@@ -205,7 +205,7 @@ class Kova:
             self.setData(user_id, user_data)
         return user_data
 
-    def chapter7(self, input, user_data):
+    def chapter7(self, input, user_data, user_id):
         user_data['ch6flag'] = 1
         self.setData(user_id, user_data)
         self.kovatype("I can see an air chamber and a few other useless things.")
