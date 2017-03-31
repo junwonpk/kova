@@ -15,7 +15,7 @@ class Kova:
 
     def chat(self, input, user_id):
         #debugging
-        #self.redis.flushall()
+        self.redis.flushall()
         if input == 'redis flushall':
             self.redis.flushall()
         #debugging
