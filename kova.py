@@ -148,7 +148,6 @@ class Kova:
         return user_data
 
     def chapter3(self, input, user_data):
-        print '8'
         self.kovatype("There is a dead woman on the ground. Her nametag says Lena Kova.")
         self.kovatype("There is a prison cell behind me, and a locked metal gate in front.")
         self.kovatype("What should I do?")

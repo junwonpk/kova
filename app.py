@@ -56,8 +56,11 @@ def webhook():
     return "ok", 200
 
 def process_message(message_text, sender_id):
+    print '1'
     kova = Kova()
+    print '2'
     kova.chat(message_text, sender_id)
+    print '3'
 
 def send_message(recipient_id, message_text):
 
