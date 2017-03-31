@@ -46,7 +46,7 @@ def webhook():
                         process_message(message, sender_id)
                     else:
                         message = messaging_event["message"]["attachments"]  # the message's image
-                        send_message(recipient_id, message, 0)
+                        send_message(recipient_id, "/gif noidea")
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -63,7 +63,7 @@ def process_message(message_text, sender_id):
     kova = Kova()
     kova.chat(message_text, sender_id)
 
-def send_message(recipient_id, message, textflag):
+def send_message(recipient_id, message):
 
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message))
 
@@ -73,16 +73,12 @@ def send_message(recipient_id, message, textflag):
     headers = {
         "Content-Type": "application/json"
     }
-    if textflag == 1:
-        message_type = "text"
-    else:
-        message_type = "attachments"
     data = json.dumps({
         "recipient": {
             "id": recipient_id
         },
         "message": {
-            message_type: message
+            "text": message
         }
     })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
