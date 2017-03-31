@@ -5,6 +5,8 @@ import time
 import redis
 import cPickle
 
+gateSyn = '(gate|door)'
+
 class Kova:
 
     def __init__(self):
@@ -163,7 +165,7 @@ class Kova:
         return user_data
 
     def chapter4(self, input, user_data):
-        if 'gate' in input:
+        if len(re.findall(gateSyn, input)) > 0:
             if user_data['cardkey'] == 1:
                 self.kovatype('Let me try Lena\'s key. Wow! It works!')
                 self.next = 1
@@ -192,11 +194,11 @@ class Kova:
             self.kovatype("The door is not gonna last long. What should I do!!")
         user_data['chapter'] += 1
         self.setData(user_id, user_data)
-        time.sleep(10)
+        time.sleep(5)
         user_data = self.getData(user_id)
         if user_data['ch6flag'] == 0:
             self.kovatype("Hurry up! Tell me what to do! I can't hold on for much longer!!!")
-        time.sleep(10)
+        time.sleep(5)
         if user_data['ch6flag'] == 0:
             self.kovatype("Oh no!! The soldier came into the room!")
             self.kovatype("He's pointing a gun at me!")
