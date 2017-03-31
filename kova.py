@@ -125,14 +125,15 @@ class Kova:
 
     def chapter2(self, input, user_data):
         #username = self.extract_name(input)
+        username = "Junwon"
         print '1'
         if not username:
             self.kovatype("Sorry. I didn't catch that!")
             self.kovatype("Could you tell me your name again?")
         if username:
             print '2'
-            #user_data["username"] = username
-            #self.kovatype("Glad to meet you, " + username + "!")
+            user_data["username"] = username
+            self.kovatype("Glad to meet you, " + username + "!")
             self.kovatype("I'd love to tell you my name too")            self.kovatype("but..")
             self.kovatype("the truth is...")
             self.kovatype("I'm not sure what my name is...")
