@@ -26,7 +26,7 @@ class Kova:
 
         user_data = self.getData(user_id)
 
-        if user_data['last_msg'] == input:
+        if user_data['lastmsg'] == input:
             return
 
         if user_data['chapter'] == 1:
@@ -73,7 +73,7 @@ class Kova:
         if self.next == 1:
             user_data['chapter'] += 1
 
-        user_data['last_msg'] = input
+        user_data['lastmsg'] = input
 
         self.setData(user_id, user_data)
         return
