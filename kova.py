@@ -14,6 +14,8 @@ class Kova:
         self.typespeed = 0.10
 
     def chat(self, input, user_id):
+        self.user_id = user_id
+
         #debugging
         #self.redis.flushall()
         self.kovatype("you said " + input)
@@ -21,7 +23,6 @@ class Kova:
             self.redis.flushall()
         #debugging
 
-        self.user_id = user_id
         if user_id not in self.redis.keys(): # if user first time talking
             self.initUser(user_id)
 
