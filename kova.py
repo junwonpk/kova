@@ -28,6 +28,7 @@ class Kova:
 
         user_data = self.getData(user_id)
 
+        self.kovatype("lastmsg is " + user_data['lastmsg'])
         if user_data['lastmsg'] == input: # did not solve issue
             return
 
@@ -132,7 +133,6 @@ class Kova:
 
     def chapter2(self, input, user_data):
         username = self.extract_name(input)
-        username = "Junwon"
         if not username:
             self.kovatype("Sorry. I didn't catch that!")
             self.kovatype("Could you tell me your name again?")
