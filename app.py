@@ -73,18 +73,17 @@ def send_message(recipient_id, message, textflag):
     headers = {
         "Content-Type": "application/json"
     }
+    if textflag == 1:
+        message_type = "text"
+    else:
+        message_type = "attachments"
     data = json.dumps({
         "recipient": {
             "id": recipient_id
         },
-        if textflag == 1:
-            "message": {
-                "text": message
-            }
-        else:
-            "message": {
-                "attachments": message
-            }
+        "message": {
+            message_type: message
+        }
     })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
     if r.status_code != 200:
