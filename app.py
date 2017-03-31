@@ -46,8 +46,8 @@ def webhook():
                         process_message(message, sender_id)
                     else:
                         attachment = messaging_event["message"]["attachments"]  # the message's image
-                        message = attachment["payload"][0] #url of content
-                        message_type = attachment["type"]
+                        message = attachment[1]["url"] #url of content
+                        message_type = attachment[0]
                         if message_type != "video" and message_type != "audio" and message_type != "file":
                             message_type = "image"
                         send_message(sender_id, message, message_type)
