@@ -14,22 +14,19 @@ class Kova:
         self.typespeed = 0.10
 
     def chat(self, input, user_id):
-        self.user_id = user_id
-
         #debugging
         #self.redis.flushall()
-        self.kovatype("you said " + input)
         if input == 'redis flushall':
             self.redis.flushall()
         #debugging
 
+        self.user_id = user_id
         if user_id not in self.redis.keys(): # if user first time talking
             self.initUser(user_id)
 
         user_data = self.getData(user_id)
 
-        self.kovatype("lastmsg is " + user_data['lastmsg'])
-        if user_data['lastmsg'] == input: # did not solve issue
+        if user_data['lastmsg'] == input:
             return
         user_data['lastmsg'] = input
         self.setData(user_id, user_data)
@@ -74,6 +71,8 @@ class Kova:
             user_data = self.chapter19(input, user_data)
         if user_data['chapter'] == 20:
             user_data = self.chapter20(input, user_data)
+        if user_data['chapter'] > 20:
+            user_data = self.epilogue(input, user_data)
 
         if self.next == 1:
             user_data['chapter'] += 1
@@ -173,28 +172,31 @@ class Kova:
     def chapter5(self, input, user_data):
         self.kovatype("Yes! I opened the door!")
         self.kovatype("Now I hear footsteps... What should I do?")
+        self.next = 1
         return user_data
 
-    def chapter6ask(self, input, user_data):
-        self.kovatype("OMG. I asked for help and they tried to shoot me.")
-        self.kovatype("I escaped to a room and locked the door.")
-        self.kovatype("The door is not gonna last long. What should I do!!")
-        return user_data
-
-    def chapter6run(self, input, user_data):
-        self.kovatype("I escaped to a room and locked the door.")
-        self.kovatype("The door is not gonna last long. What should I do!!")
+    def chapter6(self, input, user_data):
+        if 'ask' in input:
+            self.kovatype("OMG. I asked for help and they tried to shoot me.")
+            self.kovatype("I escaped to a room and locked the door.")
+            self.kovatype("The door is not gonna last long. What should I do!!")
+        if 'run' in input:
+            self.kovatype("I escaped to a room and locked the door.")
+            self.kovatype("The door is not gonna last long. What should I do!!")
+        self.next = 1
         return user_data
 
     def chapter7(self, input, user_data):
         self.kovatype("I can see an air chamber and a few other useless things.")
         self.kovatype("What should I do?")
+        self.next = 1
         return user_data
 
     def chapter8(self, input, user_data):
         self.kovatype("I climbed through the air vent")
         self.kovatype("and arrived at a dark weird research lab.")
         self.kovatype("Tell me to do something")
+        self.next = 1
         return user_data
 
     def chapter9(self, input, user_data):
@@ -203,6 +205,7 @@ class Kova:
         self.kovatype("some aliens don't hurt kids.")
         self.kovatype("Soldiers kill these kids after tests to prevent")
         self.kovatype("info or virus from leaking")
+        self.next = 1
         return user_data
 
     def chapter10(self, input, user_data):
@@ -210,6 +213,7 @@ class Kova:
         self.kovatype("including children, and is deadly")
         self.kovatype("OMG so scary")
         self.kovatype("OMGOMG I heard some sound from behind the curtains")
+        self.next = 1
         return user_data
 
     def chapter11(self, input, user_data):
@@ -217,6 +221,7 @@ class Kova:
         self.kovatype("Poor things... Look so sad...")
         self.kovatype("Let's free them. Should we?")
         self.kovatype("It will also distract the soldiers")
+        self.next = 1
         return user_data
 
     def chapter12(self, input, user_data):
@@ -224,6 +229,7 @@ class Kova:
         self.kovatype("Oh no. Breach alarm went on")
         self.kovatype("Oh no! The alarm says MAE also escaped.")
         self.kovatype("Must have been one of the aliens. Let's run away")
+        self.next = 1
         return user_data
 
     def chapter13(self, input, user_data):
@@ -233,6 +239,7 @@ class Kova:
         self.kovatype("What is the answer?")
         self.kovatype("I hear aliens and soldiers fighting in the back!")
         self.kovatype("That should give us some time!")
+        self.next = 1
         #time.sleep. Then if redis status is x, then kill. Next message, change redis status to prevent.
         return user_data
 
@@ -242,17 +249,20 @@ class Kova:
         self.kovatype("Oh my god. I see detained children")
         self.kovatype("I'll take them with me, since either soldiers")
         self.kovatype("or MAE will kill them")
+        self.next = 1
         return user_data
 
     def chapter15(self, input, user_data):
         self.kovatype("I'm taking them all")
         self.kovatype("Last door is near")
         self.kovatype("OMG There is a soldier what do i do")
+        self.next = 1
         return user_data
 
     def chapter16kill(self, input, user_data):
         self.kovatype("I hid then attacked with flame")
         self.kovatype("water is falling and there is blood")
+        self.next = 1
         return user_data
 
     def chapter17(self, input, user_data):
@@ -260,15 +270,18 @@ class Kova:
         self.kovatype("they screamed when they saw me. why?")
         self.kovatype("uh oh.. the rflection")
         self.kovatype("i am mae")
+        self.next = 1
         return user_data
 
     def chapter18(self, input, user_data):
         self.kovatype("I dont know what i should do?")
         self.kovatype("but we've done so much together. I can't kill humans")
+        self.next = 1
         return user_data
 
     def chapter19(self, input, user_data):
         self.kovatype("I decided to kill my self.") #regardless of user answer
+        self.next = 1
         return user_data
 
     def chapter20(self, input, user_data):
@@ -276,4 +289,11 @@ class Kova:
         self.kovatype("I was really happy to be your friend")
         self.kovatype("I hope this moment would have lasted forever")
         self.kovatype("DEAD")
+        self.next = 1
+        return user_data
+
+    def epilogue(self, input, user_data):
+        self.kovatype("Story Over")
+        self.kovatype("Developed by Junwon Park")
+        self.kovatype("Type Restart to begin again.")
         return user_data
