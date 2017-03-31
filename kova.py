@@ -131,11 +131,10 @@ class Kova:
             self.kovatype("Could you tell me your name again?")
         if username:
             print '2'
+            """
             user_data["username"] = username
             self.kovatype("Glad to meet you, " + username + "!")
-            self.kovatype("I'd love to tell you my name too")
-            """
-            self.kovatype("but..")
+            self.kovatype("I'd love to tell you my name too")            self.kovatype("but..")
             self.kovatype("the truth is...")
             self.kovatype("I'm not sure what my name is...")
             self.kovatype("or where I'm from..")
