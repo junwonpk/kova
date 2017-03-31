@@ -26,6 +26,9 @@ class Kova:
 
         user_data = self.getData(user_id)
 
+        if user_data['last_msg'] == input:
+            return
+
         if user_data['chapter'] == 1:
             user_data = self.chapter1(input, user_data)
         if user_data['chapter'] == 2:
@@ -70,6 +73,8 @@ class Kova:
         if self.next == 1:
             user_data['chapter'] += 1
 
+        user_data['last_msg'] = input
+
         self.setData(user_id, user_data)
         return
 
@@ -81,7 +86,7 @@ class Kova:
         app.send_message(self.user_id, message)
 
     def initUser(self, user_id):
-        user_data = {"chapter": 0, "cardkey": 0, "username": ''}
+        user_data = {"chapter": 0, "cardkey": 0, "username": '', "lastmsg": ''}
         self.redis.set(user_id, cPickle.dumps(user_data))
         self.chapter0()
         self.next = 1
@@ -124,14 +129,12 @@ class Kova:
         return user_data
 
     def chapter2(self, input, user_data):
-        #username = self.extract_name(input)
+        username = self.extract_name(input)
         username = "Junwon"
-        print '1'
         if not username:
             self.kovatype("Sorry. I didn't catch that!")
             self.kovatype("Could you tell me your name again?")
         if username:
-            print '2'
             user_data["username"] = username
             self.kovatype("Glad to meet you, " + username + "!")
             self.kovatype("I'd love to tell you my name too")
@@ -140,11 +143,8 @@ class Kova:
             self.kovatype("I'm not sure what my name is...")
             self.kovatype("or where I'm from..")
             self.kovatype("or where I'm at..")
-            print '3'
             self.kovatype("I'm just really scared and want to get out of here.")
-            print '4'
             self.next = 1
-        print '7'
         return user_data
 
     def chapter3(self, input, user_data):
