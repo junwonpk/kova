@@ -128,7 +128,7 @@ class Kova:
         if not username:
             self.kovatype("Sorry. I didn't catch that!")
             self.kovatype("Could you tell me your name again?")
-        else:
+        if username:
             user_data["username"] = username
             self.kovatype("Glad to meet you, " + username + "!")
             self.kovatype("I'd love to tell you my name too")
