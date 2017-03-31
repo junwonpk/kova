@@ -16,6 +16,7 @@ class Kova:
     def chat(self, input, user_id):
         #debugging
         #self.redis.flushall()
+        self.kovatype("you said " + input)
         if input == 'redis flushall':
             self.redis.flushall()
         #debugging
@@ -26,7 +27,7 @@ class Kova:
 
         user_data = self.getData(user_id)
 
-        if user_data['lastmsg'] == input:
+        if user_data['lastmsg'] == input: # did not solve issue
             return
 
         if user_data['chapter'] == 1:
