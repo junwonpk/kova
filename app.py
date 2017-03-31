@@ -46,7 +46,7 @@ def webhook():
                         process_message(message, sender_id)
                     else:
                         message = messaging_event["message"]["attachments"]  # the message's image
-                        send_message(recipient_id, "/gif noidea")
+                        send_message(sender_id, "/gif noidea")
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
