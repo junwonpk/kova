@@ -21,6 +21,8 @@ class Kova:
         #debugging
 
         self.user_id = user_id
+        if input.lower() == 'restart':
+            self.restart(user_id)
         if user_id not in self.redis.keys(): # if user first time talking
             self.initUser(user_id)
 
@@ -73,6 +75,8 @@ class Kova:
             user_data = self.chapter20(input, user_data)
         if user_data['chapter'] > 20:
             user_data = self.epilogue(input, user_data)
+        if user_data['chapter'] < 0:
+            user_data = self.gameover(input, user_data)
 
         if self.next == 1:
             user_data['chapter'] += 1
@@ -86,6 +90,9 @@ class Kova:
 
     def send_message(self, message):
         app.send_message(self.user_id, message, "text")
+
+    def restart(self, user_id):
+        self.redis.delete(user_id)
 
     def initUser(self, user_id):
         user_data = {"chapter": 0, "cardkey": 0, "username": '', "lastmsg": '', "ch6flag": 0}
@@ -194,6 +201,8 @@ class Kova:
             self.kovatype("Oh no!! The soldier came into the room!")
             self.kovatype("He's pointing a gun at me!")
             self.kovatype("DEAD")
+            user_data['chapter'] = -1
+            self.setData(user_id, user_data)
         return user_data
 
     def chapter7(self, input, user_data):
@@ -306,6 +315,12 @@ class Kova:
 
     def epilogue(self, input, user_data):
         self.kovatype("Story Over")
+        self.kovatype("Developed by Junwon Park")
+        self.kovatype("Type Restart to begin again.")
+        return user_data
+
+    def gameover(self, input, user_data):
+        self.kovatype("Game Over")
         self.kovatype("Developed by Junwon Park")
         self.kovatype("Type Restart to begin again.")
         return user_data
