@@ -4,7 +4,7 @@ import app
 import time
 import redis
 import cPickle
-import thesaurus
+import thesaurus as thes
 
 class Kova:
 
@@ -13,7 +13,6 @@ class Kova:
         self.user_id = 0
         self.next = 0
         self.typespeed = 0.10
-        thesaurus.readThesaurus()
 
     def chat(self, input, user_id):
         #debugging
@@ -170,20 +169,20 @@ class Kova:
         return user_data
 
     def chapter4(self, input, user_data):
-        if len(re.findall(gateSyn, input)) > 0:
+        if len(re.findall(thes.gateSyn, input)) > 0:
             if user_data['cardkey'] == 1:
                 self.kovatype('Let me try Lena\'s key. Wow! It works!')
                 self.next = 1
             else:
                 self.kovatype('The gate is locked. I need a card key. Where could I find it?')
-        elif len(re.findall(deadSyn, input)) > 0:
-            if re.findall(checkSyn, input) > 0:
+        elif len(re.findall(thes.deadSyn, input)) > 0:
+            if re.findall(thes.checkSyn, input) > 0:
                 self.kovatype('I found a card key!')
                 user_data["cardkey"] = 1
             else:
                 verb = re.findall('(\w+)(\sthe)*\s'+dead, input)[0][0]
                 self.kovatype("I can't " + verb + " the corpse. What are you talking about!?")
-        elif len(re.findall(prisonSyn, input)) > 0:
+        elif len(re.findall(thes.prisonSyn, input)) > 0:
             self.kovatype('The prison is bloody.')
         else:
             self.kovatype("I'm not sure what I should do.")
@@ -196,11 +195,11 @@ class Kova:
         return user_data
 
     def chapter6(self, input, user_data, user_id):
-        if len(re.findall(askSyn, input)) > 0:
+        if len(re.findall(thes.askSyn, input)) > 0:
             self.kovatype("OMG. I asked for help and they tried to shoot me.")
             self.kovatype("I escaped to a room and locked the door.")
             self.kovatype("The door is not gonna last long. What should I do!!")
-        if len(re.findall(runSyn, input)) > 0:
+        if len(re.findall(thes.runSyn, input)) > 0:
             self.kovatype("I escaped to a room and locked the door.")
             self.kovatype("The door is not gonna last long. What should I do!!")
         user_data['chapter'] += 1
