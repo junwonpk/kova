@@ -13,6 +13,7 @@ class Kova:
         self.user_id = 0
         self.next = 0
         self.typespeed = 0.10
+        thesaurus.readThesaurus()
 
     def chat(self, input, user_id):
         #debugging
