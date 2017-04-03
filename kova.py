@@ -28,10 +28,12 @@ class Kova:
             self.initUser(user_id)
 
         user_data = self.getData(user_id)
-
+        if user_data['talking'] == 1:
+            return
         if user_data['lastmsg'] == input:
             return
         user_data['lastmsg'] = input
+        user_data['talking'] = 1
         self.setData(user_id, user_data)
 
         if user_data['chapter'] == 1:
@@ -81,7 +83,7 @@ class Kova:
 
         if self.next == 1:
             user_data['chapter'] += 1
-
+        user_data['talking'] = 0
         self.setData(user_id, user_data)
         return
 
@@ -96,7 +98,7 @@ class Kova:
         self.redis.delete(user_id)
 
     def initUser(self, user_id):
-        user_data = {"chapter": 0, "cardkey": 0, "username": '', "lastmsg": '', "ch6flag": 0}
+        user_data = {"chapter": 0, "cardkey": 0, "username": '', "lastmsg": '', "ch6flag": 0, 'talking': 0}
         self.redis.set(user_id, cPickle.dumps(user_data))
         self.chapter0()
         self.next = 1
@@ -124,7 +126,7 @@ class Kova:
             name = re.findall('.*\'s\s(\w+).*', input.lower())
         if not name:
             if len(input.split()) == 1:
-                name = input
+                return input
         if name:
             return name[0].title()
         else:
