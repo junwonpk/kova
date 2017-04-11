@@ -160,6 +160,7 @@ class Kova:
             self.kovatype("or where I'm from..")
             self.kovatype("or where I'm at..")
             self.kovatype("I'm just really scared and want to get out of here.")
+            self.kovatype("Will you help me?")
             self.next = 1
         return user_data
 
@@ -222,7 +223,7 @@ class Kova:
     def chapter7(self, input, user_data, user_id):
         user_data['ch6flag'] = 1
         self.setData(user_id, user_data)
-        self.kovatype("I can see an air chamber and a few other useless things.")
+        self.kovatype("I can see a vent and a few other useless things.")
         self.kovatype("What should I do?")
         self.next = 1
         return user_data
