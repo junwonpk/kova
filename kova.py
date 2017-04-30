@@ -35,8 +35,22 @@ class Kova:
         language_client = language.Client()
         document = language_client.document_from_text(input)
         sentiment = document.analyze_sentiment().sentiment
-        self.kovatype(str('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude)))
+        self.kovatype('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
+        tokens = document.analyze_syntax().tokens
+        for token in tokens:
+            self.kovatype('{}: {}'.format(token.part_of_speech, token.text_content))
+        entities = document.analyze_entities().entities
+            for entity in entities:
+                self.kovatype('=' * 20)
+                self.kovatype('{:<16}: {}'.format('name', entity.name))
+                self.kovatype('{:<16}: {}'.format('type', entity.entity_type))
+                self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
+                self.kovatype('{:<16}: {}'.format('salience', entity.salience))
+                self.kovatype('{:<16}: {}'.format('wikipedia_url',
+                      entity.metadata.get('wikipedia_url', '-')))
 
+
+        """
         user_data = self.getData(user_id)
         if user_data['talking'] == 1:
             return
@@ -90,7 +104,7 @@ class Kova:
             user_data = self.epilogue(input, user_data)
         if user_data['chapter'] < 0:
             user_data = self.gameover(input, user_data)
-
+        """
         if self.next == 1:
             user_data['chapter'] += 1
         user_data['talking'] = 0
