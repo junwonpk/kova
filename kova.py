@@ -40,14 +40,14 @@ class Kova:
         for token in tokens:
             self.kovatype('{}: {}'.format(token.part_of_speech, token.text_content))
         entities = document.analyze_entities().entities
-            for entity in entities:
-                self.kovatype('=' * 20)
-                self.kovatype('{:<16}: {}'.format('name', entity.name))
-                self.kovatype('{:<16}: {}'.format('type', entity.entity_type))
-                self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
-                self.kovatype('{:<16}: {}'.format('salience', entity.salience))
-                self.kovatype('{:<16}: {}'.format('wikipedia_url',
-                      entity.metadata.get('wikipedia_url', '-')))
+        for entity in entities:
+            self.kovatype('=' * 20)
+            self.kovatype('{:<16}: {}'.format('name', entity.name))
+            self.kovatype('{:<16}: {}'.format('type', entity.entity_type))
+            self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
+            self.kovatype('{:<16}: {}'.format('salience', entity.salience))
+            self.kovatype('{:<16}: {}'.format('wikipedia_url',
+                  entity.metadata.get('wikipedia_url', '-')))
 
 
         """
