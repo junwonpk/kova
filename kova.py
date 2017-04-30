@@ -25,6 +25,10 @@ class Kova:
         if input == 'redis flushall':
             self.redis.flushall()
         #debugging
+        language_client = language.Client()
+        document = language_client.document_from_text(input)
+        sentiment = document.analyze_sentiment().sentiment
+        kovatype('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
 
         self.user_id = user_id
         if input.lower() == 'restart':
