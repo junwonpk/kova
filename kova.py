@@ -4,7 +4,12 @@ import app
 import time
 import redis
 import cPickle
+import argparse
 import thesaurus as thes
+from google.cloud import language
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 class Kova:
 
