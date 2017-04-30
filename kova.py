@@ -29,7 +29,7 @@ class Kova:
         language_client = language.Client()
         document = language_client.document_from_text(input)
         sentiment = document.analyze_sentiment().sentiment
-        kovatype('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
+        self.kovatype('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
 
         self.user_id = user_id
         if input.lower() == 'restart':
