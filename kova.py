@@ -104,11 +104,11 @@ class Kova:
             user_data = self.epilogue(input, user_data)
         if user_data['chapter'] < 0:
             user_data = self.gameover(input, user_data)
-        """
         if self.next == 1:
             user_data['chapter'] += 1
         user_data['talking'] = 0
         self.setData(user_id, user_data)
+        """
         return
 
     def kovatype(self, message):
