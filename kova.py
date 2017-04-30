@@ -6,6 +6,7 @@ import time
 import redis
 import cPickle
 import thesaurus as thes
+from google.cloud import language
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -24,6 +25,7 @@ class Kova:
         if input == 'redis flushall':
             self.redis.flushall()
         #debugging
+
         language_client = language.Client()
         document = language_client.document_from_text(input)
         sentiment = document.analyze_sentiment().sentiment
