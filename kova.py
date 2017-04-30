@@ -17,7 +17,7 @@ class Kova:
         self.redis = redis.from_url(os.environ.get("REDISCLOUD_URL"))
         self.user_id = 0
         self.next = 0
-        self.typespeed = 0.10
+        self.typespeed = 0
 
     def chat(self, input, user_id):
         #debugging
@@ -32,7 +32,6 @@ class Kova:
         if user_id not in self.redis.keys(): # if user first time talking
             self.initUser(user_id)
         self.kovatype(input)
-        """
         language_client = language.Client()
         document = language_client.document_from_text(input)
         sentiment = document.analyze_sentiment().sentiment
@@ -48,6 +47,7 @@ class Kova:
             self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
             self.kovatype('{:<16}: {}'.format('salience', entity.salience))
         return
+        """
         user_data = self.getData(user_id)
         if user_data['talking'] == 1:
             return
