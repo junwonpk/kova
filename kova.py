@@ -46,9 +46,6 @@ class Kova:
             self.kovatype('{:<16}: {}'.format('type', entity.entity_type))
             self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
             self.kovatype('{:<16}: {}'.format('salience', entity.salience))
-            self.kovatype('{:<16}: {}'.format('wikipedia_url',
-                  entity.metadata.get('wikipedia_url', '-')))
-
 
         """
         user_data = self.getData(user_id)
