@@ -26,16 +26,16 @@ class Kova:
             self.redis.flushall()
         #debugging
 
-        language_client = language.Client()
-        document = language_client.document_from_text(input)
-        sentiment = document.analyze_sentiment().sentiment
-        self.kovatype(str('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude)))
-
         self.user_id = user_id
         if input.lower() == 'restart':
             self.restart(user_id)
         if user_id not in self.redis.keys(): # if user first time talking
             self.initUser(user_id)
+
+        language_client = language.Client()
+        document = language_client.document_from_text(input)
+        sentiment = document.analyze_sentiment().sentiment
+        self.kovatype(str('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude)))
 
         user_data = self.getData(user_id)
         if user_data['talking'] == 1:
