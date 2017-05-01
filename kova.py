@@ -32,6 +32,7 @@ class Kova:
         if user_id not in self.redis.keys(): # if user first time talking
             self.initUser(user_id)
 
+        """
         language_client = language.Client()
         document = language_client.document_from_text(input)
         sentiment = document.analyze_sentiment().sentiment
@@ -104,7 +105,6 @@ class Kova:
             user_data['chapter'] += 1
         user_data['talking'] = 0
         self.setData(user_id, user_data)
-        """
         return
 
     def kovatype(self, message):
