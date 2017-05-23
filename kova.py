@@ -25,7 +25,7 @@ class Kova:
         if input == 'redis flushall':
             self.redis.flushall()
         #debugging
-        self.kovatype("linux setup complete");
+        self.kovatype("linux setup complete")
         self.user_id = user_id
         if input.lower() == 'restart':
             self.restart(user_id)
