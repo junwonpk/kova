@@ -25,7 +25,6 @@ class Kova:
         if input == 'redis flushall':
             self.redis.flushall()
         #debugging
-        self.kovatype("linux setup complete")
         self.user_id = user_id
         if input.lower() == 'restart':
             self.restart(user_id)
@@ -56,6 +55,7 @@ class Kova:
         user_data['lastmsg'] = input
         user_data['talking'] = 1
         self.setData(user_id, user_data)
+        self.kovatype("linux setup complete")
 
         if user_data['chapter'] == 1:
             user_data = self.chapter1(input, user_data)
