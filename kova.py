@@ -21,7 +21,37 @@ class Kova:
         self.typespeed = 5
 
     def chat(self, input, user_id):
+<<<<<<< HEAD
         preprocess(input, user_id)
+=======
+        #debugging
+        #self.redis.flushall()
+        if input == 'redis flushall':
+            self.redis.flushall()
+        #debugging
+        self.user_id = user_id
+        if input.lower() == 'restart':
+            self.restart(user_id)
+        if user_id not in self.redis.keys(): # if user first time talking
+            self.initUser(user_id)
+
+        """
+        language_client = language.Client()
+        document = language_client.document_from_text(input)
+        sentiment = document.analyze_sentiment().sentiment
+        self.kovatype('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
+        tokens = document.analyze_syntax().tokens
+        for token in tokens:
+            self.kovatype('{}: {}'.format(token.part_of_speech, token.text_content))
+        entities = document.analyze_entities().entities
+        for entity in entities:
+            self.kovatype('=' * 20)
+            self.kovatype('{:<16}: {}'.format('name', entity.name))
+            self.kovatype('{:<16}: {}'.format('type', entity.entity_type))
+            self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
+            self.kovatype('{:<16}: {}'.format('salience', entity.salience))
+        """
+>>>>>>> 73177f923c01ee0729ffdb0e5a3a9f25057eda86
         user_data = self.getData(user_id)
 
         if user_data['talking'] == 1:
@@ -31,6 +61,7 @@ class Kova:
         user_data['lastmsg'] = input
         user_data['talking'] = 1
         self.setData(user_id, user_data)
+        self.kovatype("linux setup complete")
 
         chapter = chapters[user_data['chapter']]
         chapter(input, user_data, user_id)
