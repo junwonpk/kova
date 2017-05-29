@@ -26,7 +26,7 @@ class Kova:
                         self.chapter18, self.chapter19, self.chapter20]
 
     def chat(self, input, user_id):
-        preprocess(input, user_id)
+        self.preprocess(input, user_id)
         user_data = self.getData(user_id)
 
         if user_data['talking'] == 1:
