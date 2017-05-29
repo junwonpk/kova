@@ -5,7 +5,6 @@ import app
 import time
 import redis
 import cPickle
-import thesaurus as thes
 from google.cloud import language
 
 reload(sys)
@@ -177,23 +176,23 @@ class Kova:
         return user_data
 
     def chapter4(self, input, user_data):
-        if len(re.findall(thes.gateSyn, input)) > 0:
-            if user_data['cardkey'] == 1:
-                self.kovatype('Let me try Lena\'s key. Wow! It works!')
-                self.next = 1
-            else:
-                self.kovatype('The gate is locked. I need a card key. Where could I find it?')
-        elif len(re.findall(thes.deadSyn, input)) > 0:
-            if re.findall(thes.checkSyn, input) > 0:
-                self.kovatype('I found a card key!')
-                user_data["cardkey"] = 1
-            else:
-                verb = re.findall('(\w+)(\sthe)*\s'+dead, input)[0][0]
-                self.kovatype("I can't " + verb + " the corpse. What are you talking about!?")
-        elif len(re.findall(thes.prisonSyn, input)) > 0:
-            self.kovatype('The prison is bloody.')
-        else:
-            self.kovatype("I'm not sure what I should do.")
+        # if len(re.findall(thes.gateSyn, input)) > 0:
+        #     if user_data['cardkey'] == 1:
+        #         self.kovatype('Let me try Lena\'s key. Wow! It works!')
+        #         self.next = 1
+        #     else:
+        #         self.kovatype('The gate is locked. I need a card key. Where could I find it?')
+        # elif len(re.findall(thes.deadSyn, input)) > 0:
+        #     if re.findall(thes.checkSyn, input) > 0:
+        #         self.kovatype('I found a card key!')
+        #         user_data["cardkey"] = 1
+        #     else:
+        #         verb = re.findall('(\w+)(\sthe)*\s'+dead, input)[0][0]
+        #         self.kovatype("I can't " + verb + " the corpse. What are you talking about!?")
+        # elif len(re.findall(thes.prisonSyn, input)) > 0:
+        #     self.kovatype('The prison is bloody.')
+        # else:
+        #     self.kovatype("I'm not sure what I should do.")
         return user_data
 
     def chapter5(self, input, user_data):
