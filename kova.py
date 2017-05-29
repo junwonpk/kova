@@ -21,9 +21,7 @@ class Kova:
         self.typespeed = 5
 
     def chat(self, input, user_id):
-<<<<<<< HEAD
         preprocess(input, user_id)
-=======
         #debugging
         #self.redis.flushall()
         if input == 'redis flushall':
