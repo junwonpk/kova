@@ -9,6 +9,7 @@ def chapter0(self, input):
     self.next = 1
     return
 
+"""
 def chapter1(self, input, user_data):
     # self.kovatype("Oh my god! Thank goodness. I'm so glad to meet you.")
     # self.kovatype("What should I call you?")
@@ -197,3 +198,4 @@ def chapter20(self, input, user_data):
     # self.kovatype("DEAD")
     # self.next = 1
     # return user_data
+"""
