@@ -64,7 +64,8 @@ class Kova:
         self.redis.delete(user_id)
 
     def initUser(self, user_id):
-        user_data = {"chapter": 0, "username": '', "lastmsg": '', "trust": 0, 'talking': 0}
+        user_data = {"chapter": 0, "username": '', "lastmsg": '', \
+                    "trust": 0, 'talking': 0, "age": 0}
         self.redis.set(user_id, cPickle.dumps(user_data))
 
     def getData(self, user_id):
@@ -133,11 +134,11 @@ class Kova:
         if not username:
             self.kovatype("Huh? I'm not sure what you mean.")
             self.kovatype("I mean, what's your name?")
-            user_data["chapter"] = 3
         if username:
             user_data["username"] = username
             self.kovatype("Cool! Nice to meet you, " + username + "!")
             self.kovatype("Which year are you living in?")
+            user_data["chapter"] = 3
         return user_data
 
     def chapter3(self, input, user_data, user_id):
@@ -154,8 +155,14 @@ class Kova:
     def chapter4(self, input, user_data, user_id):
         self.kovatype("My dad works for the Foundry Corporation")
         self.kovatype("in the advanced research department.")
-        self.kovatype("He brought home an experimental time portal technology,\
-                        so I installed it on my device while he's asleep! Hehe.")
+        self.kovatype("He brought home an experimental time portal technology, so I installed it on my device while he's asleep! Hehe.")
+        self.kovatype("I guess Foundry didn't exist back in 2017.")
+        user_data["chapter"] = 5
+        return user_data
+
+    def chapter5(self, input, user_data, user_id):
+        self.sentiment(self, input)
+        self.kovatype("Testing sentiment")
         user_data["chapter"] = 5
         return user_data
 
