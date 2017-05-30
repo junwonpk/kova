@@ -16,7 +16,7 @@ class Kova:
         self.redis = redis.from_url(os.environ.get("REDISCLOUD_URL"))
         self.user_id = 0
         self.next = 0
-        self.typespeed = 5
+        self.typespeed = 0.1
         self.chapters = [self.chapter0, self.chapter1, self.chapter2]
 
     def chat(self, input, user_id):
