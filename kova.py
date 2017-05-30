@@ -120,13 +120,13 @@ class Kova:
 
     def epilogue(self, input, user_data):
         self.kovatype("Story Over")
-        self.kovatype("Developed by Junwon Park")
+        # self.kovatype("Developed by Junwon Park")
         self.kovatype("Type Restart to begin again.")
         return user_data
 
     def gameover(self, input, user_data):
         self.kovatype("Game Over")
-        self.kovatype("Developed by Junwon Park")
+        # self.kovatype("Developed by Junwon Park")
         self.kovatype("Type Restart to begin again.")
         return user_data
 
@@ -142,7 +142,7 @@ class Kova:
 
     def chapter1(self, input, user_data, user_id):
         self.kovatype("Hey there! Wow, this is so cool!")
-        self.kovatype("I'm Lena. Nice to meet ya!")
+        self.kovatype("Nice to meet you! I'm Lena.")
         self.kovatype("What should I call you?")
         user_data["chapter"] = 2
         return user_data
@@ -154,32 +154,34 @@ class Kova:
             self.kovatype("I mean, what's your name?")
         if username:
             user_data["username"] = username
-            self.kovatype("Cool! Nice to meet you, " + username + "!")
-            self.kovatype("Which year are you living in?")
+            self.kovatype("Cool! Hello, " + username + "!")
+            self.kovatype("What year is it there by the way?")
             user_data["chapter"] = 3
         return user_data
 
     def chapter3(self, input, user_data, user_id):
         if "2017" in input:
-            self.kovatype("Wow! This time portal is working then!")
+            self.kovatype("Wow! This time portal is actually working then!")
             self.kovatype("I'm texting you from 2117. :P")
         else:
             self.kovatype("Oh I guess this is not working...")
-            self.kovatype("or maybe you lied.")
-            user_data["trust"] -= 1;
+            self.kovatype("or maybe... you are lying...")
+            user_data["trust"] -= 1
+            #give a chance to recover
         user_data["chapter"] = 4
         return user_data
 
     def chapter4(self, input, user_data, user_id):
         self.kovatype("My dad works for the Foundry Corporation")
         self.kovatype("in the advanced research department.")
-        self.kovatype("He brought home an experimental time portal technology, so I installed it on my device while he's asleep! Hehe.")
+        self.kovatype("He brought home an experimental time portal technology, \
+so I installed it on my device while he's asleep! Hehe.")
         self.kovatype("I guess Foundry didn't exist back in 2017.")
         user_data["chapter"] = 5
         return user_data
 
     def chapter5(self, input, user_data, user_id):
-        self.kovatype("Alright.")
+        self.kovatype("I see.")
         self.kovatype("I texted anyone at random from your time,")
         self.kovatype("so I actually have no idea who you are.")
         self.kovatype("How old are you?")
@@ -188,9 +190,9 @@ class Kova:
 
     def chapter6(self, input, user_data, user_id):
         #parse and store user age
-        self.kovatype("Sweet. I'm 16. Living in Palo Alto, California.")
-        self.kovatype("Probably looks very different from your wolrd's Palo Alto though.")
-        self.kovatype("I kinda can infer from your name, but don't wanna make assumptions.")
+        self.kovatype("Sweet. I'm 16, living in Palo Alto, California.")
+        self.kovatype("It probably looks very different from your wolrd's Palo Alto though.")
+        self.kovatype("Also, I kinda can infer from your name, but don't wanna make assumptions.")
         self.kovatype("What gender do you identify with?")
         user_data["chapter"] = 7
         return user_data
@@ -212,5 +214,14 @@ class Kova:
         self.kovatype("I had to wait until my dad fell asleep, so... kinda late")
         self.kovatype("Tomorrow's an exciting day for me, so I'm gonna go sleep.")
         self.kovatype("Thanks for being my friend, and talk to you in the morning! <3")
+        user_data["chapter"] = 9
+        return user_data
+
+    def chapter9(self, input, user_data, user_id):
+        sleep_start = user_data["sleep_start"]
+        if current_time - sleep_start < 8:
+            return user_data
+        #how do i make her send again in that time?
+        self.kovatype("Good Morning!")
         user_data["chapter"] = 9
         return user_data
