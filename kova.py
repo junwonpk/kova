@@ -16,7 +16,7 @@ class Kova:
         self.redis = redis.from_url(os.environ.get("REDISCLOUD_URL"))
         self.user_id = 0
         self.next = 0
-        self.typespeed = 0.15
+        self.typespeed = 0.10
         self.chapters = {0:self.chapter0, 1:self.chapter1, 2:self.chapter2,
                         3:self.chapter3, 4:self.chapter4, 5:self.chapter5,
                         6:self.chapter6, 7:self.chapter7, 8:self.chapter8}
