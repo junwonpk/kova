@@ -90,9 +90,8 @@ class Kova:
             name = re.findall('.*known\sas\s(\w+).*', input.lower())
         if not name:
             name = re.findall('.*\'s\s(\w+).*', input.lower())
-        if not name:
-            if len(input.split()) == 1:
-                return input
+        if not name and len(input.split()) == 1:
+            name = input
         if name:
             return name[0].title()
         else:
