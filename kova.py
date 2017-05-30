@@ -64,7 +64,7 @@ class Kova:
         self.redis.delete(user_id)
 
     def initUser(self, user_id):
-        user_data = {"chapter": 0, "cardkey": 0, "username": '', "lastmsg": '', "ch6flag": 0, 'talking': 0}
+        user_data = {"chapter": 0, "username": '', "lastmsg": '', "trust": 0, 'talking': 0}
         self.redis.set(user_id, cPickle.dumps(user_data))
 
     def getData(self, user_id):
@@ -133,18 +133,18 @@ class Kova:
         if not username:
             self.kovatype("Huh? I'm not sure what you mean.")
             self.kovatype("I mean, what's your name?")
+            user_data["chapter"] = 3
         if username:
             user_data["username"] = username
             self.kovatype("Cool! Nice to meet you, " + username + "!")
             self.kovatype("Which year are you living in?")
-        user_data["chapter"] = 3
         return user_data
 
     def chapter3(self, input, user_data, user_id):
-        if input == "2017":
+        if "2017" in input:
             self.kovatype("Wow! This time portal is working then!")
             self.kovatype("I'm texting you from 2117. :P")
-        if input != "2017":
+        else:
             self.kovatype("Oh I guess this is not working...")
             self.kovatype("or maybe you lied.")
         user_data["chapter"] = 4
