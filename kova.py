@@ -17,7 +17,8 @@ class Kova:
         self.user_id = 0
         self.next = 0
         self.typespeed = 0.005
-        self.chapters = [self.chapter0, self.chapter1, self.chapter2]
+        self.chapters = [self.chapter0, self.chapter1, self.chapter2,
+                        self.chapter3]
 
     def chat(self, input, user_id):
         self.preprocess(input, user_id)
@@ -119,22 +120,34 @@ class Kova:
 
     def chapter0(self, input, user_data, user_id):
         self.kovatype("Hello?")
-        self.kovatype("Is someone there?")
-        self.kovatype("Please.. I'm scared.. Let me know if you can hear me...")
+        self.kovatype("Is this message getting through?")
         self.next = 1
         return
 
     def chapter1(self, input, user_data, user_id):
-        self.kovatype("Oh my god! Thank goodness. I'm so glad to meet you.")
+        self.kovatype("Hey there! Wow, this is so cool!")
+        self.kovatype("I'm Lena. Nice to meet ya!")
         self.kovatype("What should I call you?")
         self.next = 1
         return user_data
 
     def chapter2(self, input, user_data, user_id):
-        self.kovatype("Oh my god! Thank goodness. I'm so glad to meet you.")
-        self.kovatype("What should I call you?")
-        self.next = 1
-        return user_data
+        username = self.extract_name(input)
+        if not username:
+            self.kovatype("Huh? I'm not sure what you mean.")
+            self.kovatype("I mean, what's your name?")
+        if username:
+            user_data["username"] = username
+            self.kovatype("Cool! Nice to meet you, " + username + "!")
+            self.kovatype("Which year are you living in?")
+
+    def chapter2(self, input, user_data, user_id):
+        if input == "2017":
+            self.kovatype("Wow! This time portal is working then!")
+            self.kovatype("I'm texting you from 2117. :P")
+        if input != "2017":
+            self.kovatype("Oh I guess this is not working...")
+            self.kovatype("or maybe you lied.")
 
     def epilogue(self, input, user_data):
         self.kovatype("Story Over")
