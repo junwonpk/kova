@@ -161,7 +161,7 @@ class Kova:
         return user_data
 
     def chapter5(self, input, user_data, user_id):
-        self.sentiment(self, input)
+        self.sentiment(input)
         self.kovatype("Testing sentiment")
         user_data["chapter"] = 5
         return user_data
