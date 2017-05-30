@@ -147,16 +147,15 @@ class Kova:
         else:
             self.kovatype("Oh I guess this is not working...")
             self.kovatype("or maybe you lied.")
+            user_data["trust"] -= 1;
         user_data["chapter"] = 4
         return user_data
 
     def chapter4(self, input, user_data, user_id):
-        if input == "2017":
-            self.kovatype("Wow! This time portal is working then!")
-            self.kovatype("I'm texting you from 2117. :P")
-        if input != "2017":
-            self.kovatype("Oh I guess this is not working...")
-            self.kovatype("or maybe you lied.")
+        self.kovatype("My dad works for the Foundry Corporation")
+        self.kovatype("in the advanced research department.")
+        self.kovatype("He brought home an experimental time portal technology,\
+                        so I installed it on my device while he's asleep! Hehe.")
         user_data["chapter"] = 5
         return user_data
 
