@@ -36,7 +36,8 @@ class Kova:
         chapter = self.chapters[user_data['chapter']]
         chapter(input, user_data, user_id)
         
-        chapter == NULL:
+        print chapter
+        if chapter == NULL:
             user_data = self.epilogue(input, user_data)
         if user_data['chapter'] < 0:
             user_data = self.gameover(input, user_data)
