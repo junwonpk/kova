@@ -141,7 +141,7 @@ class Kova:
             self.kovatype("Cool! Nice to meet you, " + username + "!")
             self.kovatype("Which year are you living in?")
 
-    def chapter2(self, input, user_data, user_id):
+    def chapter3(self, input, user_data, user_id):
         if input == "2017":
             self.kovatype("Wow! This time portal is working then!")
             self.kovatype("I'm texting you from 2117. :P")
