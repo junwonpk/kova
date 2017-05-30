@@ -16,7 +16,7 @@ class Kova:
         self.redis = redis.from_url(os.environ.get("REDISCLOUD_URL"))
         self.user_id = 0
         self.next = 0
-        self.typespeed = 0.005
+        self.typespeed = 0.05
         self.chapters = [self.chapter0, self.chapter1, self.chapter2,
                         self.chapter3]
 
@@ -140,6 +140,8 @@ class Kova:
             user_data["username"] = username
             self.kovatype("Cool! Nice to meet you, " + username + "!")
             self.kovatype("Which year are you living in?")
+        self.next = 1
+        return user_data
 
     def chapter3(self, input, user_data, user_id):
         if input == "2017":
@@ -148,6 +150,7 @@ class Kova:
         if input != "2017":
             self.kovatype("Oh I guess this is not working...")
             self.kovatype("or maybe you lied.")
+        return user_data
 
     def epilogue(self, input, user_data):
         self.kovatype("Story Over")
