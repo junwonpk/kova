@@ -40,8 +40,6 @@ class Kova:
         if user_data['chapter'] < 0:
             user_data = self.gameover(input, user_data)
 
-        if self.next == 1:
-            user_data['chapter'] += 1
         user_data['talking'] = 0
         self.setData(user_id, user_data)
         return
@@ -120,14 +118,14 @@ class Kova:
     def chapter0(self, input, user_data, user_id):
         self.kovatype("Hello?")
         self.kovatype("Is this message getting through?")
-        self.next = 1
-        return
+        user_data["chapter"] = 1
+        return user_data
 
     def chapter1(self, input, user_data, user_id):
         self.kovatype("Hey there! Wow, this is so cool!")
         self.kovatype("I'm Lena. Nice to meet ya!")
         self.kovatype("What should I call you?")
-        self.next = 1
+        user_data["chapter"] = 2
         return user_data
 
     def chapter2(self, input, user_data, user_id):
@@ -139,7 +137,7 @@ class Kova:
             user_data["username"] = username
             self.kovatype("Cool! Nice to meet you, " + username + "!")
             self.kovatype("Which year are you living in?")
-        self.next = 1
+        user_data["chapter"] = 3
         return user_data
 
     def chapter3(self, input, user_data, user_id):
@@ -149,6 +147,17 @@ class Kova:
         if input != "2017":
             self.kovatype("Oh I guess this is not working...")
             self.kovatype("or maybe you lied.")
+        user_data["chapter"] = 4
+        return user_data
+
+    def chapter4(self, input, user_data, user_id):
+        if input == "2017":
+            self.kovatype("Wow! This time portal is working then!")
+            self.kovatype("I'm texting you from 2117. :P")
+        if input != "2017":
+            self.kovatype("Oh I guess this is not working...")
+            self.kovatype("or maybe you lied.")
+        user_data["chapter"] = 5
         return user_data
 
     def epilogue(self, input, user_data):
