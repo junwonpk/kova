@@ -18,7 +18,8 @@ class Kova:
         self.next = 0
         self.typespeed = 0.05
         self.chapters = {0:self.chapter0, 1:self.chapter1, 2:self.chapter2,
-                        3:self.chapter3, 4:self.chapter4, 5:self.chapter5}
+                        3:self.chapter3, 4:self.chapter4, 5:self.chapter5,
+                        6:self.chapter6, 7:self.chapter7, 8:self.chapter8}
 
     def chat(self, input, user_id):
         self.preprocess(input, user_id)
@@ -34,8 +35,8 @@ class Kova:
 
         chapter = self.chapters[user_data['chapter']]
         chapter(input, user_data, user_id)
-
-        if user_data['chapter'] > 20:
+        
+        chapter == NULL:
             user_data = self.epilogue(input, user_data)
         if user_data['chapter'] < 0:
             user_data = self.gameover(input, user_data)
@@ -65,7 +66,8 @@ class Kova:
 
     def initUser(self, user_id):
         user_data = {"chapter": 0, "username": '', "lastmsg": '', \
-                    "trust": 0, 'talking': 0, "age": 0}
+                    "trust": 0, 'talking': 0, "age": 0, "auto_sent": 0\
+                    "curr_sent": 0}
         self.redis.set(user_id, cPickle.dumps(user_data))
 
     def getData(self, user_id):
@@ -116,6 +118,22 @@ class Kova:
         Lena Kova Story Below
     """
 
+    def epilogue(self, input, user_data):
+        self.kovatype("Story Over")
+        self.kovatype("Developed by Junwon Park")
+        self.kovatype("Type Restart to begin again.")
+        return user_data
+
+    def gameover(self, input, user_data):
+        self.kovatype("Game Over")
+        self.kovatype("Developed by Junwon Park")
+        self.kovatype("Type Restart to begin again.")
+        return user_data
+
+    def answer_questions(self, input, user_data): # if user asks questions, answer.
+        # lena's age, gender, school, family members
+        return user_data
+
     def chapter0(self, input, user_data, user_id):
         self.kovatype("Hello?")
         self.kovatype("Is this message getting through?")
@@ -161,19 +179,38 @@ class Kova:
         return user_data
 
     def chapter5(self, input, user_data, user_id):
-        self.sentiment(input)
-        self.kovatype("Testing sentiment")
-        user_data["chapter"] = 5
+        self.kovatype("Alright.")
+        self.kovatype("I texted anyone at random from your time,")
+        self.kovatype("so I actually have no idea who you are.")
+        self.kovatype("How old are you?")
+        user_data["chapter"] = 6
         return user_data
 
-    def epilogue(self, input, user_data):
-        self.kovatype("Story Over")
-        self.kovatype("Developed by Junwon Park")
-        self.kovatype("Type Restart to begin again.")
+    def chapter6(self, input, user_data, user_id):
+        #parse and store user age
+        self.kovatype("Sweet. I'm 16. Living in Palo Alto, California.")
+        self.kovatype("Probably looks very different from your wolrd's Palo Alto though.")
+        self.kovatype("I kinda can infer from your name, but don't wanna make assumptions.")
+        self.kovatype("What gender do you identify with?")
+        user_data["chapter"] = 7
         return user_data
 
-    def gameover(self, input, user_data):
-        self.kovatype("Game Over")
-        self.kovatype("Developed by Junwon Park")
-        self.kovatype("Type Restart to begin again.")
+    def chapter7(self, input, user_data, user_id):
+        #parse and store user gender
+        self.kovatype("Nice nice. Good to have a [GENDER] friend from a hundred years ago!")
+        self.kovatype("What is it like to live in a world without automation?")
+        self.kovatype("You still do your chores by hand, right?")
+        self.kovatype("It must really suck...")
+        self.kovatype("What do you think about your world?")
+        user_data["chapter"] = 8
+        return user_data
+
+    def chapter8(self, input, user_data, user_id):
+        #parse and store user gender
+        self.kovatype("Awesome to hear from you :)")
+        self.kovatype("Hey, it's actually 3AM here.")
+        self.kovatype("I had to wait until my dad fell asleep, so... kinda late")
+        self.kovatype("Tomorrow's an exciting day for me, so I'm gonna go sleep.")
+        self.kovatype("Thanks for being my friend, and talk to you in the morning! <3")
+        user_data["chapter"] = 9
         return user_data
