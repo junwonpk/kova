@@ -67,7 +67,7 @@ class Kova:
 
     def initUser(self, user_id):
         user_data = {"chapter": 0, "username": '', "lastmsg": '', \
-                    "trust": 0, 'talking': 0, "age": 0, "auto_sent": 0\
+                    "trust": 0, 'talking': 0, "age": 0, "auto_sent": 0,\
                     "curr_sent": 0}
         self.redis.set(user_id, cPickle.dumps(user_data))
 
