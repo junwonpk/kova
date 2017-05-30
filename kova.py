@@ -18,7 +18,7 @@ class Kova:
         self.next = 0
         self.typespeed = 0.05
         self.chapters = {0:self.chapter0, 1:self.chapter1, 2:self.chapter2,
-                        3:self.chapter3, 4:self.chapter4}
+                        3:self.chapter3, 4:self.chapter4, 5:self.chapter5}
 
     def chat(self, input, user_id):
         self.preprocess(input, user_id)
