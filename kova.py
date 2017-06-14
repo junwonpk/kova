@@ -69,6 +69,12 @@ class Kova:
         if 'sentiment' in input.lower():
             user_data['abort_plot'] = 1
             self.sentiment(input)
+        if 'entity' in input.lower():
+            user_data['abort_plot'] = 1
+            self.tag_entity(input)
+        if 'syntax' in input.lower():
+            user_data['abort_plot'] = 1
+            self.tag_syntax(input)
         if user_data['trust'] < -3:
             user_data['chapter'] = -1
             self.kovatype("I don't think you're taking me seriously...")
@@ -155,14 +161,9 @@ class Kova:
         else:
             return []
 
-    def sentiment(self, input):
+    def tag_entity(self, input):
         language_client = language.Client()
         document = language_client.document_from_text(input)
-        sentiment = document.analyze_sentiment().sentiment
-        self.kovatype('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
-        tokens = document.analyze_syntax().tokens
-        for token in tokens:
-            self.kovatype('{}: {}'.format(token.part_of_speech, token.text_content))
         entities = document.analyze_entities().entities
         for entity in entities:
             self.kovatype('=' * 20)
@@ -170,6 +171,20 @@ class Kova:
             self.kovatype('{:<16}: {}'.format('type', entity.entity_type))
             self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
             self.kovatype('{:<16}: {}'.format('salience', entity.salience))
+
+    def tag_syntax(self, input):
+        language_client = language.Client()
+        document = language_client.document_from_text(input)
+        tokens = document.analyze_syntax().tokens
+        for token in tokens:
+            self.kovatype('{}: {}'.format(token.part_of_speech, token.text_content))
+
+    def sentiment(self, input):
+        language_client = language.Client()
+        document = language_client.document_from_text(input)
+        sentiment = document.analyze_sentiment().sentiment
+        self.kovatype('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
+
 
     """ Lena Kova Story """
 
