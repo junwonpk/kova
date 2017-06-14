@@ -17,6 +17,7 @@ class Kova:
         self.user_id = 0
         self.next = 0
         self.typespeed = 0.10
+        self.lastchapter = 18
         self.chapters = {0:self.chapter0, 1:self.chapter1, 2:self.chapter2,
                         3:self.chapter3, 4:self.chapter4, 5:self.chapter5,
                         6:self.chapter6, 7:self.chapter7, 8:self.chapter8}
@@ -59,7 +60,7 @@ class Kova:
     def jump(self, input, user_data):
         if 'jump' in input.lower():
             chapter = re.search('.*chapter(.).*', input.lower())
-            console.log(chapter)
+            print(chapter)
             if chapter is not None and (len(chapter) is 1 or len(chapter) is 2):
                 user_data["chapter"] = chapter
         return user_data
