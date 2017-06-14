@@ -29,7 +29,7 @@ class Kova:
 "zero": 0, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7,\
 "eight": 8, "nine": 9}
 
-    def chat(self, input, user_id):
+    def chat(self, input, user_id, time):
         self.preprocess(input, user_id)
         user_data = self.getData(user_id)
         if user_data['talking'] == 1:
@@ -38,7 +38,7 @@ class Kova:
             return
         user_data['lastmsg'] = input
         user_data['talking'] = 1
-        user_data = self.catch(input, user_data)
+        user_data = self.catch(input, user_data, time)
         if user_data['abort_plot'] == 1:
             user_data['abort_plot'] = 0
             return
@@ -65,7 +65,12 @@ class Kova:
         if user_id not in self.redis.keys(): # if user first time
             self.initUser(user_id)
 
-    def catch(self, input, user_data):
+    def catch(self, input, user_data, time):
+        self.kovatype(time)
+        if time < user_data["msg_time"]:
+            self.kovatype(input + "was interruption")
+            user_data['abort_plot'] = 1
+            return user_data
         if 'jump' in input.lower():
             chapter = re.findall('.*chapter(\d+).*', input.lower())
             if len(chapter) > 0:
@@ -100,7 +105,8 @@ class Kova:
     def initUser(self, user_id):
         user_data = {"chapter": 0, "username": '', "lastmsg": '', \
                     "trust": 0, 'talking': 0, "age": 0, "future_sent": 0,\
-                    "past_sent": 0, "abort_plot": 0, "gender": '', "wakeup": 0}
+                    "past_sent": 0, "abort_plot": 0, "gender": '', "wakeup": 0, \
+                    "msg_time":0}
         self.redis.set(user_id, cPickle.dumps(user_data))
 
     def getData(self, user_id):
@@ -193,6 +199,7 @@ class Kova:
         self.kovatype("Hello?")
         self.kovatype("Is this message getting through?")
         user_data["chapter"] = 1
+        user_data["last_msg"] = datetime.now()
         return user_data
 
     def chapter1(self, input, user_data, user_id):
@@ -200,6 +207,7 @@ class Kova:
         self.kovatype("Nice to meet you! I'm Lena.")
         self.kovatype("What should I call you?")
         user_data["chapter"] = 2
+        user_data["last_msg"] = datetime.now()
         return user_data
 
     def chapter2(self, input, user_data, user_id):
@@ -213,6 +221,7 @@ class Kova:
             self.kovatype("Cool! Hello, " + username + "!")
             self.kovatype("What year is it there by the way?")
             user_data["chapter"] = 3
+        user_data["last_msg"] = datetime.now()
         return user_data
 
     def chapter3(self, input, user_data, user_id):

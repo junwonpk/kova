@@ -39,11 +39,12 @@ def webhook():
 
                 if messaging_event.get("message"):  # someone sent us a message
 
+                    time = entry["time"]
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     if "text" in messaging_event["message"].keys():
                         message = messaging_event["message"]["text"]  # the message's text
-                        process_message(message, sender_id)
+                        process_message(message, sender_id, time)
                     else:
                         attachment = messaging_event["message"]["attachments"][0]  # the message's image
                         message = attachment["payload"]["url"] #url of content
@@ -63,9 +64,9 @@ def webhook():
 
     return "ok", 200
 
-def process_message(message_text, sender_id):
+def process_message(message_text, sender_id, time):
     kova = Kova()
-    kova.chat(message_text, sender_id)
+    kova.chat(message_text, sender_id, time)
 
 def send_message(recipient_id, message, message_type):
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message))
