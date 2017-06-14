@@ -55,6 +55,10 @@ class Kova:
             self.restart(user_id)
         if user_id not in self.redis.keys(): # if user first time
             self.initUser(user_id)
+        if 'jump' in input.lower():
+            chapter = re.search('.*chapter(.).*', input.lower())
+            user_data = self.getData(user_id)
+            user_data["chapter"] = 11
 
     def kovatype(self, message):
         time.sleep(len(message) * self.typespeed)
