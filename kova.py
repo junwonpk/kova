@@ -64,9 +64,6 @@ class Kova:
     def jump(self, input, user_data):
         if 'jump' in input.lower():
             chapter = re.findall('.*chapter(\d+).*', input.lower())
-            print(chapter)
-            print(len(chapter))
-            print(chapter[0])
             if len(chapter) > 0:
                 user_data["chapter"] = int(chapter[0])
         return user_data
