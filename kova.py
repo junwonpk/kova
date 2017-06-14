@@ -17,13 +17,14 @@ class Kova:
         self.curr_year = 2017
         self.user_id = 0
         self.next = 0
-        self.typespeed = 0.10
+        self.typespeed = 0.07
         self.lastchapter = 40
         self.chapters = {}
         for chapter in xrange(self.lastchapter + 1):
             self.chapters[chapter] = eval('self.chapter' + str(chapter))
 
     def chat(self, input, user_id):
+        self.redis.flushall()
         self.preprocess(input, user_id)
         user_data = self.getData(user_id)
         if user_data['talking'] == 1:
@@ -34,6 +35,7 @@ class Kova:
         user_data['talking'] = 1
         user_data = self.catch(input, user_data)
         if user_data['abort_plot'] == 1:
+            user_data['abort_plot'] = 0
             return
         self.setData(user_id, user_data)
 
@@ -66,6 +68,7 @@ class Kova:
             if len(chapter) > 0:
                 user_data["chapter"] = int(chapter[0])
         if 'sentiment' in input.lower():
+            user_data['abort_plot'] = 1
             self.sentiment(input)
         if user_data['trust'] < -3:
             user_data['chapter'] = -1
@@ -143,6 +146,16 @@ class Kova:
         else:
             return []
 
+    def extract_age(self, input):
+        target = []
+        target = re.findall('.*(\d+).*', input.lower())
+        if not target:
+            target = re.findall(pattern, string)
+        if target:
+            return target[0]
+        else:
+            return []
+
     def sentiment(self, input):
         language_client = language.Client()
         document = language_client.document_from_text(input)
@@ -201,6 +214,7 @@ class Kova:
         if not username:
             self.kovatype("Huh? I'm not sure what you mean.")
             self.kovatype("I mean, what's your name?")
+            user_data["trust"] -= 1
         if username:
             user_data["username"] = username
             self.kovatype("Cool! Hello, " + username + "!")
@@ -211,7 +225,7 @@ class Kova:
     def chapter3(self, input, user_data, user_id):
         if str(self.curr_year) in input:
             self.kovatype("Wow! This time portal is actually working then!")
-            self.kovatype("I'm texting you from " + str(self.curr_year) + ". :P")
+            self.kovatype("I'm texting you from " + str(self.curr_year + 100) + ". :P")
             user_data["trust"] += 1
         else:
             self.kovatype("Oh I guess this is not working...")
@@ -230,7 +244,7 @@ so I installed it on my device while he's asleep! Hehe.")
         return user_data
 
     def chapter5(self, input, user_data, user_id):
-        self.kovatype("I see.")
+        self.kovatype("I see")
         self.kovatype("I texted anyone at random from your time,")
         self.kovatype("so I actually have no idea who you are.")
         self.kovatype("How old are you?")
@@ -238,7 +252,7 @@ so I installed it on my device while he's asleep! Hehe.")
         return user_data
 
     def chapter6(self, input, user_data, user_id):
-        #parse and store user age
+        age = self.extract_age(input)
         self.kovatype("Sweet. I'm 16, living in Palo Alto, California.")
         self.kovatype("It probably looks very different from your wolrd's Palo Alto though.")
         self.kovatype("Also, I kinda can infer from your name, but don't wanna make assumptions.")
