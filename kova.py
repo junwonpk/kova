@@ -404,7 +404,33 @@ to be like my father and work for Orbis.")
         return user_data
 
     def chapter25(self, input, user_data, user_id):
-        self.kovatype("") 
+        self.kovatype("Hmm? That's strange. I've been to Orbis many times, and \
+my dad hasn't shown me this door.") 
+        self.kovatype("This kid asked about it, and apparently we can't go in and they won't \
+tell us what's inside..") 
+        self.kovatype("That must mean...") 
+        self.kovatype("There's something cool inside!!!") 
+        self.kovatype("What shoud I do?") 
         user_data["chapter"] = 26
+        return user_data
+
+    def chapter26(self, input, user_data, user_id):
+        # if not: she goes on, gets her phone taken away.
+            #TODO: write
+        # if goes in
+        self.kovatype("Wow! The door opens? That is just weird.") 
+        self.kovatype("It's just a normal building inside, like any other labs.") 
+        self.kovatype("But it's weird that there aren't any signs.") 
+        self.kovatype("AAAH! I hear footsteps! What do I do? What do I do!!!") 
+        #
+        user_data["chapter"] = 27
+        return user_data
+
+    def chapter27(self, input, user_data, user_id):
+        self.kovatype(".") 
+        self.kovatype("It's just a normal building inside, like any other labs.") 
+        self.kovatype("But it's weird that there aren't any signs.") 
+        self.kovatype("AAAH! I hear footsteps! What do I do? What do I do!!!") 
+        user_data["chapter"] = 28
         return user_data
 
