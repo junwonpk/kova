@@ -14,9 +14,10 @@ class Kova:
 
     def __init__(self):
         self.redis = redis.from_url(os.environ.get("REDISCLOUD_URL"))
+        self.curr_year = 2017
         self.user_id = 0
         self.next = 0
-        self.typespeed = 0.10 * 0.0
+        self.typespeed = 0.10
         self.lastchapter = 40
         self.chapters = {}
         for chapter in xrange(self.lastchapter + 1):
@@ -64,6 +65,14 @@ class Kova:
             chapter = re.findall('.*chapter(\d+).*', input.lower())
             if len(chapter) > 0:
                 user_data["chapter"] = int(chapter[0])
+        if 'sentiment' in input.lower():
+            self.sentiment(input)
+        if user_data['trust'] < -3:
+            user_data['chapter'] = -1
+            self.kovatype("I don't think you're taking me seriously...")
+            self.kovatype("I'm disappointed.. I thought we could be friends, and it would've been fun..")
+            self.kovatype("But I'll leave you if you're busy with other things.")
+            self.kovatype("Bye...")
         return user_data
 
     def kovatype(self, message):
@@ -110,6 +119,30 @@ class Kova:
         else:
             return []
 
+    def extract_gender(self, input):
+        target = []
+        target = re.findall('.*is\s(\w+).*', input.lower())
+        if not target:
+            target = re.findall('.*im\s(\w+).*', input.lower())
+        if not target:
+            target = re.findall('.*as\s(\w+).*', input.lower())
+        if not target:
+            target = re.findall('.*\'m\s(\w+).*', input.lower())
+        if not target:
+            target = re.findall('.*am\s(\w+).*', input.lower())
+        if not target:
+            target = re.findall('.*call\sme\s(\w+).*', input.lower())
+        if not target:
+            target = re.findall('.*known\sas\s(\w+).*', input.lower())
+        if not target:
+            target = re.findall('.*\'s\s(\w+).*', input.lower())
+        if not target and len(input.split()) == 1:
+            return input.title()
+        if target:
+            return target[0].lower()
+        else:
+            return []
+
     def sentiment(self, input):
         language_client = language.Client()
         document = language_client.document_from_text(input)
@@ -130,18 +163,21 @@ class Kova:
 
     def epilogue(self, input, user_data):
         self.kovatype("Story Over")
-        # self.kovatype("Developed by Junwon Park")
+        self.kovatype("Thank you for chatting with Lena Kova")
+        self.kovatype("Lena Kova is developed by Junwon Park at Stanford University")
         self.kovatype("Type Restart to begin again.")
         return user_data
 
     def gameover(self, input, user_data):
         self.kovatype("Game Over")
-        # self.kovatype("Developed by Junwon Park")
+        self.kovatype("Thank you for chatting with Lena Kova")
+        self.kovatype("Lena Kova is developed by Junwon Park at Stanford University")
         self.kovatype("Type Restart to begin again.")
         return user_data
 
     def answer_questions(self, input, user_data): # if user asks questions, answer.
         # lena's age, gender, school, family members
+        # hobbies, asl, pets, 
         return user_data
 
     """ ACT 1 """
@@ -173,21 +209,20 @@ class Kova:
         return user_data
 
     def chapter3(self, input, user_data, user_id):
-        if "2017" in input:
+        if str(self.curr_year) in input:
             self.kovatype("Wow! This time portal is actually working then!")
-            self.kovatype("I'm texting you from 2117. :P")
+            self.kovatype("I'm texting you from " + str(self.curr_year) + ". :P")
             user_data["trust"] += 1
         else:
             self.kovatype("Oh I guess this is not working...")
             self.kovatype("or maybe... you are lying...")
             user_data["trust"] -= 1
-            #give a chance to recover
         user_data["chapter"] = 4
         return user_data
 
     def chapter4(self, input, user_data, user_id):
-        self.kovatype("My dad works for the Orbis Corporation")
-        self.kovatype("in the advanced research department.")
+        self.kovatype("My dad works for Orbis")
+        self.kovatype("in the Advanced Research department.")
         self.kovatype("He brought home an experimental time portal technology, \
 so I installed it on my device while he's asleep! Hehe.")
         self.kovatype("I guess Orbis didn't exist back in 2017.")
@@ -212,17 +247,21 @@ so I installed it on my device while he's asleep! Hehe.")
         return user_data
 
     def chapter7(self, input, user_data, user_id):
-        #parse and store user gender
-        self.kovatype("Nice nice. Good to have a [GENDER] friend from a hundred years ago!")
-        self.kovatype("What is it like to live in a world without automation?")
-        self.kovatype("You still do your chores by hand, right?")
-        self.kovatype("It must really suck...")
-        self.kovatype("What do you think about your world?")
-        user_data["chapter"] = 8
+        gender = self.extract_gender(input)
+        if not gender:
+            self.kovatype("No No That's not what I'm asking")
+            self.kovatype("I mean, what's your gender?")
+        if gender:
+            user_data["gender"] = gender
+            self.kovatype("Nice nice. Good to have a " + gender + " friend from a hundred years ago!")
+            self.kovatype("What is it like to live in a world without automation?")
+            self.kovatype("You still do your chores by hand, right?")
+            self.kovatype("It must really suck...")
+            self.kovatype("What do you think about your world?")
+            user_data["chapter"] = 8
         return user_data
 
     def chapter8(self, input, user_data, user_id):
-        #parse and store user gender
         self.kovatype("Awesome to hear from you :)")
         self.kovatype("Hey, it's actually 3AM here.")
         self.kovatype("I had to wait until my dad fell asleep, so... kinda late")
