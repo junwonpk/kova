@@ -23,6 +23,7 @@ class Kova:
             self.chapters[chapter] = eval('self.chapter' + str(chapter))
 
     def chat(self, input, user_id):
+        self.redis.flushall()
         self.preprocess(input, user_id)
         user_data = self.getData(user_id)
         if user_data['talking'] == 1:
@@ -400,5 +401,10 @@ to chat with you. To access a time where people did human things and gather data
         self.kovatype("I hope one day I'll get admitted to Stanford and study Computer Science \
 to be like my father and work for Orbis.") 
         user_data["chapter"] = 25
+        return user_data
+
+    def chapter25(self, input, user_data, user_id):
+        self.kovatype("") 
+        user_data["chapter"] = 26
         return user_data
 
