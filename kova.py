@@ -6,6 +6,7 @@ import time
 import redis
 import cPickle
 from google.cloud import language
+from datetime import datetime, timedelta
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -99,7 +100,7 @@ class Kova:
     def initUser(self, user_id):
         user_data = {"chapter": 0, "username": '', "lastmsg": '', \
                     "trust": 0, 'talking': 0, "age": 0, "future_sent": 0,\
-                    "past_sent": 0, "abort_plot": 0, "gender": ''}
+                    "past_sent": 0, "abort_plot": 0, "gender": '', "wakeup": 0}
         self.redis.set(user_id, cPickle.dumps(user_data))
 
     def getData(self, user_id):
@@ -182,7 +183,7 @@ class Kova:
 
     def answer_questions(self, input, user_data): # if user asks questions, answer.
         # lena's age, gender, school, family members
-        # hobbies, asl, pets, 
+        # hobbies, asl, pets, orbis
         return user_data
 
     """ ACT 1 """
@@ -237,8 +238,8 @@ so I installed it on my device while he's asleep! Hehe.")
 
     def chapter5(self, input, user_data, user_id):
         self.kovatype("I see")
-        self.kovatype("I texted anyone at random from your time,")
-        self.kovatype("so I actually have no idea who you are.")
+        self.kovatype("I texted anyone at random from your time")
+        self.kovatype("so I actually have no idea who you are")
         self.kovatype("How old are you?")
         user_data["chapter"] = 6
         return user_data
@@ -310,20 +311,23 @@ so I installed it on my device while he's asleep! Hehe.")
         self.kovatype("I had to wait until my dad fell asleep, so... kinda late")
         self.kovatype("Tomorrow's an exciting day for me, so I'm gonna go sleep.")
         self.kovatype("Thanks for being my friend, and talk to you in the morning! <3")
+        self.kovatype("Message me in like 8 hours. I'll check for your message as soon as I wake up :)")
+        user_data["wakeup"] = datetime.now() + timedelta(hours=8)
         user_data["chapter"] = 9
         return user_data
 
     """ ACT 2 """
 
     def chapter9(self, input, user_data, user_id):
-        # sleep_start = user_data["sleep_start"]
-        # if current_time - sleep_start < 8:
-        #     return user_data
-        #how do i make her send again in that time?
-        self.kovatype("Good Morning!")
-        self.kovatype("How are you doing?")
-        user_data["chapter"] = 10
-        return user_data
+        if datetime.now() < user_data["wakeup"]:
+            self.kovatype("Zzz... Still asleep")
+            self.kovatype("Message me after " + user_data["wakeup"])
+            return user_data
+        else 
+            self.kovatype("Good Morning!")
+            self.kovatype("How are you doing?")
+            user_data["chapter"] = 10
+            return user_data
 
     def chapter10(self, input, user_data, user_id):
         #sentiment analysis and respond appropriately
