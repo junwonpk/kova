@@ -241,11 +241,14 @@ so I installed it on my device while he's asleep! Hehe.")
 
     def chapter10(self, input, user_data, user_id):
         #sentiment analysis and respond appropriately
-        self.kovatype("A couple of weeks ago, dad showed me an \"alarm app\" from your time.") 
-        self.kovatype("It's so interesting that you enter a specific time manually for the alarm to ring at.") 
+        self.kovatype("A couple of weeks ago, dad showed me an \"alarm app\" \
+from your time.") 
+        self.kovatype("It's so interesting that you enter a specific time manually \
+for the alarm to ring at.") 
         self.kovatype("It's really... How should I put it...") 
         self.kovatype("Vintage?") 
-        self.kovatype("We don't have alarm devices anymore. The room lights up and plays a song when my body is ready to wake up.") 
+        self.kovatype("We don't have alarm devices anymore. The room lights up and \
+plays a song when my body is ready to wake up.") 
         self.kovatype("Wait a second. I'm gonna walk through the shower aisle.") 
         user_data["chapter"] = 11
         return user_data
@@ -261,16 +264,20 @@ so I installed it on my device while he's asleep! Hehe.")
 
     def chapter12(self, input, user_data, user_id):
         #Lena's favorite food is pasta. If same, trust score goes up.
-        self.kovatype("I can hear the delivery drones downstairs. Ah, mom must be downstairs.") 
-        self.kovatype("Bipedal-bot is telling her we're having Danish and Apple for breakfast.") 
-        self.kovatype("I'm gonna turn this chat off while I'm with mom, so I don't get caught")
+        self.kovatype("I can hear the delivery drones downstairs. Ah, mom must be \
+downstairs.") 
+        self.kovatype("Bipedal-bot is telling her we're having Danish and Apple \
+for breakfast.") 
+        self.kovatype("I'm gonna turn this chat off while I'm with mom, so I don't \
+get caught")
         self.kovatype("See you after breakfast!")
         user_data["chapter"] = 13
         return user_data
 
     def chapter13(self, input, user_data, user_id):
         self.kovatype("Hey Sorry I got back late") 
-        self.kovatype("Mom and I came to downtown and I couldn't find the time to text you without her seeing me") 
+        self.kovatype("Mom and I came to downtown and I couldn't find the time to \
+text you without her seeing me") 
         self.kovatype("What have you been up to?")
         user_data["chapter"] = 14
         return user_data
@@ -278,9 +285,11 @@ so I installed it on my device while he's asleep! Hehe.")
     def chapter14(self, input, user_data, user_id):
         #Handle response
         self.kovatype("Mom went to a VR cafe with her friends.") 
-        self.kovatype("They're going to checkout the new Euro Tour Package until lunch.") 
+        self.kovatype("They're going to checkout the new Euro Tour Package until \
+lunch.") 
         self.kovatype("Oh, do you know what VR is?")
-        self.kovatype("I learnt when it emerged in world history, but can't remember if it's before or after your year.")
+        self.kovatype("I learnt when it emerged in world history, but can't remember \
+if it's before or after your year.")
         user_data["chapter"] = 15
         return user_data
 
@@ -298,26 +307,36 @@ so I installed it on my device while he's asleep! Hehe.")
         self.kovatype("One sec...") 
         self.kovatype("Getting a haircut...") 
         #wait 1 more min
-        self.kovatype("I always wonder when households will be able to purchase these haircut drones.")
-        self.kovatype("It's still illegal, because they're equipped with sharp blades and can be used as weapons.")
-        self.kovatype("Maybe someone from my future will talk to me one day to chat with me about each other's worlds!")
-        self.kovatype("Guess what? I'm visiting dad's workplace today! That's why I got my haircut. :)")
+        self.kovatype("I always wonder when households will be able to purchase \
+these haircut drones.")
+        self.kovatype("It's still illegal, because they're equipped with sharp \
+blades and can be used as weapons.")
+        self.kovatype("Maybe someone from my future will talk to me one day to \
+chat with me about each other's worlds!")
+        self.kovatype("Guess what? I'm visiting dad's workplace today! That's why \
+I got my haircut. :)")
         user_data["chapter"] = 17
         return user_data
 
     def chapter17(self, input, user_data, user_id):
         self.kovatype("Ah crap... I forgot to turn off my Starbucks setting.") 
-        self.kovatype("Just got a notification that my Frappucino is ready, cuz last time, I told them to prepare a Frappucino everytime I approach Starbucks.") 
-        self.kovatype("I should pick it up, since I shouldn't waste good coffee, even if it's all paid for by the government through universal income.")
-        self.kovatype("You know, when I was still a young girl, we still had some shops in downtown where human staffs greeted me.")
-        self.kovatype("It'd be cruel to ask any human to spend their time at a shop working these days, but I miss human service sometimes.")
+        self.kovatype("Just got a notification that my Frappucino is ready, cuz \
+last time, I told them to prepare a Frappucino everytime I approach Starbucks.") 
+        self.kovatype("I should pick it up, since I shouldn't waste good coffee, \
+even if it's all paid for by the government through universal income.")
+        self.kovatype("You know, when I was still a young girl, we still had some \
+shops in downtown where human staffs greeted me.")
+        self.kovatype("It'd be cruel to ask any human to spend their time at a shop \
+working these days, but I miss human service sometimes.")
         user_data["chapter"] = 18
         return user_data
 
     def chapter18(self, input, user_data, user_id):
-        self.kovatype("Mom's coming in an autonomous Waymo right now, so I'm gonna leave for a sec.") 
+        self.kovatype("Mom's coming in an autonomous Waymo right now, so I'm gonna \
+leave for a sec.") 
         self.kovatype("I'll let you know all about dad's workplace when I get there!") 
-        self.kovatype("They'll show me some advanced research today too, so should be exciting!")
+        self.kovatype("They'll show me some advanced research today too, so should be \
+exciting!")
         self.kovatype("Bye!")
         user_data["chapter"] = 19
         return user_data
@@ -327,7 +346,8 @@ so I installed it on my device while he's asleep! Hehe.")
     def chapter19(self, input, user_data, user_id):
         self.kovatype("Wow, this place is like a giant playground.") 
         self.kovatype("There are so many fun things going on everywhere.")
-        self.kovatype("All these robots that must be at least a decade ahead of what I see out in the city.")
+        self.kovatype("All these robots that must be at least a decade ahead of \
+what I see out in the city.")
         user_data["chapter"] = 20
         return user_data
 
@@ -335,6 +355,50 @@ so I installed it on my device while he's asleep! Hehe.")
         self.kovatype("Just got to Orbis.") 
         self.kovatype("This place is like a giant playground!") 
         self.kovatype("There are so many fun things going on everywhere.")
-        self.kovatype("All these robots that must be at least a decade ahead of what I see out in the city.")
+        self.kovatype("All these robots that must be at least a decade ahead \
+of what I see out in the city.")
         user_data["chapter"] = 21
         return user_data
+
+    def chapter21(self, input, user_data, user_id):
+        self.kovatype("The two most shocking things I saw today are from Orbis VR.") 
+        self.kovatype("They have a full body VR that connects to your brain through \
+neural link") 
+        self.kovatype("Looks like a nice comfy massage chair with a glossy helmet.")
+        self.kovatype("Then there's the vertical skyscraper farms.")
+        user_data["chapter"] = 22
+        return user_data
+
+    def chapter22(self, input, user_data, user_id):
+        self.kovatype("I don't know what to feel about that..") 
+        self.kovatype("Everyone living in very narrow space.") 
+        self.kovatype("Being fed by robots, never waking up from virtual reality..") 
+        self.kovatype("They already talk about how we aren't doing \"human activities\".") 
+        self.kovatype("We'd be abandoning physical reality then!") 
+        self.kovatype("However, that's the only way to keep growing human population.") 
+        self.kovatype("Dad says we're already running out of land space, depsite utilizing \
+all in-land resources, unlike your time when people lived mostly along the coasts.") 
+        user_data["chapter"] = 23
+        return user_data
+
+    def chapter23(self, input, user_data, user_id):
+        self.kovatype("Now we're going into the Advanced Research building. \
+This is where my dad works.") 
+        self.kovatype("As the Vice President of Data Science, he helps Orbis \
+gather and process data about human behavior to predict what people will want \
+and provide services for them right when they want it.") 
+        self.kovatype("His team's challenge is that we've been digressing from \
+so-called \"human activities\" these days though, and there's little data he can \
+gather.")
+        self.kovatype("That's why his team made the time portal technology I'm using \
+to chat with you. To access a time where people did human things and gather data from then.")
+        user_data["chapter"] = 24
+        return user_data
+
+    def chapter24(self, input, user_data, user_id):
+        self.kovatype("Wow. Orbis has a real state-of-art distributed computing technology.") 
+        self.kovatype("I hope one day I'll get admitted to Stanford and study Computer Science \
+to be like my father and work for Orbis.") 
+        user_data["chapter"] = 25
+        return user_data
+
