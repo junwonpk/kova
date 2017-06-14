@@ -16,7 +16,7 @@ class Kova:
         self.redis = redis.from_url(os.environ.get("REDISCLOUD_URL"))
         self.user_id = 0
         self.next = 0
-        self.typespeed = 0.10
+        self.typespeed = 0.10 * 0.0
         self.lastchapter = 27
         self.chapters = {}
         for chapter in xrange(self.lastchapter + 1):
@@ -430,8 +430,10 @@ tell us what's inside..")
         #if hide
         self.kovatype("Okay. I hid in this random room. I think I'm good for") 
         self.kovatype("AH CRAP! The motion sensor turned the light on.") 
-        self.kovatype(".") 
-        self.kovatype("AAAH! I hear footsteps! What do I do? What do I do!!!") 
+        self.kovatype("Where do I go?") 
+        self.kovatype("What do I do ?") 
+        time.slee
+        self.kovatype("What do I do ?") 
         user_data["chapter"] = 28
         return user_data
 
