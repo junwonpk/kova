@@ -18,7 +18,7 @@ class Kova:
         self.curr_year = 2017
         self.user_id = 0
         self.next = 0
-        self.typespeed = 0.07
+        self.typespeed = 0.07 * 2
         self.lastchapter = 40
         self.chapters = {}
         for chapter in xrange(self.lastchapter + 1):
