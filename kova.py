@@ -21,6 +21,10 @@ class Kova:
         self.chapters = {0:self.chapter0, 1:self.chapter1, 2:self.chapter2,
                         3:self.chapter3, 4:self.chapter4, 5:self.chapter5,
                         6:self.chapter6, 7:self.chapter7, 8:self.chapter8}
+        """
+        for chapter in xrange(self.lastchapter + 1):
+            self.chapters[chapter] = "self.chapter" + chapter
+        """
 
     def chat(self, input, user_id):
         self.preprocess(input, user_id)
@@ -59,7 +63,7 @@ class Kova:
 
     def jump(self, input, user_data):
         if 'jump' in input.lower():
-            chapter = re.findall('.*chapter(d*).*', input.lower())[0]
+            chapter = re.findall('.*chapter(d*).*', input.lower())
             print(chapter)
             if chapter is not None and (len(chapter) is 1 or len(chapter) is 2):
                 user_data["chapter"] = int(chapter)
