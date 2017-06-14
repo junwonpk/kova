@@ -319,11 +319,13 @@ so I installed it on my device while he's asleep! Hehe.")
     """ ACT 2 """
 
     def chapter9(self, input, user_data, user_id):
+        if user_data["wakeup"] == 0:
+            user_data["wakeup"] = datetime.now()
         if datetime.now() < user_data["wakeup"]:
             self.kovatype("Zzz... Still asleep")
             self.kovatype("Message me after " + user_data["wakeup"])
             return user_data
-        else 
+        else:
             self.kovatype("Good Morning!")
             self.kovatype("How are you doing?")
             user_data["chapter"] = 10
