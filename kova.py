@@ -66,7 +66,6 @@ class Kova:
             self.initUser(user_id)
 
     def catch(self, input, user_data, time):
-        self.kovatype(time)
         if time < user_data["msg_time"]:
             self.kovatype(input + "was interruption")
             user_data['abort_plot'] = 1
