@@ -120,7 +120,7 @@ class Kova:
             self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
             self.kovatype('{:<16}: {}'.format('salience', entity.salience))
 
-""" Lena Kova Story """
+    """ Lena Kova Story """
 
     def epilogue(self, input, user_data):
         self.kovatype("Story Over")
@@ -138,7 +138,7 @@ class Kova:
         # lena's age, gender, school, family members
         return user_data
 
-""" ACT 1 """
+    """ ACT 1 """
 
     def chapter0(self, input, user_data, user_id):
         self.kovatype("Hello?")
@@ -223,7 +223,7 @@ so I installed it on my device while he's asleep! Hehe.")
         user_data["chapter"] = 9
         return user_data
 
-""" ACT 2 """
+    """ ACT 2 """
 
     def chapter9(self, input, user_data, user_id):
         sleep_start = user_data["sleep_start"]
@@ -318,4 +318,4 @@ so I installed it on my device while he's asleep! Hehe.")
         user_data["chapter"] = 19
         return user_data
 
-""" ACT 3 """
+    """ ACT 3 """
