@@ -23,7 +23,7 @@ class Kova:
                         6:self.chapter6, 7:self.chapter7, 8:self.chapter8}
         """
         for chapter in xrange(self.lastchapter + 1):
-            self.chapters[chapter] = "self.chapter" + chapter
+            self.chapters[chapter] = eval('self.chapter' + chapter)
         """
 
     def chat(self, input, user_id):
@@ -64,6 +64,7 @@ class Kova:
     def jump(self, input, user_data):
         if 'jump' in input.lower():
             chapter = re.findall('.*chapter(\d*).*', input.lower())
+            print(chapter)
             if len(chapter) > 0:
                 user_data["chapter"] = int(chapter[0])
         return user_data
