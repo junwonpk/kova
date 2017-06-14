@@ -59,7 +59,7 @@ class Kova:
 
     def jump(self, input, user_data):
         if 'jump' in input.lower():
-            chapter = re.findall('.*chapter(.).*', input.lower())[0]
+            chapter = re.findall('.*chapter(d*).*', input.lower())[0]
             print(chapter)
             if chapter is not None and (len(chapter) is 1 or len(chapter) is 2):
                 user_data["chapter"] = chapter
