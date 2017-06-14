@@ -17,7 +17,7 @@ class Kova:
         self.user_id = 0
         self.next = 0
         self.typespeed = 0.10
-        self.lastchapter = 18
+        self.lastchapter = 27
         self.chapters = {}
         for chapter in xrange(self.lastchapter + 1):
             self.chapters[chapter] = eval('self.chapter' + str(chapter))
@@ -422,14 +422,15 @@ tell us what's inside..")
         self.kovatype("It's just a normal building inside, like any other labs.") 
         self.kovatype("But it's weird that there aren't any signs.") 
         self.kovatype("AAAH! I hear footsteps! What do I do? What do I do!!!") 
-        #
+        #she's caught and her 
         user_data["chapter"] = 27
         return user_data
 
     def chapter27(self, input, user_data, user_id):
+        #if hide
+        self.kovatype("Okay. I hid in this random room. I think I'm good for") 
+        self.kovatype("AH CRAP! The motion sensor turned the light on.") 
         self.kovatype(".") 
-        self.kovatype("It's just a normal building inside, like any other labs.") 
-        self.kovatype("But it's weird that there aren't any signs.") 
         self.kovatype("AAAH! I hear footsteps! What do I do? What do I do!!!") 
         user_data["chapter"] = 28
         return user_data
