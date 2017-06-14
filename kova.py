@@ -17,7 +17,7 @@ class Kova:
         self.user_id = 0
         self.next = 0
         self.typespeed = 0.10 * 0.0
-        self.lastchapter = 27
+        self.lastchapter = 40
         self.chapters = {}
         for chapter in xrange(self.lastchapter + 1):
             self.chapters[chapter] = eval('self.chapter' + str(chapter))
@@ -76,8 +76,8 @@ class Kova:
 
     def initUser(self, user_id):
         user_data = {"chapter": 0, "username": '', "lastmsg": '', \
-                    "trust": 0, 'talking': 0, "age": 0, "auto_sent": 0,\
-                    "curr_sent": 0}
+                    "trust": 0, 'talking': 0, "age": 0, "future_sent": 0,\
+                    "past_sent": 0, "abort_plot": 0, "gender": ''}
         self.redis.set(user_id, cPickle.dumps(user_data))
 
     def getData(self, user_id):
@@ -584,11 +584,11 @@ being deceived by Orbis.")
         self.kovatype("Should I rather end their operation, so they can die happy?")
         self.kovatype("or let them live on, for they will at least be happy?")
         self.kovatype("Should I free them, end them, or just leave?")
-        user_data["chapter"] = 39
+        user_data["chapter"] = 40
         return 
 
     def chapter40(self, input, user_data, user_id):
         #depending on the answer, behave differently. also take into account user info from before.
-        self.kovatype("")
+        self.kovatype("Thanks. Bye.")
         user_data["chapter"] = 41
         return 
