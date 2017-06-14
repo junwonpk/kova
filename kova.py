@@ -59,7 +59,7 @@ class Kova:
     def jump(self, input, user_data):
         if 'jump' in input.lower():
             chapter = re.search('.*chapter(.).*', input.lower())
-            if chapter is not None:
+            if type(chapter) is int:
                 user_data["chapter"] = chapter
         return user_data
 
