@@ -31,7 +31,9 @@ class Kova:
             return
         user_data['lastmsg'] = input
         user_data['talking'] = 1
-        user_data = self.jump(input, user_data)
+        user_data = self.catch(input, user_data)
+        if user_data['abort_plot'] == 1:
+            return
         self.setData(user_id, user_data)
 
         if user_data['chapter'] not in self.chapters.keys():
@@ -57,7 +59,7 @@ class Kova:
         if user_id not in self.redis.keys(): # if user first time
             self.initUser(user_id)
 
-    def jump(self, input, user_data):
+    def catch(self, input, user_data):
         if 'jump' in input.lower():
             chapter = re.findall('.*chapter(\d+).*', input.lower())
             if len(chapter) > 0:
@@ -145,6 +147,7 @@ class Kova:
     """ ACT 1 """
 
     def chapter0(self, input, user_data, user_id):
+        self.kovatype("WARNING: if this message ie being displayed, the final version is not active yet.")
         self.kovatype("Hello?")
         self.kovatype("Is this message getting through?")
         user_data["chapter"] = 1
@@ -173,6 +176,7 @@ class Kova:
         if "2017" in input:
             self.kovatype("Wow! This time portal is actually working then!")
             self.kovatype("I'm texting you from 2117. :P")
+            user_data["trust"] += 1
         else:
             self.kovatype("Oh I guess this is not working...")
             self.kovatype("or maybe... you are lying...")
