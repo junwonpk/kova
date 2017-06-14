@@ -22,6 +22,11 @@ class Kova:
         self.chapters = {}
         for chapter in xrange(self.lastchapter + 1):
             self.chapters[chapter] = eval('self.chapter' + str(chapter))
+        self.word2num = {"ten": 10, "eleven": 11, "twelve": 12, "thirteen": 13,\
+"fourteen":14, "fifteen":15, "sixteen":16, "seventeen":17, "eighteen":18 \
+"nineteen":19, "twenty": 20, "thirty": 30, "fourty": 40, "fifty": 50, "sixty": 60,
+"zero": 0, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7\
+"eight": 8, "nine": 9}
 
     def chat(self, input, user_id):
         self.preprocess(input, user_id)
@@ -152,14 +157,16 @@ class Kova:
             return []
 
     def extract_age(self, input):
-        target = []
-        target = re.findall('.*(\d+).*', input.lower())
-        if not target:
-            target = re.findall(pattern, string)
-        if target:
-            return target[0]
-        else:
-            return []
+        syntax = self.tag_syntax(input)
+        age = 0
+        for token in syntax:
+            if token.part_of_speech == 'NUM':
+                if re.findall("\d+", token.text_content):
+                    age += int(token.text_content)
+                if re.findall("[a-zA-Z]+", token.text_content):
+                    if token.text_content in self.word2num.keys():
+                        age += self.word2num[token.text_content]
+        return age
 
     def tag_entity(self, input):
         language_client = language.Client()
@@ -171,6 +178,7 @@ class Kova:
             self.kovatype('{:<16}: {}'.format('type', entity.entity_type))
             self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
             self.kovatype('{:<16}: {}'.format('salience', entity.salience))
+        return entities
 
     def tag_syntax(self, input):
         language_client = language.Client()
@@ -178,13 +186,14 @@ class Kova:
         tokens = document.analyze_syntax().tokens
         for token in tokens:
             self.kovatype('{}: {}'.format(token.part_of_speech, token.text_content))
+        return tokens
 
     def sentiment(self, input):
         language_client = language.Client()
         document = language_client.document_from_text(input)
         sentiment = document.analyze_sentiment().sentiment
         self.kovatype('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
-
+        return sentiment
 
     """ Lena Kova Story """
 
@@ -266,8 +275,23 @@ so I installed it on my device while he's asleep! Hehe.")
         return user_data
 
     def chapter6(self, input, user_data, user_id):
-        age = self.extract_age(input)
-        self.kovatype("Sweet. I'm 16, living in Palo Alto, California.")
+        age = self.extract_age(input.lower())
+        if age < 10 or age > 60:
+            self.kovatype(":(")
+            self.kovatype("Not sure why you're not being sincere...")
+            self.kovatype("I'll introduce myself first then!")
+            user_data['trust'] -= 1
+        elif age == 16:
+            self.kovatype("No way! I'm also 16!")
+            user_data['trust'] += 1
+        elif abs(age - 16) < 3:
+            self.kovatype("Hey! We're really similar in age. I'm 16!)
+            user_data['trust'] += 1
+        elif age > 30:
+            self.kovatype("Ooh, you're a little older than me. I'm 16.")
+        else:
+            self.kovatype("Sweet. I'm 16!")
+        self.kovatype("I live in Palo Alto, California.")
         self.kovatype("It probably looks very different from your wolrd's Palo Alto though.")
         self.kovatype("Also, I kinda can infer from your name, but don't wanna make assumptions.")
         self.kovatype("What gender do you identify with?")
