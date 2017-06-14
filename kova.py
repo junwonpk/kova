@@ -284,12 +284,15 @@ so I installed it on my device while he's asleep! Hehe.")
         elif age == 16:
             self.kovatype("No way! I'm also 16!")
             user_data['trust'] += 1
-        elif abs(age - 16) < 3:
+        elif abs(age - 16) < 5:
+            self.kovatype("You are " + age + "?")
             self.kovatype("Hey! We're really similar in age. I'm 16!")
             user_data['trust'] += 1
         elif age > 30:
-            self.kovatype("Ooh, you're a little older than me. I'm 16.")
+            self.kovatype(age + "? I see.")
+            self.kovatype("You're a little older than me. I'm 16.")
         else:
+            self.kovatype("You are " + age + "?")
             self.kovatype("Sweet. I'm 16!")
         self.kovatype("I live in Palo Alto, California.")
         self.kovatype("It probably looks very different from your wolrd's Palo Alto though.")
