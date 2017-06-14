@@ -133,28 +133,9 @@ class Kova:
             return []
 
     def extract_gender(self, input):
-        target = []
-        target = re.findall('.*is\s(\w+).*', input.lower())
-        if not target:
-            target = re.findall('.*im\s(\w+).*', input.lower())
-        if not target:
-            target = re.findall('.*as\s(\w+).*', input.lower())
-        if not target:
-            target = re.findall('.*\'m\s(\w+).*', input.lower())
-        if not target:
-            target = re.findall('.*am\s(\w+).*', input.lower())
-        if not target:
-            target = re.findall('.*call\sme\s(\w+).*', input.lower())
-        if not target:
-            target = re.findall('.*known\sas\s(\w+).*', input.lower())
-        if not target:
-            target = re.findall('.*\'s\s(\w+).*', input.lower())
-        if not target and len(input.split()) == 1:
-            return input.title()
-        if target:
-            return target[0].lower()
-        else:
-            return []
+        entities = self.tag_entity(input)
+        for entity in entities:
+            return entity.name
 
     def extract_age(self, input):
         syntax = self.tag_syntax(input)
