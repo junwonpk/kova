@@ -20,7 +20,7 @@ class Kova:
         self.lastchapter = 18
         self.chapters = {}
         for chapter in xrange(self.lastchapter + 1):
-            self.chapters[chapter] = eval('self.chapter' + chapter)
+            self.chapters[chapter] = eval('self.chapter' + str(chapter))
 
     def chat(self, input, user_id):
         self.preprocess(input, user_id)
