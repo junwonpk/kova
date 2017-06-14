@@ -18,7 +18,7 @@ class Kova:
         self.curr_year = 2017
         self.user_id = 0
         self.next = 0
-        self.typespeed = 0.07 * 0
+        self.typespeed = 0.05
         self.lastchapter = 40
         self.chapters = {}
         for chapter in xrange(self.lastchapter + 1):
@@ -38,6 +38,7 @@ class Kova:
             return
         user_data['lastmsg'] = input
         user_data['talking'] = 1
+        user_data['msg_time'] = float("inf")
         user_data = self.catch(input, user_data, time)
         if user_data['abort_plot'] == 1:
             user_data['abort_plot'] = 0
