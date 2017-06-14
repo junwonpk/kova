@@ -45,8 +45,6 @@ class Kova:
 
         if user_data['chapter'] not in self.chapters.keys():
             user_data = self.epilogue(input, user_data)
-        if user_data['chapter'] < 0:
-            user_data = self.gameover(input, user_data)
         else:
             chapter = self.chapters[user_data['chapter']]
             chapter(input, user_data, user_id)
@@ -153,12 +151,11 @@ class Kova:
         language_client = language.Client()
         document = language_client.document_from_text(input)
         entities = document.analyze_entities().entities
-        for entity in entities:
-            self.kovatype('=' * 20)
-            self.kovatype('{:<16}: {}'.format('name', entity.name))
-            self.kovatype('{:<16}: {}'.format('type', entity.entity_type))
-            self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
-            self.kovatype('{:<16}: {}'.format('salience', entity.salience))
+        # for entity in entities:
+        #     self.kovatype('{:<16}: {}'.format('name', entity.name))
+        #     self.kovatype('{:<16}: {}'.format('type', entity.entity_type))
+        #     self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
+        #     self.kovatype('{:<16}: {}'.format('salience', entity.salience))
         return entities
 
     def tag_syntax(self, input):
@@ -171,20 +168,13 @@ class Kova:
         language_client = language.Client()
         document = language_client.document_from_text(input)
         sentiment = document.analyze_sentiment().sentiment
-        self.kovatype('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
+        # self.kovatype('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
         return sentiment
 
     """ Lena Kova Story """
 
     def epilogue(self, input, user_data):
         self.kovatype("Story Over")
-        self.kovatype("Thank you for chatting with Lena Kova")
-        self.kovatype("Lena Kova is developed by Junwon Park at Stanford University")
-        self.kovatype("Type Restart to begin again.")
-        return user_data
-
-    def gameover(self, input, user_data):
-        self.kovatype("Game Over")
         self.kovatype("Thank you for chatting with Lena Kova")
         self.kovatype("Lena Kova is developed by Junwon Park at Stanford University")
         self.kovatype("Type Restart to begin again.")
@@ -296,7 +286,26 @@ so I installed it on my device while he's asleep! Hehe.")
         return user_data
 
     def chapter8(self, input, user_data, user_id):
-        self.kovatype("Awesome to hear from you :)")
+        sentiment = self.sentiment(input)
+        if abs(sentiment.score) < 0.4:
+            self.kovatype("I see. It's nice to hear your perspective. :)")
+            self.kovatype("After all, you're more authentic of a source than my history teachers!")
+        elif sentiment.score > 0:
+            self.kovatype("Glad to hear you like it! :)")
+            self.kovatype("I also wish I could live in your place, maybe for just one day.")
+            self.kovatype("Sounds like a romantic place, filled with \"humanness\"")
+            if sentiment.magnitude > 1:
+                user_data[past_sent] += 2
+            else:
+                user_data[past_sent] += 1
+        elif sentiment.score < 0:
+            self.kovatype("Sorry to hear you don't really like it :(")
+            self.kovatype("But your world will only get better with time, right?")
+            self.kovatype("Automation is on its way, and you will soon not have to do work yourself! :)")
+            if sentiment.magnitude > 1:
+                user_data[past_sent] -= 2
+            else:
+                user_data[past_sent] -= 1
         self.kovatype("Hey, it's actually 3AM here.")
         self.kovatype("I had to wait until my dad fell asleep, so... kinda late")
         self.kovatype("Tomorrow's an exciting day for me, so I'm gonna go sleep.")
