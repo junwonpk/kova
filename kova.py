@@ -61,6 +61,7 @@ class Kova:
         if 'jump' in input.lower():
             chapter = re.search('.*chapter(.).*', input.lower())
             print(chapter)
+            print(chapter[0])
             if chapter is not None and (len(chapter) is 1 or len(chapter) is 2):
                 user_data["chapter"] = chapter
         return user_data
