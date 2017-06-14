@@ -45,6 +45,8 @@ class Kova:
         self.setData(user_id, user_data)
         return
 
+""" Infrastructure Code """
+
     def preprocess(self, input, user_id):
         if input.lower() == 'redis flushall':
             self.redis.flushall()
@@ -114,9 +116,7 @@ class Kova:
             self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
             self.kovatype('{:<16}: {}'.format('salience', entity.salience))
 
-    """
-        Lena Kova Story Below
-    """
+""" Lena Kova Story """
 
     def epilogue(self, input, user_data):
         self.kovatype("Story Over")
@@ -133,6 +133,8 @@ class Kova:
     def answer_questions(self, input, user_data): # if user asks questions, answer.
         # lena's age, gender, school, family members
         return user_data
+
+""" ACT 1 """
 
     def chapter0(self, input, user_data, user_id):
         self.kovatype("Hello?")
@@ -217,11 +219,99 @@ so I installed it on my device while he's asleep! Hehe.")
         user_data["chapter"] = 9
         return user_data
 
+""" ACT 2 """
+
     def chapter9(self, input, user_data, user_id):
         sleep_start = user_data["sleep_start"]
         if current_time - sleep_start < 8:
             return user_data
         #how do i make her send again in that time?
         self.kovatype("Good Morning!")
-        user_data["chapter"] = 9
+        self.kovatype("How are you doing?")
+        user_data["chapter"] = 10
         return user_data
+
+    def chapter10(self, input, user_data, user_id):
+        #sentiment analysis and respond appropriately
+        self.kovatype("A couple of weeks ago, dad showed me an \"alarm app\" from your time.") 
+        self.kovatype("It's so interesting that you enter a specific time manually for the alarm to ring at.") 
+        self.kovatype("It's really... How should I put it...") 
+        self.kovatype("Vintage?") 
+        self.kovatype("We don't have alarm devices anymore. The room lights up and plays a song when my body is ready to wake up.") 
+        self.kovatype("Wait a second. I'm gonna walk through the shower aisle.") 
+        user_data["chapter"] = 11
+        return user_data
+
+    def chapter11(self, input, user_data, user_id):
+        #if user asks, talk about shower aisle. 
+        #shower aisle sprays water soap and rinses body and hair. With high precision.
+        self.kovatype("Apparently, most people I will meet today like the color Orange.") 
+        self.kovatype("I really like the dress my assistant printed for me today") 
+        self.kovatype("I wonder what's for breakfast. What's your favorite dish?")
+        user_data["chapter"] = 12
+        return user_data
+
+    def chapter12(self, input, user_data, user_id):
+        #Lena's favorite food is pasta. If same, trust score goes up.
+        self.kovatype("I can hear the delivery drones downstairs. Ah, mom must be downstairs.") 
+        self.kovatype("Bipedal-bot is telling her we're having Danish and Apple for breakfast.") 
+        self.kovatype("I'm gonna turn this chat off while I'm with mom, so I don't get caught")
+        self.kovatype("See you after breakfast!")
+        user_data["chapter"] = 13
+        return user_data
+
+    def chapter13(self, input, user_data, user_id):
+        self.kovatype("Hey Sorry I got back late") 
+        self.kovatype("Mom and I came to downtown and I couldn't find the time to text you without her seeing me") 
+        self.kovatype("What have you been up to?")
+        user_data["chapter"] = 14
+        return user_data
+
+    def chapter14(self, input, user_data, user_id):
+        #Handle response
+        self.kovatype("Mom went to a VR cafe with her friends.") 
+        self.kovatype("They're going to checkout the new Euro Tour Package until lunch.") 
+        self.kovatype("Oh, do you know what VR is?")
+        self.kovatype("I learnt when it emerged in world history, but can't remember if it's before or after your year.")
+        user_data["chapter"] = 15
+        return user_data
+
+    def chapter15(self, input, user_data, user_id):
+        #TRUST SCORE ADJUSTMENT BASED ON ANSWER
+        self.kovatype("Well, I'm at a hair salon for a haircut right now.") 
+        self.kovatype("I just reserved a seat and ordered a Monica Cut.") 
+        self.kovatype("She's the celebrity that many of my classmates like too")
+        self.kovatype("Do you like any celebrity? Which one?")
+        user_data["chapter"] = 16
+        return user_data
+
+    def chapter16(self, input, user_data, user_id):
+        #wait 1 min, and respond appropriately
+        self.kovatype("One sec...") 
+        self.kovatype("Getting a haircut...") 
+        #wait 1 more min
+        self.kovatype("I always wonder when households will be able to purchase these haircut drones.")
+        self.kovatype("It's still illegal, because they're equipped with sharp blades and can be used as weapons.")
+        self.kovatype("Maybe someone from my future will talk to me one day to chat with me about each other's worlds!")
+        self.kovatype("Guess what? I'm visiting dad's workplace today! That's why I got my haircut. :)")
+        user_data["chapter"] = 17
+        return user_data
+
+    def chapter17(self, input, user_data, user_id):
+        self.kovatype("Ah crap... I forgot to turn off my Starbucks setting.") 
+        self.kovatype("Just got a notification that my Frappucino is ready, cuz last time, I told them to prepare a Frappucino everytime I approach Starbucks.") 
+        self.kovatype("I should pick it up, since I shouldn't waste good coffee, even if it's all paid for by the government through universal income.")
+        self.kovatype("You know, when I was still a young girl, we still had some shops in downtown where human staffs greeted me.")
+        self.kovatype("It'd be cruel to ask any human to spend their time at a shop working these days, but I miss human service sometimes.")
+        user_data["chapter"] = 18
+        return user_data
+
+    def chapter18(self, input, user_data, user_id):
+        self.kovatype("Mom's coming in an autonomous Waymo right now, so I'm gonna leave for a sec.") 
+        self.kovatype("I'll let you know all about dad's workplace when I get there!") 
+        self.kovatype("They'll show me some advanced research today too, so should be exciting!")
+        self.kovatype("Bye!")
+        user_data["chapter"] = 19
+        return user_data
+
+""" ACT 3 """
