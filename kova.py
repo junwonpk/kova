@@ -432,7 +432,163 @@ tell us what's inside..")
         self.kovatype("Where do I go?") 
         self.kovatype("What do I do ?") 
         time.sleep(10)
-        self.kovatype("There was an air vent, and I just ?") 
+        self.kovatype("I found an air vent and just hid inside.") 
+        self.kovatype("This isn't exactly the cool thing I was looking for") 
+        self.kovatype("I should get out of this place before I get caught. I'm gonna crawl out.") 
         user_data["chapter"] = 28
         return user_data
 
+    def chapter28(self, input, user_data, user_id):
+        #if hide
+        self.kovatype("Oh? I hear my father's from the left vent.") 
+        self.kovatype("I should go ask him for help. He'll scold me, but won't be as bad as \
+being taken to him by the guards or his scientists.") 
+        user_data["chapter"] = 29
+        return user_data
+
+    def chapter29(self, input, user_data, user_id):
+        #if hide
+        self.kovatype("Oh wow. This IS a really cool place.") 
+        self.kovatype("There seem to be a hundred scientists, all working in one room.") 
+        self.kovatype("\"Room\" doesn't do this place justice. It's a giant dome that are all screens.") 
+        self.kovatype("What are they watching? Each screen seems to be just ordinary people's days.") 
+        user_data["chapter"] = 30
+        return user_data
+
+    def chapter30(self, input, user_data, user_id):
+        #if hide
+        self.kovatype("Wait, what? That's all me! Why are they all watching me in different places?") 
+        self.kovatype("Creepy!") 
+        self.kovatype("Wait a second. That's Paris. When did I ever visit Paris?") 
+        self.kovatype("Hmm? I don't recognize any of those locations, or the clothes I'm wearing.") 
+        user_data["chapter"] = 31
+        return user_data
+
+    def chapter31(self, input, user_data, user_id):
+        #if hide
+        self.kovatype("Huh? The door opened, and a girl came in. She resembles me in many ways, but \
+she looks visibly younger.")
+        self.kovatype("WAIT WHAT?? She called my dad, \"Dad\"")
+        self.kovatype("Did my father...? What? But that can't be. He's an honest man. A good man!")
+        self.kovatype("He wouldn't do that to my mom!")
+        user_data["chapter"] = 32
+        return user_data
+
+    def chapter32(self, input, user_data, user_id):
+        #if hide
+        self.kovatype("Huh? The door opened, and a girl came in. She resembles me in many ways, but \
+she looks visibly younger.")
+        self.kovatype("WAIT WHAT?? She called my dad, \"Dad\"")
+        self.kovatype("Did my father...? What? But that can't be. He's an honest man. A good man!")
+        self.kovatype("He wouldn't do that to my mom!")
+        user_data["chapter"] = 33
+        return user_data
+
+    def chapter33(self, input, user_data, user_id):
+        #if hide
+        self.kovatype("I can't believe this. I'm going to turn on transcription to record this, \
+and tell my mom all about it when I get home! He'll have to explain!!!")
+        self.kovatype("Alfred Kova: My Dear Lena, welcome to Orbis!")
+        self.kovatype("What? Her name is Lena too?")
+        self.kovatype("Lena Kova: You know how much I like visiting this place. You've never let me in here though.")
+        self.kovatype("It's weird to see Speaker Recognition identifying her with the same name as me.")
+        self.kovatype("Alfred Kova: Now that you've begun studying computer science, I thought you'd like \
+to see how the Lifestyle Prediction Algorithm works.")
+        self.kovatype("Lena Kova: Cool!")
+        self.kovatype("Hmm. I was always curious how it works. That's how Orbis achives its revolutionary \
+predictive assistance service.")
+        user_data["chapter"] = 34
+        return user_data
+
+    def chapter34(self, input, user_data, user_id):
+        self.kovatype("Alfred Kova: To predict what you will need and want, and when, we made humanoid \
+robots that have an exact replica of your genes, and aged them to live a year ahead of you. There are \
+10 clones of you, living in different parts of the world to help us gather as much as data as possible.")
+        self.kovatype("Lena Kova: Uh... I don't know what to feel about that. Do they feel and think like I do?")
+        self.kovatype("Alfred Kova: Yes! Exactly like you do. This is the only way I can make sure you get everything \
+you need, exactly when you need it. This is also very expensive. Few can enjoy this privilege, Lena!")
+        self.kovatype("Lena Kova: That's... I guess incredible!")
+        self.kovatype("...")
+        self.kovatype("What does that mean?...")
+        user_data["chapter"] = 35
+        return user_data
+
+    def chapter35(self, input, user_data, user_id):
+        self.kovatype("Alfred Kova: The one we put most effort into is Kova Klone X, \
+which is the tenth clone we've made of you, and is living in Palo Alto like you. She's \
+exactly like you, in every measuarable way, except for her being a year older than you.")
+        self.kovatype("Does that mean...")
+        self.kovatype("I'm just a robot? A copy of another person? Not a genuine being?")
+        self.kovatype("This is a lie.")
+        self.kovatype("My life is a lie!")
+        self.kovatype("Lena Kova: But... I can't imagine what they'll feel if they find out.")
+        self.kovatype("Alfred Kova: They won't find out. And as long as they don't, they should \
+be grateful we let them exist in the first place.")
+        self.kovatype("Lena Kova: Won't they... feel betrayed? By you?")
+        self.kovatype("Alfred Kova: ...")
+        self.kovatype("Alfred Kova: If I didn't do it, someone else would've done it.")
+        self.kovatype("Alfred Kova: As for now, let's go eat lunch. I'll show you other places too.")
+        self.kovatype("Alfred Kova: Everyone! Time for lunch! Let's go!")
+        user_data["chapter"] = 36
+        return user_data
+
+    def chapter35(self, input, user_data, user_id):
+        self.kovatype("...")
+        self.kovatype("I'm sorry. I'm just...")
+        self.kovatype("Well... I should first get out of here while they're gone.")
+        self.kovatype("I can process... the other thing... later.")
+        self.kovatype("Okay, got out of the vent, and I'm on my way out.")
+        self.kovatype("Wait")
+        user_data["chapter"] = 36
+        return 
+
+    def chapter36(self, input, user_data, user_id):
+        self.kovatype("Dad left his computer here.")
+        self.kovatype("If he still uses the same password...")
+        self.kovatype("It works! Okay, so this project's dashboard is...")
+        self.kovatype("Access granted. Everything's just one command away now.")
+        self.kovatype("Do you see what I'm trying to do?")
+        user_data["chapter"] = 37
+        return 
+
+    def chapter37(self, input, user_data, user_id):
+        self.kovatype("I'm going to end this misery for once and for all.")
+        self.kovatype("I just need to press enter, and the fakes will be dead.")
+        self.kovatype("No other Lena has to go through this, if I just...")
+        self.kovatype("But... I can't... I'm scared...")
+        self.kovatype("I know this is my only chance, still...")
+        user_data["chapter"] = 38
+        return 
+
+    def chapter38(self, input, user_data, user_id):
+        self.kovatype("Or is it right to keep this project running?")
+        self.kovatype("To keep these robots living in their blissful ignorance")
+        self.kovatype("and fulfill the plan of this greedy father?")
+        self.kovatype("And me? How will I go back? Should I act like nothing happened?")
+        self.kovatype("I don't know. I need... help...")
+        self.kovatype("[Name], tell me what I should do...")
+        self.kovatype("Should I let this project... continue? or stop...")
+        user_data["chapter"] = 39
+        return 
+
+    def chapter39(self, input, user_data, user_id):
+        self.kovatype("Oh my god... I just queried the database, and...")
+        self.kovatype("There are a hundred other clone projects. That's one thousand robots \
+being deceived by Orbis.")
+        self.kovatype("And there's a debugging console.")
+        self.kovatype("Apparently, I can deactivate their human-mode, and broadcast a message.")
+        self.kovatype("Using this, I could inform every one of them what is going on,")
+        self.kovatype("and free them from this disasterous fate.")
+        self.kovatype("But they'll have to face the fact")
+        self.kovatype("that their life is a lie, and that they must leave their loved ones...")
+        self.kovatype("Should I rather end their operation, so they can die happy?")
+        self.kovatype("or let them live on, for they will at least be happy?")
+        self.kovatype("Should I free them, end them, or just leave?")
+        user_data["chapter"] = 39
+        return 
+
+    def chapter40(self, input, user_data, user_id):
+        #depending on the answer, behave differently. also take into account user info from before.
+        self.kovatype("")
+        user_data["chapter"] = 41
+        return 
