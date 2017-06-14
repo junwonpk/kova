@@ -64,10 +64,17 @@ class Kova:
             self.restart(user_id)
         if user_id not in self.redis.keys(): # if user first time
             self.initUser(user_id)
+    
+    def check_time(self, user_data, time):
+        self.kovatype(str(time))
+        self.kovatype(str(user_data["msg_time"]))
+        d = user_data["msg_time"].strftime('%s')
+        d_in_ms = int(d)*1000
+        self.kovatype(str(d_in_ms))
+        return time < d_in_ms
 
     def catch(self, input, user_data, time):
-        self.kovatype(str(time))
-        if time < user_data["msg_time"]:
+        if check_time(user_data, time):
             self.kovatype(input + "was interruption")
             user_data['abort_plot'] = 1
             return user_data
