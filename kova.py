@@ -24,7 +24,6 @@ class Kova:
             self.chapters[chapter] = eval('self.chapter' + str(chapter))
 
     def chat(self, input, user_id):
-        self.redis.flushall()
         self.preprocess(input, user_id)
         user_data = self.getData(user_id)
         if user_data['talking'] == 1:
