@@ -38,7 +38,6 @@ class Kova:
             return
         user_data['lastmsg'] = input
         user_data['talking'] = 1
-        user_data['msg_time'] = float("inf")
         user_data = self.catch(input, user_data, time)
         if user_data['abort_plot'] == 1:
             user_data['abort_plot'] = 0
