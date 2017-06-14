@@ -285,7 +285,7 @@ so I installed it on my device while he's asleep! Hehe.")
             self.kovatype("No way! I'm also 16!")
             user_data['trust'] += 1
         elif abs(age - 16) < 3:
-            self.kovatype("Hey! We're really similar in age. I'm 16!)
+            self.kovatype("Hey! We're really similar in age. I'm 16!")
             user_data['trust'] += 1
         elif age > 30:
             self.kovatype("Ooh, you're a little older than me. I'm 16.")
