@@ -230,9 +230,9 @@ so I installed it on my device while he's asleep! Hehe.")
     """ ACT 2 """
 
     def chapter9(self, input, user_data, user_id):
-        sleep_start = user_data["sleep_start"]
-        if current_time - sleep_start < 8:
-            return user_data
+        # sleep_start = user_data["sleep_start"]
+        # if current_time - sleep_start < 8:
+        #     return user_data
         #how do i make her send again in that time?
         self.kovatype("Good Morning!")
         self.kovatype("How are you doing?")
