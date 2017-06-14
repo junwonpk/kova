@@ -65,6 +65,8 @@ class Kova:
         if 'jump' in input.lower():
             chapter = re.findall('.*chapter(\d*).*', input.lower())
             print(chapter)
+            print(len(chapter))
+            print(chapter[0])
             if len(chapter) > 0:
                 user_data["chapter"] = int(chapter[0])
         return user_data
@@ -328,3 +330,19 @@ so I installed it on my device while he's asleep! Hehe.")
         return user_data
 
     """ ACT 3 """
+
+    def chapter19(self, input, user_data, user_id):
+        self.kovatype("Just got to Orbis.") 
+        self.kovatype("This place is like a giant playground!") 
+        self.kovatype("There are so many fun things going on everywhere.")
+        self.kovatype("All these robots that must be at least a decade ahead of what I see out in the city.")
+        user_data["chapter"] = 20
+        return user_data
+
+    def chapter20(self, input, user_data, user_id):
+        self.kovatype("Just got to Orbis.") 
+        self.kovatype("This place is like a giant playground!") 
+        self.kovatype("There are so many fun things going on everywhere.")
+        self.kovatype("All these robots that must be at least a decade ahead of what I see out in the city.")
+        user_data["chapter"] = 21
+        return user_data
