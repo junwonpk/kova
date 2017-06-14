@@ -24,13 +24,13 @@ class Kova:
     def chat(self, input, user_id):
         self.preprocess(input, user_id)
         user_data = self.getData(user_id)
-
         if user_data['talking'] == 1:
             return
         if user_data['lastmsg'] == input:
             return
         user_data['lastmsg'] = input
         user_data['talking'] = 1
+        user_data = self.jump(input, user_id)
         self.setData(user_id, user_data)
 
         if user_data['chapter'] not in self.chapters.keys():
@@ -55,6 +55,8 @@ class Kova:
             self.restart(user_id)
         if user_id not in self.redis.keys(): # if user first time
             self.initUser(user_id)
+
+    def jump(self, input, user_id):
         if 'jump' in input.lower():
             chapter = re.search('.*chapter(.).*', input.lower())
             user_data = self.getData(user_id)
