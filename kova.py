@@ -30,7 +30,7 @@ class Kova:
             return
         user_data['lastmsg'] = input
         user_data['talking'] = 1
-        user_data = self.jump(input, user_id)
+        user_data = self.jump(input, user_data)
         self.setData(user_id, user_data)
 
         if user_data['chapter'] not in self.chapters.keys():
@@ -56,11 +56,10 @@ class Kova:
         if user_id not in self.redis.keys(): # if user first time
             self.initUser(user_id)
 
-    def jump(self, input, user_id):
+    def jump(self, input, user_data):
         if 'jump' in input.lower():
             chapter = re.search('.*chapter(.).*', input.lower())
-            user_data = self.getData(user_id)
-            user_data["chapter"] = 11
+            user_data["chapter"] = chapter
 
     def kovatype(self, message):
         time.sleep(len(message) * self.typespeed)
