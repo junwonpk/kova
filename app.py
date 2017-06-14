@@ -105,7 +105,7 @@ def send_message(recipient_id, message, message_type):
     if r.status_code != 200:
         log(r.status_code)
         log(r.text)
-    return "success", 200
+    return "success"
 
 def log(message):  # simple wrapper for logging to stdout on heroku
     print str(message)
