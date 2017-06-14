@@ -323,7 +323,7 @@ so I installed it on my device while he's asleep! Hehe.")
             user_data["wakeup"] = datetime.now()
         if datetime.now() < user_data["wakeup"]:
             self.kovatype("Zzz... Still asleep")
-            self.kovatype("Message me after " + user_data["wakeup"])
+            self.kovatype("Message me after " + str(user_data["wakeup"]))
             return user_data
         else:
             self.kovatype("Good Morning!")
