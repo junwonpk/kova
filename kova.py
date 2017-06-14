@@ -23,7 +23,6 @@ class Kova:
             self.chapters[chapter] = eval('self.chapter' + str(chapter))
 
     def chat(self, input, user_id):
-        self.redis.flushall()
         self.preprocess(input, user_id)
         user_data = self.getData(user_id)
         if user_data['talking'] == 1:
@@ -432,8 +431,8 @@ tell us what's inside..")
         self.kovatype("AH CRAP! The motion sensor turned the light on.") 
         self.kovatype("Where do I go?") 
         self.kovatype("What do I do ?") 
-        time.slee
-        self.kovatype("What do I do ?") 
+        time.sleep(10)
+        self.kovatype("There was an air vent, and I just ?") 
         user_data["chapter"] = 28
         return user_data
 
