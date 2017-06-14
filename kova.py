@@ -18,13 +18,9 @@ class Kova:
         self.next = 0
         self.typespeed = 0.10
         self.lastchapter = 18
-        self.chapters = {0:self.chapter0, 1:self.chapter1, 2:self.chapter2,
-                        3:self.chapter3, 4:self.chapter4, 5:self.chapter5,
-                        6:self.chapter6, 7:self.chapter7, 8:self.chapter8}
-        """
+        self.chapters = {}
         for chapter in xrange(self.lastchapter + 1):
             self.chapters[chapter] = eval('self.chapter' + chapter)
-        """
 
     def chat(self, input, user_id):
         self.preprocess(input, user_id)
