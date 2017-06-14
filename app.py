@@ -68,6 +68,7 @@ def process_message(message_text, sender_id):
     kova.chat(message_text, sender_id)
 
 def send_message(recipient_id, message, message_type):
+    yield "success"
 
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message))
 
@@ -105,7 +106,6 @@ def send_message(recipient_id, message, message_type):
     if r.status_code != 200:
         log(r.status_code)
         log(r.text)
-    return "success"
 
 def log(message):  # simple wrapper for logging to stdout on heroku
     print str(message)
