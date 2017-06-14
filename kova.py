@@ -45,7 +45,9 @@ class Kova:
         self.setData(user_id, user_data)
         return
 
-""" Infrastructure Code """
+"""
+Infrastructure Code 
+"""
 
     def preprocess(self, input, user_id):
         if input.lower() == 'redis flushall':
@@ -120,7 +122,9 @@ class Kova:
             self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
             self.kovatype('{:<16}: {}'.format('salience', entity.salience))
 
-""" Lena Kova Story """
+"""
+Lena Kova Story
+"""
 
     def epilogue(self, input, user_data):
         self.kovatype("Story Over")
