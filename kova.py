@@ -60,6 +60,7 @@ class Kova:
         if 'jump' in input.lower():
             chapter = re.search('.*chapter(.).*', input.lower())
             user_data["chapter"] = chapter
+        return user_data
 
     def kovatype(self, message):
         time.sleep(len(message) * self.typespeed)
