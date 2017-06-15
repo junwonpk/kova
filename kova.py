@@ -811,7 +811,7 @@ me if I stay behind.")
         self.send_message("But it's weird there aren't any signs or directions or anything at all.") 
         self.send_message("Just white walls and") 
         self.send_message("OH NO! I HEAR FOOTSTEPS COMING THIS WAY! WHAT DO I DO? WHAT DO I DO!!!") 
-        user_data["wakeup"] = datetime.now() + timedelta(seconds=30)
+        user_data["wakeup"] = int((datetime.now() + timedelta(seconds=30)).strftime('%s'))*1000
         user_data["chapter"] = 27
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         self.setData(user_id, user_data)
