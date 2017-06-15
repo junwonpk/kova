@@ -18,6 +18,7 @@ class Kova:
         self.curr_year = 2017
         self.user_id = 0
         self.next = 0
+        self.time = 0
         self.typespeed = 0.05
         self.resume_chapter = 0
         self.lastchapter = 40
@@ -73,6 +74,7 @@ class Kova:
             self.initUser(user_id)
 
     def catch(self, input, user_data, time):
+        self.time = time
         if "<3" in input or ":)" in input:
             user_data["trust"] += 1
         if time < user_data["msg_time"]:
@@ -809,25 +811,26 @@ me if I stay behind.")
         self.send_message("But it's weird there aren't any signs or directions or anything at all.") 
         self.send_message("Just white walls and") 
         self.send_message("OH NO! I HEAR FOOTSTEPS COMING THIS WAY! WHAT DO I DO? WHAT DO I DO!!!") 
+        user_data["wakeup"] = datetime.now() + timedelta(seconds=30)
         user_data["chapter"] = 27
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         self.setData(user_id, user_data)
         time.sleep(5)
         if user_data["flag"] == 0:
             self.send_message("HURRY UP!!! THEY ARE ALMOST HERE!!!") 
-        time.sleep(5)
-        if user_data["flag"] == 0:
+        return user_data
+
+    def chapter27(self, input, user_data, user_id):
+        user_data["flag"] = 1
+        self.setData(user_id, user_data)
+        if self.time > user_data["wakeup"]:
             self.send_message("OH NO! THE GUARDS CAUGHT ME. :(") 
             self.send_message("They are going to confiscate my device and inspect it.") 
             self.send_message("I guess they'll take my time portal away then...") 
             self.send_message("I really enjoyed talking to you " + user_data["username"] + "...") 
             self.send_message("Farewell... :)") 
             user_data["chapter"] = -1
-        return user_data
-
-    def chapter27(self, input, user_data, user_id):
-        user_data['flag'] = 1
-        self.setData(user_id, user_data)
+            return user_data
         if "hide" not in input.lower() and "run" not in input.lower() and \
 "conceal" not in input.lower():
             self.send_message("WHAT? I DON'T THINK THAT'S A GOOD IDEA.") 
