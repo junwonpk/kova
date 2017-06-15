@@ -767,11 +767,8 @@ me if I stay behind.")
     def chapter26(self, input, user_data, user_id):
         sentiment = self.sentiment(input)
         if sentiment.score <= 0.0:
-            #TODO: route this to a bad ending
             self.kovatype("But.. this kind of chance won't come again!")
             self.kovatype("Oh whatever! I'm gonna do it anyway!!!")
-            #user_data["chapter"] = some large number
-            #return user_data
         else:
             self.kovatype("Alright! I'm blaming it on you if I get caught! Haha")
         self.kovatype("Wow! The door isn't locked?") 
@@ -784,16 +781,16 @@ me if I stay behind.")
         user_data["chapter"] = 27
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         self.setData(user_id, user_data)
-        time.sleep(3)
+        time.sleep(5)
         if user_data["flag"] == 0:
             self.send_message("HURRY UP!!! THEY ARE ALMOST HERE!!!") 
-        time.sleep(3)
+        time.sleep(5)
         if user_data["flag"] == 0:
             self.send_message("OH NO! THE GUARDS CAUGHT ME. :(") 
-            self.kova_type("They are going to confiscate my device and inspect it.") 
+            self.kovatype("They are going to confiscate my device and inspect it.") 
             self.send_message("I guess they'll take my time portal away then...") 
-            self.kova_type("I really enjoyed talking to you " + user_data["username"] + "...") 
-            self.kova_type("Farewell... :)") 
+            self.kovatype("I really enjoyed talking to you " + user_data["username"] + "...") 
+            self.kovatype("Farewell... :)") 
             user_data["chapter"] = -1
         return user_data
 
