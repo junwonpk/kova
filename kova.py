@@ -567,7 +567,7 @@ leave for a sec.")
         self.kovatype("I'll let you know all about dad's workplace when I get there!") 
         self.kovatype("They'll show me some advanced research today too, so should be \
 exciting!")
-        self.kovatype("Bye! 👋")
+        self.kovatype("Bye!")
         user_data["chapter"] = 19
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         user_data["wakeup"] = datetime.now() + timedelta(hours=2)
