@@ -201,7 +201,7 @@ class Kova:
         self.kovatype("Lena Kova is developed by Junwon Park at Stanford University")
         self.kovatype("Type Restart to begin again")
         if self.resume_chapter < self.lastchapter:
-            self.kovatype("or type \"skip to chapter " + str(self.resume_chapter - 1) + "\" to resume \
+            self.send_message("or type \"skip to chapter " + str(self.resume_chapter - 1) + "\" to resume \
 from the point you were at.")
         return user_data
 
@@ -772,12 +772,12 @@ me if I stay behind.")
         else:
             self.kovatype("Alright! I'm blaming it on you if I get caught! Haha")
         self.kovatype("Wow! The door isn't locked?") 
-        self.send_message("I thought I'll have to climb through a window or something.") 
-        self.send_message("Well, it's just a company after all. Not like a government agency.") 
+        self.kovatype("I thought I'll have to climb through a window or something.") 
+        self.kovatype("Well, it's just a company after all. Not like a government agency.") 
         self.kovatype("Hmm. Inside is not that different from other buildings here.") 
-        self.send_message("But it's weird there aren't any signs or directions or anything at all.") 
+        self.kovatype("But it's weird there aren't any signs or directions or anything at all.") 
         self.kovatype("Just white walls and") 
-        self.send_message("OH NO! I HEAR FOOTSTEPS COMING THIS WAY! What DO I DO? What DO I DO!!!") 
+        self.send_message("OH NO! I HEAR FOOTSTEPS COMING THIS WAY! WHAT DO I DO? WHAT DO I DO!!!") 
         user_data["chapter"] = 27
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         self.setData(user_id, user_data)
@@ -797,6 +797,10 @@ me if I stay behind.")
     def chapter27(self, input, user_data, user_id):
         user_data['flag'] = 1
         self.setData(user_id, user_data)
+        if "hide" not in input.lower() and "run" not in input.lower() and \
+"conceal" not in input.lower():
+            self.send_message("WHAT? I DON'T THINK THAT'S A GOOD IDEA.") 
+            self.send_message("I'M JUST GONNA HIDE!") 
         self.kovatype("Okay. I hid in this random room. I think I'm good for") 
         self.kovatype("AH CRAP! The motion sensor turned the light on.") 
         self.kovatype("Where do I go?") 
