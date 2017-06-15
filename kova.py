@@ -201,7 +201,7 @@ class Kova:
         self.kovatype("Lena Kova is developed by Junwon Park at Stanford University")
         self.kovatype("Type Restart to begin again")
         if self.resume_chapter < self.lastchapter:
-            self.kovatype("or type \"skip to chapter " + self.resume_chapter + "\" to resume \
+            self.kovatype("or type \"skip to chapter " + str(self.resume_chapter - 1) + "\" to resume \
 from the point you were at.")
         return user_data
 
@@ -756,7 +756,7 @@ And they won't tell us what's inside..")
         self.kovatype("That must mean...") 
         self.kovatype("THERE IS SOMETHING SUPER COOL INSIDE THERE!!!") 
         self.kovatype("Do you think I should sneak in?") 
-        self.send_message("The tour group is moving on and it doesn't seem like they'll notice \
+        self.kovatype("The tour group is moving on and it doesn't seem like they'll notice \
 me if I stay behind.") 
         user_data["chapter"] = 26
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
@@ -784,11 +784,11 @@ me if I stay behind.")
         user_data["chapter"] = 27
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         self.setData(user_id, user_data)
-        time.sleep(5)
-        if user_data['flag'] == 0:
+        time.sleep(3)
+        if user_data["flag"] == 0:
             self.send_message("HURRY UP!!! THEY ARE ALMOST HERE!!!") 
-        time.sleep(5)
-        if user_data['flag'] == 0:
+        time.sleep(3)
+        if user_data["flag"] == 0:
             self.send_message("OH NO! THE GUARDS CAUGHT ME. :(") 
             self.kova_type("They are going to confiscate my device and inspect it.") 
             self.send_message("I guess they'll take my time portal away then...") 
@@ -804,7 +804,7 @@ me if I stay behind.")
         self.kovatype("AH CRAP! The motion sensor turned the light on.") 
         self.kovatype("Where do I go?") 
         self.kovatype("What do I do ?") 
-        time.sleep(10)
+        time.sleep(4)
         self.kovatype("I found an air vent and just hid inside.") 
         self.kovatype("This isn't exactly the cool thing I was looking for") 
         self.kovatype("I should get out of this place before I get caught. I'm gonna crawl out.") 
