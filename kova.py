@@ -465,6 +465,10 @@ get caught")
         return user_data
 
     def chapter14(self, input, user_data, user_id):
+        entities = self.tag_entity(input)
+        for entity in entities:
+            self.kovatype("Haha I guess that's something that didn't change over the 100 years.")
+            self.kovatype(entity.name + " occupies my time too!")
         #Handle response
         self.kovatype("Mom went to a VR cafe with her friends.") 
         self.kovatype("They're going to checkout the new Euro Tour Package until \
