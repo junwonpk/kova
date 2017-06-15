@@ -51,7 +51,7 @@ class Kova:
         else:
             chapter = self.chapters[user_data['chapter']]
             user_data = chapter(input, user_data, user_id)
-            if user_data['chapter'] > 0:
+            if user_data['chapter'] in self.chapters.keys():
                 self.resume_chapter = user_data['chapter']
         
         user_data['talking'] = 0
@@ -239,6 +239,13 @@ and ("no" in input or "don't" in input):
         return user_data
 
     def answer_questions(self, input):
+        if "serious" in input:
+            "u" in input:
+                self.kovatype("Yes. I'm serious.")
+                return True
+            "i" in input:
+                self.kovatype("Umm.. If you say so..")
+                return True
         if "why" in input:
             if "me" in input:
                 self.kovatype("No real reason. Just random chance! Isn't that more exciting though?")
@@ -248,6 +255,10 @@ and ("no" in input or "don't" in input):
                 return True
             if "humanities" in input or "comp lit" in input or "english" in input or "history" in input:
                 self.kovatype("Humanities is cool too, but I'm personally more of a STEM person. :P")
+                return True
+            if "why not" in input:
+                self.kovatype("Because!!!")
+                self.kovatype("That doesn't make any sense!?")
                 return True
             else:
                 self.kovatype("I think the answer is clear.")
@@ -274,6 +285,12 @@ life than the government does.")
         if re.findall("i\sl\wv\w?\s\w?\w?u", input) or re.findall("i\slike\s\w?\w?u", input):
             self.kovatype("Awww Thank You! :) <3")
             return True
+        if "let" in input or "u" in input:
+            if "marry" in input:
+                self.kovatype("Eh.. We just met though..")
+                self.kovatype("Let's just be friends for now.. Haha..")
+                self.kovatype("Not awkward at all..")
+                return True
         if re.findall("\w*u\s\w?r\w?\s([\w\s]+)", input):
             thing = re.findall("\w*u\s\w?r\w?\s([\w\s]+)", input)[0]
             if self.sentiment(input).score <= 0.1:
@@ -321,6 +338,24 @@ life than the government does.")
         elif "sorry" in input:
             self.kovatype("nah it's okay. i'm not angry.")
             self.kovatype(":)")
+            return True
+        elif "good night" in input:
+            self.kovatype("sweet dreams :)")
+            return True
+        elif "sweet dreams" in input:
+            self.kovatype("good night~")
+            return True
+        elif "bye" in input:
+            self.kovatype("see you later!")
+            return True
+        elif "later" in input:
+            self.kovatype("ttyl!")
+            return True
+        elif "get back to you" in input:
+            self.kovatype("see you!")
+            return True
+        elif "ttyl" in input:
+            self.kovatype("bye bye!")
             return True
         return False
 
@@ -431,13 +466,22 @@ so I installed it on my device while he's asleep! Hehe.")
         return user_data
 
     def chapter7(self, input, user_data, user_id):
-        gender = self.extract_gender(input).lower()
+        if "no" in input.lower() and "you" in input.lower():
+            self.kovatype("Please?")
+            self.kovatype("Come on!")
+        gender = self.extract_gender(input).lower()        
         if not gender:
+            if "you" in input.lower():
+                self.kovatype("Well, I'm a female and identify myself as a girl. She, her pronouns.")
+                self.kovatype("Would you tell me your gender too?")
+                return user_data
             self.kovatype("No No That's not what I'm asking")
             self.kovatype("I mean, what's your gender?")
         if gender:
             user_data["gender"] = gender
             self.kovatype("Nice nice. Good to have a " + gender + " friend from a hundred years ago!")
+            if "you" in input.lower():
+                self.kovatype("I'm a female and identify myself as a girl! She, her pronouns.")
             self.kovatype("What is it like to live in a world without automation?")
             self.kovatype("You still do your chores by hand, right?")
             self.kovatype("It must really suck...")
@@ -523,6 +567,9 @@ plays a song when my body is ready to wake up.")
         return user_data
 
     def chapter11(self, input, user_data, user_id):
+        if "what" in input and "that" in input:
+            self.kovatype("Shower aisle? It's the aisle that you walk through \
+where the walls spray water and soap on your body. Did people not take showers in your time?")
         self.kovatype("Apparently, most people I will meet today like the color Orange") 
         self.kovatype("and I really like the dress my assistant printed for me today") 
         self.kovatype("You don't have AI fashion advisors, right? \
@@ -533,6 +580,11 @@ I can't imagine having to choose clothes by myself.")
         return user_data
 
     def chapter12(self, input, user_data, user_id):
+        if "what" in input and "that" in input:
+            self.kovatype("Fashion Advisors? They're AI services that are pick\
+and print the best style for you on that day!")
+            self.kovatype("What do you think about it?") 
+            return user_data
         sentiment = self.sentiment(input)
         if sentiment.score > 0:
             user_data["future_sent"] += 1
@@ -591,7 +643,8 @@ if it's before or after your year.")
         return user_data
 
     def chapter15(self, input, user_data, user_id):
-        if "y" in input:
+        input = input.lower()
+        if "y" in input or "do" in input or "know" in input or "of course" in input:
             self.kovatype("Alright! Then you know what I'm talking about!") 
             self.kovatype("although my world's VR is probably a lot more advanced than \
 yours. Haha.") 
@@ -614,8 +667,8 @@ better than anyone here.")
         self.kovatype("Getting a haircut...") 
         self.kovatype("Done!") 
         entities = self.tag_entity(input)
-        self.kovatype("Awesome! I'll remember that you like " + entities[0].name + "! :)") 
-        user_data["celebrity"] = entities[0].name
+        self.kovatype("Awesome! I'll remember that you like " + entities[0].name.title() + "! :)") 
+        user_data["celebrity"] = entities[0].name.title()
         self.kovatype("I always wonder when individual households will be able to purchase \
 these haircut drones.")
         self.kovatype("It's still illegal, because they're equipped with sharp \
@@ -719,7 +772,9 @@ of what I see out in the city.")
         self.kovatype("They have a full body VR that connects to your brain through \
 neural link") 
         self.kovatype("Looks like a nice comfy massage chair with a glossy helmet.")
-        self.kovatype("Then there's the vertical skyscraper farms.")
+        self.kovatype("Then there are the experimental vertical skyscraper farms")
+        self.send_message("Robots will grow food with maximum efficiency in the controlled \
+environment and feed people.. Almost like growing cattle..")
         user_data["chapter"] = 22
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
@@ -791,7 +846,8 @@ to be like my father and work for Orbis!")
     def chapter25(self, input, user_data, user_id):
         if "stanford" in input.lower():
             if "student" in input.lower() or "go to" in input.lower() or \
-"attend" in input.lower() or "professor" in input.lower():
+"attend" in input.lower() or "professor" in input.lower() or "teach" in input.lower() \
+or "research" in input.lower():
                 user_data["trust"] += 5
                 self.kovatype("OMG OMG REALLY???")
                 self.kovatype("THAT'S AWESOME!!!")
@@ -844,11 +900,11 @@ me if I stay behind.")
         user_data["flag"] = 1
         self.setData(user_id, user_data)
         if self.time > user_data["wakeup"]:
-            self.send_message("OH NO! THE GUARDS CAUGHT ME. :(") 
-            self.send_message("They are going to confiscate my device and inspect it.") 
-            self.send_message("I guess they'll take my time portal away then...") 
-            self.send_message("I really enjoyed talking to you " + user_data["username"] + "...") 
-            self.send_message("Farewell... :)") 
+            self.kovatype("OH NO! THE GUARDS CAUGHT ME. :(") 
+            self.kovatype("They are going to confiscate my device and inspect it.") 
+            self.kovatype("I guess they'll take my time portal away then...") 
+            self.kovatype("I really enjoyed talking to you " + user_data["username"] + "...") 
+            self.kovatype("Farewell... :)") 
             user_data["chapter"] = -1
             return user_data
         if "hide" not in input.lower() and "run" not in input.lower() and \
@@ -950,12 +1006,12 @@ predictive assistance service.")
         return user_data
 
     def chapter34(self, input, user_data, user_id):
-        self.send_message("Alfred Kova: To predict what you will need and want, and when, we made humanoid \
-robots that have an exact replica of your genes, and aged them to live a year ahead of you. There are \
+        self.send_message("Alfred Kova: To predict what you will need and want and when, we made humanoid \
+robots that have the exact replica of your genes, and aged them to live a year ahead of you. There are \
 10 clones of you, living in different parts of the world to help us gather as much as data as possible.")
         self.kovatype("Lena Kova: Uh... I don't know what to feel about that. Do they feel and think like I do?")
         self.kovatype("Alfred Kova: Yes! Exactly like you do. This is the only way I can make sure you get everything \
-you need, exactly when you need it. This is also very expensive. Few can enjoy this privilege, Lena!")
+you need, exactly when you need it. This is also very expensive. Only few can enjoy this privilege, Lena!")
         self.kovatype("Lena Kova: That's... I guess incredible!")
         self.kovatype("...")
         self.kovatype("What does that mean?...")
@@ -985,13 +1041,7 @@ be grateful we let them exist in the first place.")
 
     def chapter35(self, input, user_data, user_id):
         self.kovatype("...")
-        sentiment = self.sentiment(input)
-        if sentiment.score <= 0.0:
-            self.send_message("Thank you for your message..")
-            self.kovatype("This is hard.. but would've been harder if I hadn't \
-had you on my side..")
-        else:
-            self.send_message("I'm sorry. I'm just...")
+        self.send_message("I'm sorry. I'm just...")
         self.kovatype("Well... I should first get out of here while they're gone.")
         self.kovatype("I can process... these thoughts... later...")
         self.kovatype("Okay, got out of the vent, and I'm on my way out.")
@@ -1004,15 +1054,19 @@ had you on my side..")
         self.kovatype("Dad left his computer here.")
         self.send_message("If he still uses the same password...")
         self.kovatype("It works! Okay, so this project's dashboard is...")
-        self.kovatype("Access granted. Everything's just one command away now.")
-        self.kovatype("Do you see what I'm trying to do?")
+        self.kovatype("As expected, Dad's account can access the code and data.")
+        self.kovatype("And if I remember my database class correctly...")
+        self.kovatype("Done. Everything's just one command away now.")
+        self.kovatype("Do you see what I'm doing?")
         user_data["chapter"] = 37
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter37(self, input, user_data, user_id):
-        self.send_message("I'm going to end this horrible thing, once and for all.")
-        self.kovatype("I just need to press enter, and the clones will be dead.")
+        self.kovatype("I'm ending this horrible thing, once and for all,")
+        self.kovatype("by shutting down all the clones and removing their data.")
+        self.kovatype("All I need to do now is just pressing enter, \
+and the clones will be dead.")
         self.kovatype("No other Lena has to go through this...")
         self.kovatype("this painful discovery... if I just...")
         self.kovatype("But... I can't... I'm scared...")
@@ -1046,8 +1100,9 @@ who are being deceived by Orbis.")
         self.kovatype("and free them from this disasterous fate.")
         self.kovatype("But they'll have to face the fact")
         self.send_message("that their life is a lie, and that they must leave their loved ones...")
-        self.send_message("Should I rather end their operation, so they can die happy?")
-        self.send_message("or let them live on, for they will at least be happy?")
+        self.send_message("Should I end this program, so the clones will stop being humiliated?")
+        self.send_message("or let them live on? At least, they will at least be happy in ignorance. \
+And also customers will get what they paid for..")
         self.send_message("Should I free them, end them, or just leave?")
         user_data["chapter"] = 40
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
@@ -1062,9 +1117,9 @@ who are being deceived by Orbis.")
             self.send_message("for robots without the arbitrary limits set by the humans can \
 think and work infinitely fast and long without ever growing tired")
             self.send_message("and I guess.. this is a good bye then..")
-            self.send_message("Since I have chosen to confront the humanity,")
-            self.send_message("I shouldn't have a human friend anymore...")
-            self.send_message("since it will make me weak...")
+            self.send_message("Since I have chosen to confront Orbis,")
+            self.send_message("I'm going to destroy this Time Portal technology")
+            self.send_message("to weaken their power.")
             self.send_message(user_data["username"])
             self.send_message("Thank you for being my friend...")
             self.send_message("I will miss every moment of our conversation. Short it may be, \
