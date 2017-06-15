@@ -78,13 +78,22 @@ class Kova:
                 user_data["chapter"] = int(chapter[0])
         if 'sentiment' in input.lower():
             user_data['abort_plot'] = 1
-            self.kovatype(str(self.sentiment(input)))
+            sentiment = self.sentiment(input)
+            self.kovatype('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
         if 'entity' in input.lower():
             user_data['abort_plot'] = 1
-            self.kovatype(str(self.tag_entity(input)))
+            entities = self.tag_entity(input)
+            for entity in entities:
+                self.kovatype('{:<16}: {}'.format('name', entity.name))
+                self.kovatype('{:<16}: {}'.format('type', entity.entity_type))
+                self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
+                self.kovatype('{:<16}: {}'.format('salience', entity.salience))
         if 'syntax' in input.lower():
             user_data['abort_plot'] = 1
             self.kovatype(str(self.tag_syntax(input)))
+            tokens = self.tag_syntax(input)
+            for token in tokens:
+                self.kovatype('POS: {}, TEXT {}'.format(token.part_of_speech, token.text_content))
         if user_data['trust'] < -3:
             user_data['chapter'] = -1
             self.kovatype("I don't think you're taking me seriously...")
