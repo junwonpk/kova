@@ -353,17 +353,17 @@ so I installed it on my device while he's asleep! Hehe.")
             self.kovatype("I also wish I could live in your place, maybe for just one day.")
             self.kovatype("Sounds like a romantic place, filled with \"humanness\"")
             if sentiment.magnitude > 1:
-                user_data[past_sent] += 2
+                user_data["past_sent"] += 2
             else:
-                user_data[past_sent] += 1
+                user_data["past_sent"] += 1
         elif sentiment.score < 0:
             self.kovatype("Sorry to hear you don't really like it :(")
             self.kovatype("But your world will only get better with time, right?")
             self.kovatype("Automation is on its way, and you will soon not have to do work yourself! :)")
             if sentiment.magnitude > 1:
-                user_data[past_sent] -= 2
+                user_data["past_sent"] -= 2
             else:
-                user_data[past_sent] -= 1
+                user_data["past_sent"] -= 1
         self.kovatype("Hey, it's actually 3AM here.")
         self.kovatype("I had to wait until my dad fell asleep, so... kinda late")
         self.kovatype("Tomorrow's an exciting day for me, so I'm gonna go sleep.")
