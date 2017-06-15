@@ -66,6 +66,8 @@ class Kova:
             self.initUser(user_id)
 
     def catch(self, input, user_data, time):
+        if "<3" in input or ":)" in input:
+            user_data["trust"] += 1
         if time < user_data["msg_time"]:
             user_data['abort_plot'] = 1
             return user_data
@@ -513,24 +515,21 @@ better than anyone here.")
         return user_data
 
     def chapter16(self, input, user_data, user_id):
-        if user_data["attach_level"] < 3:
-            user_data["attach_level"] += 1
-        if user_data["attach_level"] == 2:
-            self.kovatype("Junwon: Lena won't respond for 1 hour in production. I disabled it for now so you can test it.")
-            self.kovatype("Sorry... One sec...") 
-            self.kovatype("Getting a haircut...") 
-        if user_data["attach_level"] == 3:
-            user_data["attach_level"] = 0
-            self.kovatype("Done!") 
-            self.kovatype("I always wonder when individual households will be able to purchase \
-    these haircut drones.")
-            self.kovatype("It's still illegal, because they're equipped with sharp \
-    blades and can be used as weapons.")
-            self.kovatype("Maybe someone from my future will talk to me one day to \
-    chat with me about each other's worlds!")
-            self.kovatype("Guess what? I'm visiting dad's workplace today! That's why \
-    I got my haircut. :)")
-            user_data["chapter"] = 17
+        self.kovatype("Sorry... One sec...") 
+        self.kovatype("Getting a haircut...") 
+        self.kovatype("Done!") 
+        entities = self.tag_entity(input)
+        for entity in entities:
+            self.kovatype("Awesome! I'll remember that you like " + entity.name + "! :)") 
+        self.kovatype("I always wonder when individual households will be able to purchase \
+these haircut drones.")
+        self.kovatype("It's still illegal, because they're equipped with sharp \
+blades and can be used as weapons.")
+        self.kovatype("Maybe someone from my future will talk to me one day to \
+chat with me about each other's worlds!")
+        self.kovatype("Guess what? I'm visiting dad's workplace today! That's why \
+I got my haircut. :)")
+        user_data["chapter"] = 17
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
