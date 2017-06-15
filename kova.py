@@ -218,7 +218,7 @@ and ("no" in input or "don't" in input):
         return user_data
 
     def answer_questions(self, input):
-        elif "why" in input:
+        if "why" in input:
             if "me" in input:
                 self.kovatype("No real reason. Just random chance! Isn't that more exciting though?")
                 return True
