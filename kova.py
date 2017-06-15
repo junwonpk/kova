@@ -76,21 +76,20 @@ class Kova:
         if 'sentiment' in input.lower():
             user_data['abort_plot'] = 1
             sentiment = self.sentiment(input)
-            self.kovatype('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
+            self.send_message('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
         if 'entity' in input.lower():
             user_data['abort_plot'] = 1
             entities = self.tag_entity(input)
             for entity in entities:
-                self.kovatype('{:<16}: {}'.format('name', entity.name))
-                self.kovatype('{:<16}: {}'.format('type', entity.entity_type))
-                self.kovatype('{:<16}: {}'.format('metadata', entity.metadata))
-                self.kovatype('{:<16}: {}'.format('salience', entity.salience))
+                self.send_message('{:<16}: {}'.format('name', entity.name))
+                self.send_message('{:<16}: {}'.format('type', entity.entity_type))
+                self.send_message('{:<16}: {}'.format('metadata', entity.metadata))
+                self.send_message('{:<16}: {}'.format('salience', entity.salience))
         if 'syntax' in input.lower():
             user_data['abort_plot'] = 1
-            self.kovatype(str(self.tag_syntax(input)))
             tokens = self.tag_syntax(input)
             for token in tokens:
-                self.kovatype('POS: {}, TEXT {}'.format(token.part_of_speech, token.text_content))
+                self.send_message('POS: {}, TEXT {}'.format(token.part_of_speech, token.text_content))
         if user_data['trust'] < -3:
             user_data['chapter'] = -1
             self.kovatype("I don't think you're taking me seriously...")
@@ -438,11 +437,12 @@ I can't imagine having to choose clothes by myself.")
             self.kovatype("Hmm.. You never know you need it until you see it")
         self.kovatype("Oh! I can hear the delivery drone downstairs. Breakfast \
 time!") 
-        self.kovatype("My Family's Homebot is telling mom we're having croissant and tartine \
+        self.kovatype("My Family's homebot is telling mom we're having croissant and tartine \
 for breakfast.") 
         self.kovatype("I'm gonna turn this chat off while I'm with mom, so I don't \
 get caught")
         self.kovatype("See you after breakfast!")
+        user_data["wakeup"] = datetime.now() + timedelta(hours=2)
         user_data["chapter"] = 13
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
@@ -450,12 +450,18 @@ get caught")
     """ ACT 3 """
 
     def chapter13(self, input, user_data, user_id):
-        self.kovatype("Hey Sorry I got back late") 
-        self.kovatype("Mom and I came to downtown and I couldn't find the time to \
-text you without her seeing me") 
-        self.kovatype("What have you been up to?")
-        user_data["chapter"] = 14
-        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
+        if user_data["wakeup"] == 0:
+            user_data["wakeup"] = datetime.now()
+        if datetime.now() < user_data["wakeup"]:
+            user_data["attach_level"] += 1
+        else:
+            self.kovatype("Junwon: Lena won't respond for 1 hour in production. I disabled it for now so you can test it.")
+            self.kovatype("Hey, Sorry I got back late") 
+            self.kovatype("Mom and I came to Downtown Palo Alto and I couldn't find the time to \
+    text you without her seeing me") 
+            self.kovatype("What have you been up to?")
+            user_data["chapter"] = 14
+            user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter14(self, input, user_data, user_id):
