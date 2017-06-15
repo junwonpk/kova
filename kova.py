@@ -97,7 +97,7 @@ class Kova:
             self.kovatype("I'm disappointed.. I thought we could be friends, and it would've been fun..")
             self.kovatype("But I'll leave you if you're busy with other things.")
             self.kovatype("Bye...")
-        if self.answer_questions(input):
+        if self.answer_questions(input.lower()):
             user_data['abort_plot'] = 1
         if re.findall("\syou$", input):
             self.kovatype(input + " too")
@@ -390,7 +390,7 @@ so I installed it on my device while he's asleep! Hehe.")
             self.kovatype("Junwon: Lena won't respond for 8 hours in production. I disabled it for now so you can test it.")
             self.kovatype("Good Morning!")
             if user_data["attach_level"] > 1:
-                self.kovatype("Oh my, you messaged me " + str(user_data["attach_level"]) + \
+                self.kovatype("Oh my, you messaged me " + str(user_data["attach_level"] - 1) + \
 " times while I was asleep. Did you miss me? :P")
                 user_data["trust"] += user_data["attach_level"]
                 user_data["attach_level"] = 0
