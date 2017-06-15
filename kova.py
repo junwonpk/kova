@@ -245,7 +245,10 @@ where the walls spray water and soap on your body. Did people not take showers i
         return user_data
 
     def chapter1(self, input, user_data, user_id):
-        self.kovatype("Hey there! Wow, this is so cool!")
+        if 'n' in input:
+            self.kovatype("Huh? How did you respond then?")
+        else:   
+            self.kovatype("Hey there! Wow, this is so cool!")
         self.kovatype("Nice to meet you! I'm Lena.")
         self.kovatype("What should I call you?")
         user_data["chapter"] = 2
@@ -260,17 +263,26 @@ where the walls spray water and soap on your body. Did people not take showers i
             user_data["trust"] -= 1
         if username:
             user_data["username"] = username
-            self.kovatype("Cool! Hello, " + username + "!")
+            if username == "Lena":
+                self.kovatype("Woah! You're also Lena? Small world, I guess!")
+            else:
+                self.kovatype("Cool! Hello, " + username + "!")
             self.kovatype("What year is it there by the way?")
             user_data["chapter"] = 3
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter3(self, input, user_data, user_id):
-        if str(self.curr_year) in input:
+        year = extract_age(input)
+        if self.curr_year == year:
             self.kovatype("Wow! This time portal is actually working then!")
             self.kovatype("I'm texting you from " + str(self.curr_year + 100) + ". :P")
             user_data["trust"] += 1
+        elif year == 0:
+            self.kovatype("?")
+            self.kovatype("I guess you are trying to be funny.")
+            self.kovatype("LOL jokes from 100 years ago are weird")
+            user_data["trust"] -= 1
         else:
             self.kovatype("Oh I guess this is not working...")
             self.kovatype("or maybe... you are lying...")
@@ -468,8 +480,7 @@ get caught")
         entities = self.tag_entity(input)
         for entity in entities:
             self.kovatype("Haha I guess that's something that didn't change over the 100 years.")
-            self.kovatype(entity.name + " occupies my time too!")
-        #Handle response
+            self.kovatype(entity.name.title() + " occupies a lot of my time too!")
         self.kovatype("Mom went to a VR cafe with her friends.") 
         self.kovatype("They're going to checkout the new Euro Tour Package until \
 lunch.") 
@@ -481,7 +492,16 @@ if it's before or after your year.")
         return user_data
 
     def chapter15(self, input, user_data, user_id):
-        #TRUST SCORE ADJUSTMENT BASED ON ANSWER
+        if "y" in input:
+            self.kovatype("Alright! Then you know what I'm talking about!") 
+            self.kovatype("although my world's VR is probably a lot more advanced than \
+yours. Haha.") 
+            user_data["trust"] += 1
+        else:
+            self.kovatype("Hmm, that's weird..") 
+            self.kovatype("I just looked it up and... nevermind.. You know your world \
+better than anyone here.") 
+            user_data["trust"] -= 1
         self.kovatype("Well, I'm at a hair salon for a haircut right now.") 
         self.kovatype("I just reserved a seat and ordered a Monica Cut.") 
         self.kovatype("She's the celebrity that many of my classmates like too")
