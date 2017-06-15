@@ -201,24 +201,24 @@ class Kova:
         return user_data
 
     def answer_questions(self, input):
-        if re.findall("are\s\you\s([\w\s]+)", input):
-            thing = re.findall("are\s\you\s([\w\s]+)", input)[0]
+        if re.findall("\w*u\s\w?r\w?\s([\w\s]+)", input):
+            thing = re.findall("\w*u\s\w?r\w?\s([\w\s]+)", input)[0]
+            if self.sentiment(input).score <= 0.1:
+                self.kovatype("What??? Not sure why you would say I am " + thing + "...")
+            else:
+                self.kovatype("Haha! Thank you! I'd like to think I'm " + thing + "!")
+            return True
+
+        if re.findall("\w?r\w?\s\w*u\s([\w\s]+)", input):
+            thing = re.findall("\w?r\w?\s\w*u\s([\w\s]+)", input)[0]
             if self.sentiment(input).score <= 0.1:
                 self.kovatype("No... I am not " + thing + "...")
             else:
                 self.kovatype("Yeah! I am " + thing + "!")
             return True
-        if re.findall("do\syou\s(\w+)\sto\s([\w\s]+)", input):
-            verb = re.findall("do\syou\s(\w+)\sto\s([\w\s]+)", input)[0][0]
-            thing = re.findall("do\syou\s(\w+)\sto\s([\w\s]+)", input)[0][1]
-            if self.sentiment(input).score <= 0.1:
-                self.kovatype("No... I don't " + verb + " to " + thing + "...")
-            else:
-                self.kovatype("Yeah! I " + verb + " to " + thing + "!")
-            return True
-        elif re.findall("do\syou\s(\w+)\s([\w\s]+)", input):
-            verb = re.findall("do\syou\s(\w+)\s([\w\s]+)", input)[0][0]
-            thing = re.findall("do\syou\s(\w+)\s([\w\s]+)", input)[0][1]
+        elif re.findall("do\s\w*u\s(\w+)\s([\w\s]+)", input):
+            verb = re.findall("do\s\w*u\s(\w+)\s([\w\s]+)", input)[0][0]
+            thing = re.findall("do\s\w*u\s(\w+)\s([\w\s]+)", input)[0][1]
             if self.sentiment(input).score <= 0.1:
                 self.kovatype("No... I don't " + verb + " " + thing + "...")
             else:
