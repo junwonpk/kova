@@ -240,10 +240,10 @@ and ("no" in input or "don't" in input):
 
     def answer_questions(self, input):
         if "serious" in input:
-            "u" in input:
+            if "u" in input:
                 self.kovatype("Yes. I'm serious.")
                 return True
-            "i" in input:
+            if "i" in input:
                 self.kovatype("Umm.. If you say so..")
                 return True
         if "why" in input:
