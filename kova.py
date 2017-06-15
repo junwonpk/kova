@@ -205,10 +205,21 @@ class Kova:
                 self.kovatype("Shower aisle? It's the aisle that you walk through \
 where the walls spray water and soap on your body. Did people not take showers in your time?")
         elif "who" in input:
+            if "father" in input:
+                self.kovatype("My father is Alfred Kova, VP of Data Science at Orbis")
         elif "when" in input:
+            if "birthday" in input:
+                self.kovatype("June 14th, 2101. Why do you ask? Will you give me a birthday present?")
         elif "where" in input:
+            if "home" in input or "live" in input:
+                self.kovatype("I live in Palo Alto, California. Heart of Silicon Valley")
         elif "why" in input:
+            if "me" in input:
+                self.kovatype("No real reason. Just random chance! Isn't that more exciting though?")
         elif "how" in input:
+            if "contact" in input:
+                self.kovatype("My father heads the Advanced Research department at Orbis")
+                self.kovatype("That means I can access magical technologies! Like Time Portal Messenger!")
         elif "?" in input:
             self.kovatype("?")
         return false
