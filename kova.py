@@ -230,17 +230,17 @@ where the walls spray water and soap on your body. Did people not take showers i
         elif "?" == input:
             self.kovatype("?")
             return True
-        elif re.findall("do\syou\s(\w+)\sto\s(.+)\?$", input):
-            verb = re.findall("do\syou\s(\w+)\sto\s(.+)\?$", input)[0][0]
-            thing = re.findall("do\syou\s(\w+)\sto\s(.+)\?$", input)[0][1]
+        elif re.findall("do\syou\s(\w+)\sto\s(.+)$", input):
+            verb = re.findall("do\syou\s(\w+)\sto\s(.+)$", input)[0][0]
+            thing = re.findall("do\syou\s(\w+)\sto\s(.+)$", input)[0][1]
             if self.sentiment(input).score <= 0.1:
                 self.kovatype("No... I don't " + verb + " to " + thing + "...")
             else:
                 self.kovatype("Yeah! I " + verb + " to " + thing + "!")
             return True
-        elif re.findall("do\syou\s(\w+)\s(.+)\?$", input):
-            verb = re.findall("do\syou\s(\w+)\s(.+)\?$", input)[0][0]
-            thing = re.findall("do\syou\s(\w+)\s(.+)\?$", input)[0][1]
+        elif re.findall("do\syou\s(\w+)\s(.+)$", input):
+            verb = re.findall("do\syou\s(\w+)\s(.+)$", input)[0][0]
+            thing = re.findall("do\syou\s(\w+)\s(.+)$", input)[0][1]
             if self.sentiment(input).score <= 0.1:
                 self.kovatype("No... I don't " + verb + " " + thing + "...")
             else:
