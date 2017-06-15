@@ -64,6 +64,10 @@ class Kova:
         self.user_id = user_id
         if input.lower() == 'restart':
             self.restart(user_id)
+        if input.lower() == 'resume':
+            user_data = self.getData(user_id)
+            user_data["chapter"] = self.resume_chapter - 1
+            self.setData(user_id, user_data)
         if user_id not in self.redis.keys(): # if user first time
             self.initUser(user_id)
 
@@ -199,10 +203,9 @@ class Kova:
         self.kovatype("Story Over")
         self.kovatype("Thank you for chatting with Lena Kova")
         self.kovatype("Lena Kova is developed by Junwon Park at Stanford University")
-        self.kovatype("Type Restart to begin again")
+        self.kovatype("Type \"Restart\" to begin again")
         if self.resume_chapter < self.lastchapter:
-            self.send_message("or type \"skip to chapter " + str(self.resume_chapter - 1) + "\" to resume \
-from the point you were at.")
+            self.send_message("or \"Resume\" to return to the last point you were at.")
         return user_data
 
     def answer_questions(self, input):
@@ -787,10 +790,10 @@ me if I stay behind.")
         time.sleep(5)
         if user_data["flag"] == 0:
             self.send_message("OH NO! THE GUARDS CAUGHT ME. :(") 
-            self.kovatype("They are going to confiscate my device and inspect it.") 
+            self.send_message("They are going to confiscate my device and inspect it.") 
             self.send_message("I guess they'll take my time portal away then...") 
-            self.kovatype("I really enjoyed talking to you " + user_data["username"] + "...") 
-            self.kovatype("Farewell... :)") 
+            self.send_message("I really enjoyed talking to you " + user_data["username"] + "...") 
+            self.send_message("Farewell... :)") 
             user_data["chapter"] = -1
         return user_data
 
