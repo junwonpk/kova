@@ -274,7 +274,7 @@ where the walls spray water and soap on your body. Did people not take showers i
 
     def chapter3(self, input, user_data, user_id):
         year = self.extract_age(input)
-        if self.curr_year == year:
+        if self.curr_year == year or "two thousand and seventeen" in input:
             self.kovatype("Wow! This time portal is actually working then!")
             self.kovatype("I'm texting you from " + str(self.curr_year + 100) + ". :P")
             user_data["trust"] += 1
@@ -392,7 +392,7 @@ so I installed it on my device while he's asleep! Hehe.")
             self.kovatype("delete this after debug")
         # if user_data["wakeup"] == 0:
         #     user_data["wakeup"] = datetime.now()
-        # if "good" in input or "sweet" in input:
+        # if "good" in input or "sweet" in input or "well" in input:
         #     self.kovatype("good night!")
         #     user_data["attach_level"] += 1
         # if datetime.now() < user_data["wakeup"]:
@@ -462,10 +462,12 @@ get caught")
     """ ACT 3 """
 
     def chapter13(self, input, user_data, user_id):
-        if user_data["wakeup"] == 0:
-            user_data["wakeup"] = datetime.now()
-        if datetime.now() < user_data["wakeup"]:
-            user_data["attach_level"] += 1
+        if 1 == 2:
+            self.kovatype("delete this after debug")
+        # if user_data["wakeup"] == 0:
+        #     user_data["wakeup"] = datetime.now()
+        # if datetime.now() < user_data["wakeup"]:
+        #     user_data["attach_level"] += 1
         else:
             self.kovatype("Junwon: Lena won't respond for 1 hour in production. I disabled it for now so you can test it.")
             self.kovatype("Hey, Sorry I got back late") 
@@ -511,24 +513,35 @@ better than anyone here.")
         return user_data
 
     def chapter16(self, input, user_data, user_id):
-        #wait 1 min, and respond appropriately
-        self.kovatype("One sec...") 
-        self.kovatype("Getting a haircut...") 
-        #wait 1 more min
-        self.kovatype("I always wonder when households will be able to purchase \
-these haircut drones.")
-        self.kovatype("It's still illegal, because they're equipped with sharp \
-blades and can be used as weapons.")
-        self.kovatype("Maybe someone from my future will talk to me one day to \
-chat with me about each other's worlds!")
-        self.kovatype("Guess what? I'm visiting dad's workplace today! That's why \
-I got my haircut. :)")
-        user_data["chapter"] = 17
+        if user_data["attach_level"] < 3:
+            user_data["attach_level"] += 1
+        if user_data["attach_level"] == 2:
+            self.kovatype("Junwon: Lena won't respond for 1 hour in production. I disabled it for now so you can test it.")
+            self.kovatype("Sorry... One sec...") 
+            self.kovatype("Getting a haircut...") 
+        if user_data["attach_level"] == 3:
+            user_data["attach_level"] = 0
+            self.kovatype("Done!") 
+            self.kovatype("I always wonder when individual households will be able to purchase \
+    these haircut drones.")
+            self.kovatype("It's still illegal, because they're equipped with sharp \
+    blades and can be used as weapons.")
+            self.kovatype("Maybe someone from my future will talk to me one day to \
+    chat with me about each other's worlds!")
+            self.kovatype("Guess what? I'm visiting dad's workplace today! That's why \
+    I got my haircut. :)")
+            user_data["chapter"] = 17
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter17(self, input, user_data, user_id):
-        self.kovatype("Ah crap... I forgot to turn off my Starbucks setting.") 
+        sentiment = self.sentiment(input)
+        if sentiment.score >= 0:
+            self.kovatype("I'm really excited! 🌺🌸") 
+        if sentiment.score < 0:
+            self.kovatype("Okay, but I'm really excited! 🌺🌸")
+        self.kovatype("Ah crap") 
+        self.kovatype("I forgot to turn off my Starbucks setting.") 
         self.kovatype("Just got a notification that my Frappucino is ready, cuz \
 last time, I told them to prepare a Frappucino everytime I approach Starbucks.") 
         self.kovatype("I should pick it up, since I shouldn't waste good coffee, \
@@ -542,29 +555,52 @@ working these days, but I miss human service sometimes.")
         return user_data
 
     def chapter18(self, input, user_data, user_id):
+        sentiment = self.sentiment(input)
+        if sentiment.score >= 0:
+            self.kovatype("Haha. Yeah Exactly!") 
+            user_data["past_sent"] += 1
+        if sentiment.score < 0:
+            self.kovatype("Hmm Okay. Maybe it's different when you see the system from within it.")
+            user_data["past_sent"] -= 1
         self.kovatype("Mom's coming in an autonomous Waymo right now, so I'm gonna \
 leave for a sec.") 
         self.kovatype("I'll let you know all about dad's workplace when I get there!") 
         self.kovatype("They'll show me some advanced research today too, so should be \
 exciting!")
-        self.kovatype("Bye!")
+        self.kovatype("Bye! 👋")
         user_data["chapter"] = 19
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
+        user_data["wakeup"] = datetime.now() + timedelta(hours=2)
         return user_data
 
     """ ACT 4 """
 
     def chapter19(self, input, user_data, user_id):
-        self.kovatype("Wow, this place is like a giant playground.") 
-        self.kovatype("There are so many fun things going on everywhere.")
-        self.kovatype("All these robots that must be at least a decade ahead of \
-what I see out in the city.")
-        user_data["chapter"] = 20
+        if 1 == 2:
+            self.kovatype("delete this after debug")
+        # if user_data["wakeup"] == 0:
+        #     user_data["wakeup"] = datetime.now()
+        # if datetime.now() < user_data["wakeup"]:
+        #     user_data["attach_level"] += 1
+        else:
+            self.kovatype("Junwon: Lena will be irresponsive for 1 hour here. I skipped it for now for testing.") 
+            self.kovatype("Wow, this place is like a giant playground.") 
+            self.kovatype("There are so many fun things going on everywhere.")
+            self.kovatype("All these robots that must be at least a decade ahead of \
+    what I see out in the city.")
+            user_data["chapter"] = 20
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter20(self, input, user_data, user_id):
-        self.kovatype("Just got to Orbis.") 
+        sentiment = self.sentiment(input)
+        if sentiment.score >= 0:
+            self.kovatype("Yup! So proud my father works here!") 
+            user_data["future_sent"] += 1
+        if sentiment.score < 0:
+            self.kovatype("Well, it's actually really cool!")
+            user_data["future_sent"] -= 1
+        self.kovatype("I always feel this way when I come to Orbis") 
         self.kovatype("This place is like a giant playground!") 
         self.kovatype("There are so many fun things going on everywhere.")
         self.kovatype("All these robots that must be at least a decade ahead \
@@ -574,6 +610,14 @@ of what I see out in the city.")
         return user_data
 
     def chapter21(self, input, user_data, user_id):
+        sentiment = self.sentiment(input)
+        if sentiment.score >= 0:
+            self.kovatype("Exactly! It's remarkable!") 
+            user_data["future_sent"] += 1
+        if sentiment.score < 0:
+            self.kovatype("Yeah.. I guess?")
+            self.kovatype("Well")
+            user_data["future_sent"] -= 1
         self.kovatype("The two most shocking things I saw today are from Orbis VR.") 
         self.kovatype("They have a full body VR that connects to your brain through \
 neural link") 
@@ -584,14 +628,22 @@ neural link")
         return user_data
 
     def chapter22(self, input, user_data, user_id):
-        self.kovatype("I don't know what to feel about that..") 
-        self.kovatype("Everyone living in very narrow space.") 
+        sentiment = self.sentiment(input)
+        if sentiment.score >= 0:
+            self.kovatype("Yeah.. I don't know what to feel about that..") 
+            user_data["future_sent"] -= 1
+        if sentiment.score < 0:
+            self.kovatype("Well.. If you say so..")
+            self.kovatype("but think about it!")
+            user_data["future_sent"] += 1
+        self.kovatype("Everyone living in such narrow space.") 
         self.kovatype("Being fed by robots, never waking up from virtual reality..") 
         self.kovatype("They already talk about how we aren't doing \"human activities\".") 
         self.kovatype("We'd be abandoning physical reality then!") 
         self.kovatype("However, that's the only way to keep growing human population.") 
         self.kovatype("Dad says we're already running out of land space, depsite utilizing \
 all in-land resources, unlike your time when people lived mostly along the coasts.") 
+        self.kovatype("Distopian. Isn't it?") 
         user_data["chapter"] = 23
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
@@ -612,6 +664,14 @@ to chat with you. To access a time where people did human things and gather data
         return user_data
 
     def chapter24(self, input, user_data, user_id):
+        sentiment = self.sentiment(input)
+        if sentiment.score >= 0:
+            self.kovatype("") 
+            user_data["future_sent"] -= 1
+        if sentiment.score < 0:
+            self.kovatype("")
+            self.kovatype("but think about it!")
+            user_data["future_sent"] += 1
         self.kovatype("Wow. Orbis has a real state-of-art distributed computing technology.") 
         self.kovatype("I hope one day I'll get admitted to Stanford and study Computer Science \
 to be like my father and work for Orbis.") 
