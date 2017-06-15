@@ -74,7 +74,7 @@ class Kova:
         return time < d_in_ms
 
     def catch(self, input, user_data, time):
-        if check_time(user_data, time):
+        if self.check_time(user_data, time):
             self.kovatype(input + "was interruption")
             user_data['abort_plot'] = 1
             return user_data
