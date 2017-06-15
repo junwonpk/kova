@@ -64,17 +64,11 @@ class Kova:
             self.restart(user_id)
         if user_id not in self.redis.keys(): # if user first time
             self.initUser(user_id)
-    
-    def check_time(self, user_data, time):
-        self.kovatype(str(time))
-        self.kovatype(str(user_data["msg_time"]))
-        d = user_data["msg_time"].strftime('%s')
-        d_in_ms = int(d)*1000
-        self.kovatype(str(d_in_ms))
-        return time < d_in_ms
 
     def catch(self, input, user_data, time):
-        if self.check_time(user_data, time):
+        self.kovatype(str(time))
+        self.kovatype(str(user_data["msg_time"]))
+        if time < user_data["msg_time"]:
             self.kovatype(input + "was interruption")
             user_data['abort_plot'] = 1
             return user_data
@@ -206,7 +200,7 @@ class Kova:
         self.kovatype("Hello?")
         self.kovatype("Is this message getting through?")
         user_data["chapter"] = 1
-        user_data["last_msg"] = datetime.now()
+        user_data["last_msg"] = int(datetime.now().strftime('%s')) * 1000
         return user_data
 
     def chapter1(self, input, user_data, user_id):
@@ -214,7 +208,7 @@ class Kova:
         self.kovatype("Nice to meet you! I'm Lena.")
         self.kovatype("What should I call you?")
         user_data["chapter"] = 2
-        user_data["last_msg"] = datetime.now()
+        user_data["last_msg"] = int(datetime.now().strftime('%s')) * 1000
         return user_data
 
     def chapter2(self, input, user_data, user_id):
@@ -228,7 +222,7 @@ class Kova:
             self.kovatype("Cool! Hello, " + username + "!")
             self.kovatype("What year is it there by the way?")
             user_data["chapter"] = 3
-        user_data["last_msg"] = datetime.now()
+        user_data["last_msg"] = int(datetime.now().strftime('%s')) * 1000
         return user_data
 
     def chapter3(self, input, user_data, user_id):
