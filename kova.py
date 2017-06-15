@@ -69,9 +69,6 @@ class Kova:
         if time < user_data["msg_time"]:
             user_data['abort_plot'] = 1
             return user_data
-        if re.findall("\syou$", input):
-            self.kovatype(input + " too")
-            user_data['abort_plot'] = 1
         if 'jump' in input.lower():
             chapter = re.findall('.*chapter(\d+).*', input.lower())
             if len(chapter) > 0:
@@ -101,6 +98,9 @@ class Kova:
             self.kovatype("But I'll leave you if you're busy with other things.")
             self.kovatype("Bye...")
         if self.answer_questions(input):
+            user_data['abort_plot'] = 1
+        if re.findall("\syou$", input):
+            self.kovatype(input + " too")
             user_data['abort_plot'] = 1
         return user_data
 
@@ -229,6 +229,10 @@ where the walls spray water and soap on your body. Did people not take showers i
         elif "?" == input:
             self.kovatype("?")
             return True
+        elif "sorry" in input:
+            self.kovatype("nah it's okay. i'm not angry.")
+            self.kovatype(":)")
+            return True
         return False
 
     """ ACT 1 """
@@ -310,7 +314,7 @@ so I installed it on my device while he's asleep! Hehe.")
             self.kovatype("Hey! We're really similar in age. I'm 16!")
             user_data['trust'] += 1
         elif age > 30:
-            self.kovatype(str(age) + "? I see.")
+            self.kovatype(str(age) + "?")
             self.kovatype("You're a little older than me. I'm 16.")
         else:
             self.kovatype("You are " + str(age) + "?")
@@ -373,14 +377,17 @@ so I installed it on my device while he's asleep! Hehe.")
     """ ACT 2 """
 
     def chapter9(self, input, user_data, user_id):
-        if user_data["wakeup"] == 0:
-            user_data["wakeup"] = datetime.now()
-        if "good" in input or "sweet" in input:
-            self.kovatype("good night!")
-            user_data["attach_level"] += 1
-        if datetime.now() < user_data["wakeup"]:
-            user_data["attach_level"] += 1
+        if 1 == 2:
+            self.kovatype("delete this after debug")
+        # if user_data["wakeup"] == 0:
+        #     user_data["wakeup"] = datetime.now()
+        # if "good" in input or "sweet" in input:
+        #     self.kovatype("good night!")
+        #     user_data["attach_level"] += 1
+        # if datetime.now() < user_data["wakeup"]:
+        #     user_data["attach_level"] += 1
         else:
+            self.kovatype("Junwon: Lena won't respond for 8 hours in production. I disabled it for now so you can test it.")
             self.kovatype("Good Morning!")
             if user_data["attach_level"] > 1:
                 self.kovatype("Oh my, you messaged me " + str(user_data["attach_level"]) + \
