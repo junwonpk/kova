@@ -767,7 +767,11 @@ to be like my father and work for Orbis!")
         if "stanford" in input.lower():
             if "student" in input.lower() or "go to" in input.lower() or \
 "attend" in input.lower() or "professor" in input.lower():
-                
+                user_data["trust"] += 5
+                self.kovatype("OMG OMG REALLY???")
+                self.kovatype("THAT'S AWESOME!!!")
+                self.kovatype("I'm glad we're friends. Hehe.")
+                self.kovatype("Tell me about what Stanford was like back then sometime!")
         else:
             sentiment = self.sentiment(input)
             if sentiment.score >= 0:
