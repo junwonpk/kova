@@ -200,8 +200,7 @@ class Kova:
         self.kovatype("Hello?")
         self.kovatype("Is this message getting through?")
         user_data["chapter"] = 1
-        self.kovatype(str(datetime.now()))
-        self.kovatype(str(datetime.now().strftime('%s')))
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter1(self, input, user_data, user_id):
@@ -209,7 +208,7 @@ class Kova:
         self.kovatype("Nice to meet you! I'm Lena.")
         self.kovatype("What should I call you?")
         user_data["chapter"] = 2
-        user_data["last_msg"] = int(datetime.now().strftime('%s')) * 1000
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter2(self, input, user_data, user_id):
@@ -223,7 +222,7 @@ class Kova:
             self.kovatype("Cool! Hello, " + username + "!")
             self.kovatype("What year is it there by the way?")
             user_data["chapter"] = 3
-        user_data["last_msg"] = int(datetime.now().strftime('%s')) * 1000
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter3(self, input, user_data, user_id):
@@ -236,6 +235,7 @@ class Kova:
             self.kovatype("or maybe... you are lying...")
             user_data["trust"] -= 1
         user_data["chapter"] = 4
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter4(self, input, user_data, user_id):
