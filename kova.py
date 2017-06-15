@@ -100,7 +100,7 @@ class Kova:
             self.kovatype("I'm disappointed.. I thought we could be friends, and it would've been fun..")
             self.kovatype("But I'll leave you if you're busy with other things.")
             self.kovatype("Bye...")
-        if answer_questions(input):
+        if self.answer_questions(input):
             user_data['abort_plot'] = 1
         return user_data
 
@@ -204,24 +204,31 @@ class Kova:
             if "shower" in input:
                 self.kovatype("Shower aisle? It's the aisle that you walk through \
 where the walls spray water and soap on your body. Did people not take showers in your time?")
+                return true
         elif "who" in input:
             if "father" in input:
                 self.kovatype("My father is Alfred Kova, VP of Data Science at Orbis")
+                return true
         elif "when" in input:
             if "birthday" in input:
                 self.kovatype("June 14th, 2101. Why do you ask? Will you give me a birthday present?")
+                return true
         elif "where" in input:
             if "home" in input or "live" in input:
                 self.kovatype("I live in Palo Alto, California. Heart of Silicon Valley")
+                return true
         elif "why" in input:
             if "me" in input:
                 self.kovatype("No real reason. Just random chance! Isn't that more exciting though?")
+                return true
         elif "how" in input:
             if "contact" in input:
                 self.kovatype("My father heads the Advanced Research department at Orbis")
                 self.kovatype("That means I can access magical technologies! Like Time Portal Messenger!")
-        elif "?" in input:
+                return true
+        elif "?" == input:
             self.kovatype("?")
+            return true
         return false
 
     """ ACT 1 """
