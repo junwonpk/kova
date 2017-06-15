@@ -100,6 +100,8 @@ class Kova:
             self.kovatype("I'm disappointed.. I thought we could be friends, and it would've been fun..")
             self.kovatype("But I'll leave you if you're busy with other things.")
             self.kovatype("Bye...")
+        if answer_questions(input):
+            user_data['abort_plot'] = 1
         return user_data
 
     def kovatype(self, message):
@@ -197,10 +199,19 @@ class Kova:
         self.kovatype("Type Restart to begin again.")
         return user_data
 
-    def answer_questions(self, input, user_data): # if user asks questions, answer.
-        # lena's age, gender, school, family members
-        # hobbies, asl, pets, orbis
-        return user_data
+    def answer_questions(self, input):
+        if "what" in input:
+            if "shower" in input:
+                self.kovatype("Shower aisle? It's the aisle that you walk through \
+where the walls spray water and soap on your body. Did people not take showers in your time?")
+        elif "who" in input:
+        elif "when" in input:
+        elif "where" in input:
+        elif "why" in input:
+        elif "how" in input:
+        elif "?" in input:
+            self.kovatype("?")
+        return false
 
     """ ACT 1 """
 
@@ -364,12 +375,16 @@ so I installed it on my device while he's asleep! Hehe.")
         return user_data
 
     def chapter10(self, input, user_data, user_id):
-        #sentiment analysis and respond appropriately
-        self.kovatype("A couple of weeks ago, dad showed me an \"alarm app\" \
+        sentiment = self.sentiment(input)
+        if sentiment.score > 0:
+            self.kovatype("Good to hear that!")
+        if sentiment.score < 0:
+            self.kovatype("I'm sorry to hear that... :'(")
+        self.kovatype("By the way, a couple of weeks ago, dad showed me an \"alarm app\" \
 from your time.") 
-        self.kovatype("It's so interesting that you enter a specific time manually \
-for the alarm to ring at.") 
-        self.kovatype("It's really... How should I put it...") 
+        self.kovatype("It's so interesting that you had to enter a specific time manually.") 
+        self.kovatype("It's really") 
+        self.kovatype("How should I put it") 
         self.kovatype("Vintage?") 
         self.kovatype("We don't have alarm devices anymore. The room lights up and \
 plays a song when my body is ready to wake up.") 
@@ -379,20 +394,26 @@ plays a song when my body is ready to wake up.")
         return user_data
 
     def chapter11(self, input, user_data, user_id):
-        #if user asks, talk about shower aisle. 
-        #shower aisle sprays water soap and rinses body and hair. With high precision.
-        self.kovatype("Apparently, most people I will meet today like the color Orange.") 
-        self.kovatype("I really like the dress my assistant printed for me today") 
-        self.kovatype("I wonder what's for breakfast. What's your favorite dish?")
+        self.kovatype("Apparently, most people I will meet today like the color Orange") 
+        self.kovatype("and I really like the dress my assistant printed for me today") 
+        self.kovatype("You don't have AI fashion advisors, right? \
+I can't imagine having to choose clothes by myself.") 
+        self.kovatype("Don't you wish you had one too?") 
         user_data["chapter"] = 12
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter12(self, input, user_data, user_id):
-        #Lena's favorite food is pasta. If same, trust score goes up.
-        self.kovatype("I can hear the delivery drones downstairs. Ah, mom must be \
-downstairs.") 
-        self.kovatype("Bipedal-bot is telling her we're having Danish and Apple \
+        sentiment = self.sentiment(input)
+        if sentiment.score > 0:
+            user_data["future_sent"] += 1
+            self.kovatype("I thought you'd like the idea!")
+        if sentiment.score < 0:
+            user_data["future_sent"] -= 1
+            self.kovatype("Hmm.. You never know you need it until you see it")
+        self.kovatype("Oh! I can hear the delivery drone downstairs. Breakfast \
+time!") 
+        self.kovatype("My Family's Homebot is telling mom we're having croissant and tartine \
 for breakfast.") 
         self.kovatype("I'm gonna turn this chat off while I'm with mom, so I don't \
 get caught")
@@ -400,6 +421,8 @@ get caught")
         user_data["chapter"] = 13
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
+
+    """ ACT 3 """
 
     def chapter13(self, input, user_data, user_id):
         self.kovatype("Hey Sorry I got back late") 
@@ -474,7 +497,7 @@ exciting!")
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
-    """ ACT 3 """
+    """ ACT 4 """
 
     def chapter19(self, input, user_data, user_id):
         self.kovatype("Wow, this place is like a giant playground.") 
@@ -552,6 +575,8 @@ tell us what's inside..")
         user_data["chapter"] = 26
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
+
+    """ ACT 5 """
 
     def chapter26(self, input, user_data, user_id):
         # if not: she goes on, gets her phone taken away.
