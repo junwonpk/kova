@@ -482,9 +482,8 @@ get caught")
 
     def chapter14(self, input, user_data, user_id):
         entities = self.tag_entity(input)
-        for entity in entities:
-            self.kovatype("Haha I guess that's something that didn't change over the 100 years.")
-            self.kovatype(entity.name.title() + " occupies a lot of my time too!")
+        self.kovatype("Haha I guess that's something that didn't change over the 100 years.")
+        self.kovatype(entities[0].name.title() + " occupies a lot of my time too!")
         self.kovatype("Mom went to a VR cafe with her friends.") 
         self.kovatype("They're going to checkout the new Euro Tour Package until \
 lunch.") 
