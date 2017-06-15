@@ -200,7 +200,8 @@ class Kova:
         self.kovatype("Hello?")
         self.kovatype("Is this message getting through?")
         user_data["chapter"] = 1
-        user_data["last_msg"] = int(datetime.now().strftime('%s')) * 1000
+        self.kovatype(str(datetime.now()))
+        self.kovatype(str(datetime.now().strftime('%s')))
         return user_data
 
     def chapter1(self, input, user_data, user_id):
