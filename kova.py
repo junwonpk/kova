@@ -66,10 +66,7 @@ class Kova:
             self.initUser(user_id)
 
     def catch(self, input, user_data, time):
-        self.kovatype(str(time))
-        self.kovatype(str(user_data["msg_time"]))
         if time < user_data["msg_time"]:
-            self.kovatype(input + "was interruption")
             user_data['abort_plot'] = 1
             return user_data
         if 'jump' in input.lower():
@@ -245,6 +242,7 @@ class Kova:
 so I installed it on my device while he's asleep! Hehe.")
         self.kovatype("I guess Orbis didn't exist back in 2017.")
         user_data["chapter"] = 5
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter5(self, input, user_data, user_id):
@@ -253,6 +251,7 @@ so I installed it on my device while he's asleep! Hehe.")
         self.kovatype("so I actually have no idea who you are")
         self.kovatype("How old are you?")
         user_data["chapter"] = 6
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter6(self, input, user_data, user_id):
@@ -280,6 +279,7 @@ so I installed it on my device while he's asleep! Hehe.")
         self.kovatype("Also, I kinda can infer from your name, but don't wanna make assumptions.")
         self.kovatype("What gender do you identify with?")
         user_data["chapter"] = 7
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter7(self, input, user_data, user_id):
@@ -295,6 +295,7 @@ so I installed it on my device while he's asleep! Hehe.")
             self.kovatype("It must really suck...")
             self.kovatype("What do you think about your world?")
             user_data["chapter"] = 8
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter8(self, input, user_data, user_id):
@@ -325,6 +326,7 @@ so I installed it on my device while he's asleep! Hehe.")
         self.kovatype("Message me in like 8 hours. I'll check for your message as soon as I wake up :)")
         user_data["wakeup"] = datetime.now() + timedelta(hours=8)
         user_data["chapter"] = 9
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     """ ACT 2 """
@@ -335,12 +337,12 @@ so I installed it on my device while he's asleep! Hehe.")
         if datetime.now() < user_data["wakeup"]:
             self.kovatype("Zzz... Still asleep")
             self.kovatype("Message me after " + str(user_data["wakeup"]))
-            return user_data
         else:
             self.kovatype("Good Morning!")
             self.kovatype("How are you doing?")
             user_data["chapter"] = 10
-            return user_data
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
+        return user_data
 
     def chapter10(self, input, user_data, user_id):
         #sentiment analysis and respond appropriately
@@ -354,6 +356,7 @@ for the alarm to ring at.")
 plays a song when my body is ready to wake up.") 
         self.kovatype("Wait a second. I'm gonna walk through the shower aisle.") 
         user_data["chapter"] = 11
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter11(self, input, user_data, user_id):
@@ -363,6 +366,7 @@ plays a song when my body is ready to wake up.")
         self.kovatype("I really like the dress my assistant printed for me today") 
         self.kovatype("I wonder what's for breakfast. What's your favorite dish?")
         user_data["chapter"] = 12
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter12(self, input, user_data, user_id):
@@ -375,6 +379,7 @@ for breakfast.")
 get caught")
         self.kovatype("See you after breakfast!")
         user_data["chapter"] = 13
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter13(self, input, user_data, user_id):
@@ -383,6 +388,7 @@ get caught")
 text you without her seeing me") 
         self.kovatype("What have you been up to?")
         user_data["chapter"] = 14
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter14(self, input, user_data, user_id):
@@ -394,6 +400,7 @@ lunch.")
         self.kovatype("I learnt when it emerged in world history, but can't remember \
 if it's before or after your year.")
         user_data["chapter"] = 15
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter15(self, input, user_data, user_id):
@@ -403,6 +410,7 @@ if it's before or after your year.")
         self.kovatype("She's the celebrity that many of my classmates like too")
         self.kovatype("Do you like any celebrity? Which one?")
         user_data["chapter"] = 16
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter16(self, input, user_data, user_id):
@@ -419,6 +427,7 @@ chat with me about each other's worlds!")
         self.kovatype("Guess what? I'm visiting dad's workplace today! That's why \
 I got my haircut. :)")
         user_data["chapter"] = 17
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter17(self, input, user_data, user_id):
@@ -432,6 +441,7 @@ shops in downtown where human staffs greeted me.")
         self.kovatype("It'd be cruel to ask any human to spend their time at a shop \
 working these days, but I miss human service sometimes.")
         user_data["chapter"] = 18
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter18(self, input, user_data, user_id):
@@ -442,6 +452,7 @@ leave for a sec.")
 exciting!")
         self.kovatype("Bye!")
         user_data["chapter"] = 19
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     """ ACT 3 """
@@ -452,6 +463,7 @@ exciting!")
         self.kovatype("All these robots that must be at least a decade ahead of \
 what I see out in the city.")
         user_data["chapter"] = 20
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter20(self, input, user_data, user_id):
@@ -461,6 +473,7 @@ what I see out in the city.")
         self.kovatype("All these robots that must be at least a decade ahead \
 of what I see out in the city.")
         user_data["chapter"] = 21
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter21(self, input, user_data, user_id):
@@ -470,6 +483,7 @@ neural link")
         self.kovatype("Looks like a nice comfy massage chair with a glossy helmet.")
         self.kovatype("Then there's the vertical skyscraper farms.")
         user_data["chapter"] = 22
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter22(self, input, user_data, user_id):
@@ -482,6 +496,7 @@ neural link")
         self.kovatype("Dad says we're already running out of land space, depsite utilizing \
 all in-land resources, unlike your time when people lived mostly along the coasts.") 
         user_data["chapter"] = 23
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter23(self, input, user_data, user_id):
@@ -496,6 +511,7 @@ gather.")
         self.kovatype("That's why his team made the time portal technology I'm using \
 to chat with you. To access a time where people did human things and gather data from then.")
         user_data["chapter"] = 24
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter24(self, input, user_data, user_id):
@@ -503,6 +519,7 @@ to chat with you. To access a time where people did human things and gather data
         self.kovatype("I hope one day I'll get admitted to Stanford and study Computer Science \
 to be like my father and work for Orbis.") 
         user_data["chapter"] = 25
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter25(self, input, user_data, user_id):
@@ -514,6 +531,7 @@ tell us what's inside..")
         self.kovatype("There's something cool inside!!!") 
         self.kovatype("What shoud I do?") 
         user_data["chapter"] = 26
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter26(self, input, user_data, user_id):
@@ -526,6 +544,7 @@ tell us what's inside..")
         self.kovatype("AAAH! I hear footsteps! What do I do? What do I do!!!") 
         #she's caught and her 
         user_data["chapter"] = 27
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter27(self, input, user_data, user_id):
@@ -539,6 +558,7 @@ tell us what's inside..")
         self.kovatype("This isn't exactly the cool thing I was looking for") 
         self.kovatype("I should get out of this place before I get caught. I'm gonna crawl out.") 
         user_data["chapter"] = 28
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter28(self, input, user_data, user_id):
@@ -547,6 +567,7 @@ tell us what's inside..")
         self.kovatype("I should go ask him for help. He'll scold me, but won't be as bad as \
 being taken to him by the guards or his scientists.") 
         user_data["chapter"] = 29
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter29(self, input, user_data, user_id):
@@ -556,6 +577,7 @@ being taken to him by the guards or his scientists.")
         self.kovatype("\"Room\" doesn't do this place justice. It's a giant dome that are all screens.") 
         self.kovatype("What are they watching? Each screen seems to be just ordinary people's days.") 
         user_data["chapter"] = 30
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter30(self, input, user_data, user_id):
@@ -565,6 +587,7 @@ being taken to him by the guards or his scientists.")
         self.kovatype("Wait a second. That's Paris. When did I ever visit Paris?") 
         self.kovatype("Hmm? I don't recognize any of those locations, or the clothes I'm wearing.") 
         user_data["chapter"] = 31
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter31(self, input, user_data, user_id):
@@ -575,6 +598,7 @@ she looks visibly younger.")
         self.kovatype("Did my father...? What? But that can't be. He's an honest man. A good man!")
         self.kovatype("He wouldn't do that to my mom!")
         user_data["chapter"] = 32
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter32(self, input, user_data, user_id):
@@ -585,6 +609,7 @@ she looks visibly younger.")
         self.kovatype("Did my father...? What? But that can't be. He's an honest man. A good man!")
         self.kovatype("He wouldn't do that to my mom!")
         user_data["chapter"] = 33
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter33(self, input, user_data, user_id):
@@ -601,6 +626,7 @@ to see how the Lifestyle Prediction Algorithm works.")
         self.kovatype("Hmm. I was always curious how it works. That's how Orbis achives its revolutionary \
 predictive assistance service.")
         user_data["chapter"] = 34
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter34(self, input, user_data, user_id):
@@ -614,6 +640,7 @@ you need, exactly when you need it. This is also very expensive. Few can enjoy t
         self.kovatype("...")
         self.kovatype("What does that mean?...")
         user_data["chapter"] = 35
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter35(self, input, user_data, user_id):
@@ -633,6 +660,7 @@ be grateful we let them exist in the first place.")
         self.kovatype("Alfred Kova: As for now, let's go eat lunch. I'll show you other places too.")
         self.kovatype("Alfred Kova: Everyone! Time for lunch! Let's go!")
         user_data["chapter"] = 36
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter35(self, input, user_data, user_id):
@@ -643,7 +671,8 @@ be grateful we let them exist in the first place.")
         self.kovatype("Okay, got out of the vent, and I'm on my way out.")
         self.kovatype("Wait")
         user_data["chapter"] = 36
-        return 
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
+        return user_data
 
     def chapter36(self, input, user_data, user_id):
         self.kovatype("Dad left his computer here.")
@@ -652,7 +681,8 @@ be grateful we let them exist in the first place.")
         self.kovatype("Access granted. Everything's just one command away now.")
         self.kovatype("Do you see what I'm trying to do?")
         user_data["chapter"] = 37
-        return 
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
+        return user_data
 
     def chapter37(self, input, user_data, user_id):
         self.kovatype("I'm going to end this misery for once and for all.")
@@ -661,7 +691,8 @@ be grateful we let them exist in the first place.")
         self.kovatype("But... I can't... I'm scared...")
         self.kovatype("I know this is my only chance, still...")
         user_data["chapter"] = 38
-        return 
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
+        return user_data
 
     def chapter38(self, input, user_data, user_id):
         self.kovatype("Or is it right to keep this project running?")
@@ -672,7 +703,8 @@ be grateful we let them exist in the first place.")
         self.kovatype("[Name], tell me what I should do...")
         self.kovatype("Should I let this project... continue? or stop...")
         user_data["chapter"] = 39
-        return 
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
+        return user_data
 
     def chapter39(self, input, user_data, user_id):
         self.kovatype("Oh my god... I just queried the database, and...")
@@ -688,10 +720,12 @@ being deceived by Orbis.")
         self.kovatype("or let them live on, for they will at least be happy?")
         self.kovatype("Should I free them, end them, or just leave?")
         user_data["chapter"] = 40
-        return 
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
+        return user_data
 
     def chapter40(self, input, user_data, user_id):
         #depending on the answer, behave differently. also take into account user info from before.
         self.kovatype("Thanks. Bye.")
         user_data["chapter"] = 41
-        return 
+        user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
+        return user_data
