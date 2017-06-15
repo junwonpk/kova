@@ -50,7 +50,8 @@ class Kova:
         else:
             chapter = self.chapters[user_data['chapter']]
             user_data = chapter(input, user_data, user_id)
-            self.resume_chapter = user_data['chapter']
+            if user_data['chapter'] > 0:
+                self.resume_chapter = user_data['chapter']
         
         user_data['talking'] = 0
         self.setData(user_id, user_data)
@@ -832,30 +833,33 @@ I'm gonna crawl out through this vent.")
         return user_data
 
     def chapter29(self, input, user_data, user_id):
-        #if hide
         self.kovatype("Oh wow.. This IS a really cool place.") 
-        self.kovatype("There must be a hundred scientists in that one gigantic room.") 
-        self.kovatype("\"Room\" doesn't do this place justice. It's a giant dome that are all screens.") 
-        self.kovatype("What are they watching? Each screen seems to be just ordinary people's days.") 
+        self.kovatype("There must be a hundred scientists in that one gigantic room, \
+my father overseeing them in the middle. So cool!") 
+        self.kovatype("Getting out of this vent right now probably isn't the best idea though..") 
+        self.kovatype("and the word \"room\" doesn't do this place justice. \
+It's a giant dome of hundreds of screens.") 
+        self.kovatype("What are they all watching? Each screen seems to be just \
+ordinary people's days.") 
         user_data["chapter"] = 30
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter30(self, input, user_data, user_id):
-        #if hide
         self.kovatype("Wait, what? That's all me! Why are they all watching me in different places?") 
         self.kovatype("Creepy!") 
+        self.kovatype("Is this building entirely dedicated to just stalking me!?") 
         self.kovatype("Wait a second. That's Paris. When did I ever visit Paris?") 
-        self.kovatype("Hmm? I don't recognize any of those locations, or the clothes I'm wearing.") 
+        self.kovatype("Hmm? I don't recognize most of those locations or the clothes I'm wearing.") 
         user_data["chapter"] = 31
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter31(self, input, user_data, user_id):
-        #if hide
-        self.kovatype("Huh? The door opened, and a girl came in. She resembles me in many ways, but \
-she looks visibly younger.")
-        self.kovatype("WAIT WHAT?? She called my dad, \"Dad\"")
+        self.kovatype("A young girl just walked into the lab.")
+        self.kovatype("She actually looks pretty similar to me. Probably younger.")
+        self.kovatype("I really don't know what to make out of this place..")
+        self.kovatype("WAIT WHAT?? She called my dad, \"Dad\"!")
         self.kovatype("Did my father...? What? But that can't be. He's an honest man. A good man!")
         self.kovatype("He wouldn't do that to my mom!")
         user_data["chapter"] = 32
@@ -863,18 +867,21 @@ she looks visibly younger.")
         return user_data
 
     def chapter32(self, input, user_data, user_id):
-        #if hide
-        self.kovatype("Huh? The door opened, and a girl came in. She resembles me in many ways, but \
-she looks visibly younger.")
-        self.kovatype("WAIT WHAT?? She called my dad, \"Dad\"")
-        self.kovatype("Did my father...? What? But that can't be. He's an honest man. A good man!")
-        self.kovatype("He wouldn't do that to my mom!")
+        self.kovatype("Give me a second..")
+        self.kovatype("I can't register anything on my mind right now..")
+        self.kovatype("Not even what you are saying..")
+        self.kovatype("Should I just go out and scream at my dad!?")
         user_data["chapter"] = 33
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter33(self, input, user_data, user_id):
-        #if hide
+        sentiment = self.sentiment(input)
+        if sentiment.score <= 0.0:
+            self.kovatype("Yeah, you're right.")
+            self.kovatype("I have to think rationally.")
+        else:
+            self.kovatype("Yeah! I got this! :)")
         self.kovatype("I can't believe this. I'm going to turn on transcription to record this, \
 and tell my mom all about it when I get home! He'll have to explain!!!")
         self.kovatype("Alfred Kova: My Dear Lena, welcome to Orbis!")
