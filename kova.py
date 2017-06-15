@@ -230,6 +230,20 @@ where the walls spray water and soap on your body. Did people not take showers i
         elif "?" == input:
             self.kovatype("?")
             return True
+        elif re.findall("do\syou\s(\w+)\sto\s(.+)\?$", input):
+            verb = re.findall("do\syou\s(\w+)\sto\s(.+)\?$", input)[0][0]
+            thing = re.findall("do\syou\s(\w+)\sto\s(.+)\?$", input)[0][1]
+            if self.sentiment(input).score <= 0.1:
+                self.kovatype("No... I don't " + verb + " to " + thing + "...")
+            else:
+                self.kovatype("Yeah! I " + verb + " to " + thing + "!")
+        elif re.findall("do\syou\s(\w+)\s(.+)\?$", input):
+            verb = re.findall("do\syou\s(\w+)\s(.+)\?$", input)[0][0]
+            thing = re.findall("do\syou\s(\w+)\s(.+)\?$", input)[0][1]
+            if self.sentiment(input).score <= 0.1:
+                self.kovatype("No... I don't " + verb + " " + thing + "...")
+            else:
+                self.kovatype("Yeah! I " + verb + " " + thing + "!")
         elif "sorry" in input:
             self.kovatype("nah it's okay. i'm not angry.")
             self.kovatype(":)")
@@ -341,7 +355,7 @@ so I installed it on my device while he's asleep! Hehe.")
         return user_data
 
     def chapter7(self, input, user_data, user_id):
-        gender = self.extract_gender(input)
+        gender = self.extract_gender(input).lower()
         if not gender:
             self.kovatype("No No That's not what I'm asking")
             self.kovatype("I mean, what's your gender?")
