@@ -767,10 +767,10 @@ me if I stay behind.")
     def chapter26(self, input, user_data, user_id):
         sentiment = self.sentiment(input)
         if sentiment.score <= 0.0:
-            self.kovatype("But.. this kind of chance won't come again!")
-            self.kovatype("Oh whatever! I'm gonna do it anyway!!!")
+            self.send_message("But.. this kind of chance won't come again!")
+            self.send_message("Oh whatever! I'm gonna do it anyway!!!")
         else:
-            self.kovatype("Alright! I'm blaming it on you if I get caught! Haha")
+            self.send_message("Alright! I'm blaming it on you if I get caught! Haha")
         self.kovatype("Wow! The door isn't locked?") 
         self.kovatype("I thought I'll have to climb through a window or something.") 
         self.kovatype("Well, it's just a company after all. Not like a government agency.") 
@@ -801,23 +801,29 @@ me if I stay behind.")
 "conceal" not in input.lower():
             self.send_message("WHAT? I DON'T THINK THAT'S A GOOD IDEA.") 
             self.send_message("I'M JUST GONNA HIDE!") 
-        self.kovatype("Okay. I hid in this random room. I think I'm good for") 
-        self.kovatype("AH CRAP! The motion sensor turned the light on.") 
-        self.kovatype("Where do I go?") 
-        self.kovatype("What do I do ?") 
-        time.sleep(4)
-        self.kovatype("I found an air vent and just hid inside.") 
+        self.kovatype("Okay. I hid in this random room. I think I'm good for now.") 
+        self.send_message("AH CRAP! The motion sensor turned the light on.") 
+        self.send_message("WHERE DO I GO?") 
+        self.send_message("WHAT DO I DO?") 
+        time.sleep(7)
+        self.kovatype("Ah, I crawled into an air vent, and the guards left the room") 
         self.kovatype("This isn't exactly the cool thing I was looking for") 
-        self.kovatype("I should get out of this place before I get caught. I'm gonna crawl out.") 
+        self.kovatype("I should get out of this building before I get caught... \
+I'm gonna crawl out through this vent.") 
         user_data["chapter"] = 28
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter28(self, input, user_data, user_id):
-        #if hide
-        self.kovatype("Oh? I hear my father's from the left vent.") 
-        self.kovatype("I should go ask him for help. He'll scold me, but won't be as bad as \
-being taken to him by the guards or his scientists.") 
+        sentiment = self.sentiment(input)
+        if sentiment.score <= 0.0:
+            self.kovatype("I hate to admit but...")
+            self.kovatype("I think I'm a little scared...")
+        else:
+            self.kovatype("Yeah! I got this! :)")
+        self.kovatype("Oh! I hear my father's voice coming from the left vent.") 
+        self.kovatype("I should go ask him for help. He'll scold me for sure, but \
+won't be as bad as being taken to him by the guards or his scientists.") 
         user_data["chapter"] = 29
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
