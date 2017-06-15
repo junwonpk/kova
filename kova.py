@@ -201,6 +201,9 @@ class Kova:
         return user_data
 
     def answer_questions(self, input):
+        if re.findall("i\sl\wv\w?\s\w?\w?u", input) or re.findall("i\slike\s\w?\w?u", input):
+            self.kovatype("Awww Thank You! :) <3")
+            return True
         if re.findall("\w*u\s\w?r\w?\s([\w\s]+)", input):
             thing = re.findall("\w*u\s\w?r\w?\s([\w\s]+)", input)[0]
             if self.sentiment(input).score <= 0.1:
@@ -208,7 +211,6 @@ class Kova:
             else:
                 self.kovatype("Haha! Thank you! I'd like to think I'm " + thing + "!")
             return True
-
         if re.findall("\w?r\w?\s\w*u\s([\w\s]+)", input):
             thing = re.findall("\w?r\w?\s\w*u\s([\w\s]+)", input)[0]
             if self.sentiment(input).score <= 0.1:
@@ -224,6 +226,8 @@ class Kova:
             else:
                 self.kovatype("Yeah! I " + verb + " " + thing + "!")
             return True
+        elif "bitch" in input or "whore" in input:
+            self.kovatype("Hey! Don't say that! >:(")
         elif "what" in input:
             if "shower" in input:
                 self.kovatype("Shower aisle? It's the aisle that you walk through \
@@ -251,6 +255,12 @@ life than the government does.")
             if "me" in input:
                 self.kovatype("No real reason. Just random chance! Isn't that more exciting though?")
                 return True
+            if "cs" in input or "computer science" in input:
+                self.kovatype("To make my imaginations come true, of course! By making awesome softwares! :)")
+                return True
+            if "humanities" in input or "comp lit" in input or "english" in input or "history" in input:
+                self.kovatype("Humanities is cool too, but I'm personally more of a STEM person. :P")
+                return True
         elif "how" in input:
             if "contact" in input:
                 self.kovatype("My father heads the Advanced Research department at Orbis")
@@ -276,7 +286,7 @@ life than the government does.")
         return user_data
 
     def chapter1(self, input, user_data, user_id):
-        if 'n' in input:
+        if 'n' in input.lower():
             self.kovatype("Huh? How did you respond then?")
         else:   
             self.kovatype("Hey there! Wow, this is so cool!")
@@ -323,6 +333,9 @@ life than the government does.")
         return user_data
 
     def chapter4(self, input, user_data, user_id):
+        if "lie" in input or "lying" in input:
+            self.kovatype("Well, if you say so...")
+            self.kovatype("Anyways")
         self.kovatype("My dad works for Orbis")
         self.kovatype("in the Advanced Research department.")
         self.kovatype("He brought home an experimental time portal technology, \
@@ -503,7 +516,7 @@ get caught")
             self.kovatype("Junwon: Lena won't respond for 1 hour in production. I disabled it for now so you can test it.")
             self.kovatype("Hey, Sorry I got back late") 
             self.kovatype("Mom and I came to Downtown Palo Alto and I couldn't find the time to \
-    text you without her seeing me") 
+text you without her seeing me") 
             self.kovatype("What have you been up to?")
             user_data["chapter"] = 14
             user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
@@ -611,10 +624,12 @@ exciting!")
         #     user_data["attach_level"] += 1
         else:
             self.kovatype("Junwon: Lena will be irresponsive for 1 hour here. I skipped it for now for testing.") 
-            self.kovatype("Wow, this place is like a giant playground.") 
-            self.kovatype("There are so many fun things going on everywhere.")
-            self.kovatype("All these robots that must be at least a decade ahead of \
-what I see out in the city.")
+            self.kovatype("Hey") 
+            self.kovatype("I was just about to text you too!") 
+            self.kovatype("I arrived at Orbis about half an hour ago, but I couldn't \
+separate myself from the tour group.") 
+            self.kovatype("Also, just couldn't take my eyes off of the amazing projects \
+they've been showing us. Hahaha.")
             user_data["chapter"] = 20
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
@@ -627,7 +642,7 @@ what I see out in the city.")
         if sentiment.score < 0:
             self.kovatype("Well, it's actually really cool!")
             user_data["future_sent"] -= 1
-        self.kovatype("I always feel this way when I come to Orbis") 
+        self.kovatype("I always feel this way when I come here") 
         self.kovatype("This place is like a giant playground!") 
         self.kovatype("There are so many fun things going on everywhere.")
         self.kovatype("All these robots that must be at least a decade ahead \
@@ -664,7 +679,7 @@ neural link")
             self.kovatype("but think about it!")
             user_data["future_sent"] += 1
         self.kovatype("Everyone living in such narrow space.") 
-        self.kovatype("Being fed by robots, never waking up from virtual reality..") 
+        self.kovatype("Being fed by robots, only seldom waking up from virtual reality..") 
         self.kovatype("They already talk about how we aren't doing \"human activities\".") 
         self.kovatype("We'd be abandoning physical reality then!") 
         self.kovatype("However, that's the only way to keep growing human population.") 
@@ -677,10 +692,11 @@ all in-land resources, unlike your time when people lived mostly along the coast
 
     def chapter23(self, input, user_data, user_id):
         sentiment = self.sentiment(input)
-        if sentiment.score >= 0:
-            self.kovatype("Yeah, I can see your point. It's not all that bad.") 
-            self.kovatype("It's scary to think about radically changing my lifestyle, \
-but humans do that all the time when new technology comes out, right? Haha") 
+        if sentiment.score >= 0 or ("bad idea" in input and "not" in input):
+            self.kovatype("I can see your point.") 
+            self.kovatype("It's just that..")
+            self.kovatype("It's scary to think I'll have to radically changing my lifestyle, \
+but humans do that all the time when new technologies come out, don't they? Haha") 
             user_data["future_sent"] += 1
         if sentiment.score < 0:
             self.kovatype("I agree. It's not a thing I'm looking forward to either.")
