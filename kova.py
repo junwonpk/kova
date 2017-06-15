@@ -233,6 +233,25 @@ and ("no" in input or "don't" in input):
             else:
                 self.kovatype("I think the answer is clear.")
                 return True
+        elif "what" in input:
+            if "going to do":
+                return False
+            if "do" in input and 'u' in input:
+                return False
+            if "fashion" in input:
+                self.kovatype("Fashion Advisors? They're AI services that are pick\
+and print the best style for you on that day!")
+                return True
+            if "shower" in input:
+                self.kovatype("Shower aisle? It's the aisle that you walk through \
+where the walls spray water and soap on your body. Did people not take showers in your time?")
+                return True
+            if "orbis" in input:
+                self.kovatype("Orbis?")
+                self.kovatype("Only the biggest company in the world???")
+                self.kovatype("It practically wields more influence on our daily \
+life than the government does.")
+                return True
         if re.findall("i\sl\wv\w?\s\w?\w?u", input) or re.findall("i\slike\s\w?\w?u", input):
             self.kovatype("Awww Thank You! :) <3")
             return True
@@ -260,23 +279,6 @@ and ("no" in input or "don't" in input):
             return True
         elif "bitch" in input or "whore" in input:
             self.kovatype("Hey! Don't say that! >:(")
-        elif "what" in input:            
-            if "do" in input and 'u' in input:
-                return False
-            if "fashion" in input:
-                self.kovatype("Fashion Advisors? They're AI services that are pick\
-and print the best style for you on that day!")
-                return True
-            if "shower" in input:
-                self.kovatype("Shower aisle? It's the aisle that you walk through \
-where the walls spray water and soap on your body. Did people not take showers in your time?")
-                return True
-            if "orbis" in input:
-                self.kovatype("Orbis?")
-                self.kovatype("Only the biggest company in the world???")
-                self.kovatype("It practically wields more influence on our daily \
-life than the government does.")
-                return True
         elif "who" in input:
             if "father" in input:
                 self.kovatype("My father is Alfred Kova, VP of Data Science at Orbis")
@@ -306,7 +308,6 @@ life than the government does.")
     """ ACT 1 """
 
     def chapter0(self, input, user_data, user_id):
-        self.kovatype("WARNING: if this message ie being displayed, the final version is not active yet.")
         self.kovatype("Hello?")
         self.kovatype("Is this message getting through?")
         user_data["chapter"] = 1
@@ -470,7 +471,8 @@ so I installed it on my device while he's asleep! Hehe.")
         # if datetime.now() < user_data["wakeup"]:
         #     user_data["attach_level"] += 1
         else:
-            self.kovatype("Junwon: Lena won't respond for 8 hours in production. I disabled it for now so you can test it.")
+            self.kovatype("Junwon: In production, Lena won't respond for 8 hours. \
+I disabled it for now so you don't have to wait!")
             self.kovatype("Good Morning!")
             if user_data["attach_level"] > 1:
                 self.kovatype("Oh my, you messaged me " + str(user_data["attach_level"] - 1) + \
@@ -541,7 +543,8 @@ get caught")
         # if datetime.now() < user_data["wakeup"]:
         #     user_data["attach_level"] += 1
         else:
-            self.kovatype("Junwon: Lena won't respond for 1 hour in production. I disabled it for now so you can test it.")
+            self.kovatype("Junwon: In production, Lena won't respond for 2 hours. \
+I disabled it for now so you don't have to wait!")
             self.kovatype("Hey, Sorry I got back late") 
             self.kovatype("Mom and I came to Downtown Palo Alto and I couldn't find the time to \
 text you without her seeing me") 
@@ -655,7 +658,8 @@ exciting!")
         # if datetime.now() < user_data["wakeup"]:
         #     user_data["attach_level"] += 1
         else:
-            self.kovatype("Junwon: Lena will be irresponsive for 1 hour here. I skipped it for now for testing.") 
+            self.kovatype("Junwon: In production, Lena won't respond for 2 hours. \
+I disabled it for now so you don't have to wait!")
             self.kovatype("Hey") 
             self.kovatype("I was just about to text you too!") 
             self.kovatype("I arrived at Orbis about half an hour ago, but I couldn't \
@@ -811,13 +815,10 @@ me if I stay behind.")
         self.send_message("But it's weird there aren't any signs or directions or anything at all.") 
         self.send_message("Just white walls and") 
         self.send_message("OH NO! I HEAR FOOTSTEPS COMING THIS WAY! WHAT DO I DO? WHAT DO I DO!!!") 
-        user_data["wakeup"] = int((datetime.now() + timedelta(seconds=30)).strftime('%s'))*1000
+        user_data["wakeup"] = int((datetime.now() + timedelta(seconds=20)).strftime('%s'))*1000
         user_data["chapter"] = 27
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         self.setData(user_id, user_data)
-        time.sleep(5)
-        if user_data["flag"] == 0:
-            self.send_message("HURRY UP!!! THEY ARE ALMOST HERE!!!") 
         return user_data
 
     def chapter27(self, input, user_data, user_id):
