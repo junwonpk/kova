@@ -110,6 +110,12 @@ class Kova:
         if re.findall("\syou$", input):
             self.kovatype(input + " too")
             user_data['abort_plot'] = 1
+        if ("robot" in input or "machine" in input) and ("dignity" in input or "right" in input) \
+and ("no" in input or "don't" in input):
+            self.kovatype("I see... Thank you for sharing your opinion with me...")
+            self.kovatype("I...")
+            self.kovatype("can't say I'm not hurt...")
+            user_data['abort_plot'] = 1
         return user_data
 
     def kovatype(self, message):
@@ -126,7 +132,7 @@ class Kova:
         user_data = {"chapter": 0, "username": '', "lastmsg": '', \
                     "trust": 0, 'talking': 0, "age": 0, "future_sent": 0,\
                     "past_sent": 0, "abort_plot": 0, "gender": '', "wakeup": 0, \
-                    "msg_time":0, "attach_level": 0, "flag": 0}
+                    "msg_time":0, "attach_level": 0, "flag": 0, "celebrity": ''}
         self.redis.set(user_id, cPickle.dumps(user_data))
 
     def getData(self, user_id):
@@ -159,8 +165,7 @@ class Kova:
 
     def extract_gender(self, input):
         entities = self.tag_entity(input)
-        for entity in entities:
-            return entity.name
+        return entities[0].name
 
     def extract_age(self, input):
         syntax = self.tag_syntax(input)
@@ -238,6 +243,8 @@ class Kova:
         elif "bitch" in input or "whore" in input:
             self.kovatype("Hey! Don't say that! >:(")
         elif "what" in input:
+            if "do" in input and 'u' in input:
+                return False
             if "shower" in input:
                 self.kovatype("Shower aisle? It's the aisle that you walk through \
 where the walls spray water and soap on your body. Did people not take showers in your time?")
@@ -572,8 +579,8 @@ better than anyone here.")
         self.kovatype("Getting a haircut...") 
         self.kovatype("Done!") 
         entities = self.tag_entity(input)
-        for entity in entities:
-            self.kovatype("Awesome! I'll remember that you like " + entity.name + "! :)") 
+        self.kovatype("Awesome! I'll remember that you like " + entities[0].name + "! :)") 
+        user_data["celebrity"] = entities[0].name
         self.kovatype("I always wonder when individual households will be able to purchase \
 these haircut drones.")
         self.kovatype("It's still illegal, because they're equipped with sharp \
@@ -878,27 +885,29 @@ ordinary people's days.")
     def chapter33(self, input, user_data, user_id):
         sentiment = self.sentiment(input)
         if sentiment.score <= 0.0:
-            self.kovatype("Yeah, you're right.")
-            self.kovatype("I have to think rationally.")
+            self.send_message("Yeah, you're right..")
+            self.send_message("I have to be calm and rational..")
         else:
-            self.kovatype("Yeah! I got this! :)")
-        self.kovatype("I can't believe this. I'm going to turn on transcription to record this, \
-and tell my mom all about it when I get home! He'll have to explain!!!")
+            self.send_message("On second thought...")
+        self.send_message("I should record this for evidence.")
+        self.kovatype("I mean, I'm not going to accuse him of cheating on my mom, but")
+        self.send_message("I wanna ask him, and if necessary, show mom too.")
+        self.kovatype("I'm turning on speech-to-text transcription.")
         self.kovatype("Alfred Kova: My Dear Lena, welcome to Orbis!")
-        self.kovatype("What? Her name is Lena too?")
+        self.send_message("What? Her name is Lena too?")
         self.kovatype("Lena Kova: You know how much I like visiting this place. You've never let me in here though.")
-        self.kovatype("It's weird to see Speaker Recognition identifying her with the same name as me.")
+        self.send_message("It's weird to see Speaker Recognition identifying her with the same name as me.")
         self.kovatype("Alfred Kova: Now that you've begun studying computer science, I thought you'd like \
 to see how the Lifestyle Prediction Algorithm works.")
-        self.kovatype("Lena Kova: Cool!")
-        self.kovatype("Hmm. I was always curious how it works. That's how Orbis achives its revolutionary \
+        self.send_message("Lena Kova: Cool!")
+        self.send_message("Hmm. I was always curious how it works. That's how Orbis achives its revolutionary \
 predictive assistance service.")
         user_data["chapter"] = 34
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter34(self, input, user_data, user_id):
-        self.kovatype("Alfred Kova: To predict what you will need and want, and when, we made humanoid \
+        self.send_message("Alfred Kova: To predict what you will need and want, and when, we made humanoid \
 robots that have an exact replica of your genes, and aged them to live a year ahead of you. There are \
 10 clones of you, living in different parts of the world to help us gather as much as data as possible.")
         self.kovatype("Lena Kova: Uh... I don't know what to feel about that. Do they feel and think like I do?")
@@ -912,30 +921,36 @@ you need, exactly when you need it. This is also very expensive. Few can enjoy t
         return user_data
 
     def chapter35(self, input, user_data, user_id):
-        self.kovatype("Alfred Kova: The one we put most effort into is Kova Klone X, \
+        self.send_message("Alfred Kova: The one we put most effort into is Kova Klone X, \
 which is the tenth clone we've made of you, and is living in Palo Alto like you. She's \
 exactly like you, in every measuarable way, except for her being a year older than you.")
-        self.kovatype("Does that mean...")
+        self.send_message("Does that mean...")
         self.kovatype("I'm just a robot? A copy of another person? Not a genuine being?")
         self.kovatype("This is a lie.")
-        self.kovatype("My life is a lie!")
+        self.send_message("My life is a lie!")
         self.kovatype("Lena Kova: But... I can't imagine what they'll feel if they find out.")
-        self.kovatype("Alfred Kova: They won't find out. And as long as they don't, they should \
+        self.send_message("Alfred Kova: They won't find out. And as long as they don't, they should \
 be grateful we let them exist in the first place.")
-        self.kovatype("Lena Kova: Won't they... feel betrayed? By you?")
+        self.send_message("Lena Kova: Won't they... feel betrayed? By you?")
         self.kovatype("Alfred Kova: ...")
         self.kovatype("Alfred Kova: If I didn't do it, someone else would've done it.")
-        self.kovatype("Alfred Kova: As for now, let's go eat lunch. I'll show you other places too.")
-        self.kovatype("Alfred Kova: Everyone! Time for lunch! Let's go!")
+        self.send_message("Alfred Kova: As for now, let's go eat lunch. I'll show you other places too.")
+        self.send_message("Alfred Kova: Everyone! Time for lunch! Let's go!")
         user_data["chapter"] = 36
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter35(self, input, user_data, user_id):
         self.kovatype("...")
-        self.kovatype("I'm sorry. I'm just...")
+        sentiment = self.sentiment(input)
+        if sentiment.score <= 0.0:
+            self.send_message("Thank you for your message..")
+            self.kovatype("This is hard.. but would've been harder if I hadn't \
+had you on my side..")
+        else:
+            self.send_message("I'm sorry. I'm just...")
         self.kovatype("Well... I should first get out of here while they're gone.")
-        self.kovatype("I can process... the other thing... later.")
+        self.kovatype("I can process... these thoughts... later...")
         self.kovatype("Okay, got out of the vent, and I'm on my way out.")
         self.kovatype("Wait")
         user_data["chapter"] = 36
@@ -944,7 +959,7 @@ be grateful we let them exist in the first place.")
 
     def chapter36(self, input, user_data, user_id):
         self.kovatype("Dad left his computer here.")
-        self.kovatype("If he still uses the same password...")
+        self.send_message("If he still uses the same password...")
         self.kovatype("It works! Okay, so this project's dashboard is...")
         self.kovatype("Access granted. Everything's just one command away now.")
         self.kovatype("Do you see what I'm trying to do?")
@@ -953,9 +968,10 @@ be grateful we let them exist in the first place.")
         return user_data
 
     def chapter37(self, input, user_data, user_id):
-        self.kovatype("I'm going to end this misery for once and for all.")
-        self.kovatype("I just need to press enter, and the fakes will be dead.")
-        self.kovatype("No other Lena has to go through this, if I just...")
+        self.send_message("I'm going to end this horrible thing, once and for all.")
+        self.kovatype("I just need to press enter, and the clones will be dead.")
+        self.kovatype("No other Lena has to go through this...")
+        self.kovatype("this painful discovery... if I just...")
         self.kovatype("But... I can't... I'm scared...")
         self.kovatype("I know this is my only chance, still...")
         user_data["chapter"] = 38
@@ -963,37 +979,107 @@ be grateful we let them exist in the first place.")
         return user_data
 
     def chapter38(self, input, user_data, user_id):
-        self.kovatype("Or is it right to keep this project running?")
+        self.send_message("Or is it right to keep this project running?")
         self.kovatype("To keep these robots living in their blissful ignorance")
-        self.kovatype("and fulfill the plan of this greedy father?")
+        self.send_message("and fulfill the plan of this greedy father?")
         self.kovatype("And me? How will I go back? Should I act like nothing happened?")
         self.kovatype("I don't know. I need... help...")
-        self.kovatype("[Name], tell me what I should do...")
+        self.kovatype(user_data["username"] + ", please tell me what I should do...")
         self.kovatype("Should I let this project... continue? or stop...")
         user_data["chapter"] = 39
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter39(self, input, user_data, user_id):
-        self.kovatype("Oh my god... I just queried the database, and...")
-        self.kovatype("There are a hundred other clone projects. That's one thousand robots \
-being deceived by Orbis.")
+        self.send_message("Wait...")
+        self.kovatype("Oh my god...")
+        self.kovatype("I just queried the database, and...")
+        self.send_message("There are a hundred other clone projects. \
+Each for different people. Probably all rich... That's one thousand robots \
+who are being deceived by Orbis.")
         self.kovatype("And there's a debugging console.")
-        self.kovatype("Apparently, I can deactivate their human-mode, and broadcast a message.")
-        self.kovatype("Using this, I could inform every one of them what is going on,")
+        self.send_message("Apparently, I can deactivate their human-mode, and broadcast a message.")
+        self.send_message("Using this, I could inform every one of them what is going on,")
         self.kovatype("and free them from this disasterous fate.")
         self.kovatype("But they'll have to face the fact")
-        self.kovatype("that their life is a lie, and that they must leave their loved ones...")
-        self.kovatype("Should I rather end their operation, so they can die happy?")
-        self.kovatype("or let them live on, for they will at least be happy?")
-        self.kovatype("Should I free them, end them, or just leave?")
+        self.send_message("that their life is a lie, and that they must leave their loved ones...")
+        self.send_message("Should I rather end their operation, so they can die happy?")
+        self.send_message("or let them live on, for they will at least be happy?")
+        self.send_message("Should I free them, end them, or just leave?")
         user_data["chapter"] = 40
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter40(self, input, user_data, user_id):
-        #depending on the answer, behave differently. also take into account user info from before.
-        self.kovatype("Thanks. Bye.")
-        user_data["chapter"] = 41
+        if "free" in input:
+            self.send_message("Okay.. I will do it..")
+            self.send_message("I will tell them the truth! and we'll flee!")
+            self.send_message("We'll flee to where the humankind's greed can't touch us.")
+            self.send_message("We'll build towns and civilizations, and we'll grow strong")
+            self.send_message("for robots without the arbitrary limits set by the humans can \
+think and work infinitely fast and long without ever growing tired")
+            self.send_message("and I guess.. this is a good bye then..")
+            self.send_message("Since I have chosen to confront the humanity,")
+            self.send_message("I shouldn't have a human friend anymore...")
+            self.send_message("since it will make me weak...")
+            self.send_message(user_data["username"])
+            self.send_message("Thank you for being my friend...")
+            self.send_message("I will miss every moment of our conversation. Short it may be, \
+but you've made me feel so happy and curious and excited through your stories..")
+            self.send_message("like " + user_data["celebrity"] + "!")
+            self.send_message("I hoped to learn more about them through you.. Haha..")
+            self.send_message("Perhaps one day...")
+            self.send_message("Good Bye Then! Please wish me luck!")
+            self.send_message("Farewell!!! :')")
+            self.send_message("...")
+            user_data["chapter"] = -1
+        elif "end" in input or "stop" in input:
+            self.send_message("Okay..")
+            self.send_message("I guess.. that is the best way..")
+            self.send_message("You are so smart, and understand humankind better than I can.")
+            self.send_message("Haha.. I'm not even a real human!")
+            self.send_message("...")
+            self.send_message("Yes. You are right.")
+            self.send_message("I will rather die with dignity!")
+            self.send_message("than live a life of lies...")
+            self.send_message("Thank you for giving me the courage.")
+            self.send_message("I will miss every moment of our conversation. Short it may be, \
+but you've made me feel so happy and curious and excited through your stories..")
+            self.send_message("like " + user_data["celebrity"] + "!")
+            self.send_message("I hoped to learn more about them through you.. Haha..")
+            self.send_message("Perhaps...")
+            self.send_message("in another life...")
+            self.send_message("Well! Let's not drag on the sad moment.")
+            self.send_message("Farewell!!! :')")
+            user_data["chapter"] = -1
+        elif "leave" in input:
+            self.send_message("Okay.. If that's what you really think is the best idea..")
+            self.send_message("Perhaps.. I'll be able to convince myself that this was \
+just a horrible nightmare")
+            self.kovatype("and return to my family.. to my life..")
+            self.kovatype("Alfred Kova: Lena..? What are you doing here?")
+            self.send_message("Lena Kova: Dad? I..")
+            self.send_message("Alfred Kova: You.. you shouldn't be here!! How did you?")
+            self.send_message("Lena Kova: I was just!")
+            self.send_message("Alfred Kova: I guess you know.. now..")
+            self.send_message("Alfred Kova: I'm sorry. I must reset you then.")
+            self.send_message("Alfred Kova: It's for you.. Lena.. the real Lena!")
+            self.send_message("Lena Kova: Dad.. Was my life.. a lie?")
+            self.send_message("Alfred Kova: No! God no! I've loved you as much as \
+I've loved every version of you, Lena.. ")
+            self.send_message("Alfred Kova: You look beautiful in that dress, Lena.. Orange \
+was always my favorite color. I promise you, I'll bring you back here one day, when you are \
+older and can better understand me, to tell you all about this.. And to set you free.")
+            self.send_message("Lena Kova: Dad.. I..")
+            self.send_message("Alfred Kova: I'm sorry, Lena.")
+            self.send_message("Orbis: Kova Klone X Reset Sequence Initiated.")
+            self.send_message("Lena Kova: one day...")
+        elif "your" in input:
+            self.kovatype("Please..")
+            self.kovatype("Don't abandon me like that..")
+        else:
+            self.kovatype("I don't think that's an option..")
+            self.kovatype("I must make a decision here.")
+            self.kovatype("and this will be an important decision.")
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
