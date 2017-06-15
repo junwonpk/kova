@@ -822,8 +822,8 @@ I'm gonna crawl out through this vent.")
         else:
             self.kovatype("Yeah! I got this! :)")
         self.kovatype("Oh! I hear my father's voice coming from the left vent.") 
-        self.kovatype("I should go ask him for help. He'll scold me for sure, but \
-won't be as bad as being taken to him by the guards or his scientists.") 
+        self.kovatype("I should go ask him for help!")
+        self.kovatype("Oh, I'm so getting grounded for this...")
         user_data["chapter"] = 29
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
