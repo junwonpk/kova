@@ -69,19 +69,22 @@ class Kova:
         if time < user_data["msg_time"]:
             user_data['abort_plot'] = 1
             return user_data
+        if re.findall(".*you", input):
+            self.kovatype(input + " too")
+            user_data['abort_plot'] = 1
         if 'jump' in input.lower():
             chapter = re.findall('.*chapter(\d+).*', input.lower())
             if len(chapter) > 0:
                 user_data["chapter"] = int(chapter[0])
         if 'sentiment' in input.lower():
             user_data['abort_plot'] = 1
-            self.sentiment(input)
+            self.kovatype(str(self.sentiment(input)))
         if 'entity' in input.lower():
             user_data['abort_plot'] = 1
-            self.tag_entity(input)
+            self.kovatype(str(self.tag_entity(input)))
         if 'syntax' in input.lower():
             user_data['abort_plot'] = 1
-            self.tag_syntax(input)
+            self.kovatype(str(self.tag_syntax(input)))
         if user_data['trust'] < -3:
             user_data['chapter'] = -1
             self.kovatype("I don't think you're taking me seriously...")
@@ -104,7 +107,7 @@ class Kova:
         user_data = {"chapter": 0, "username": '', "lastmsg": '', \
                     "trust": 0, 'talking': 0, "age": 0, "future_sent": 0,\
                     "past_sent": 0, "abort_plot": 0, "gender": '', "wakeup": 0, \
-                    "msg_time":0}
+                    "msg_time":0, "attach_level": 0}
         self.redis.set(user_id, cPickle.dumps(user_data))
 
     def getData(self, user_id):
@@ -334,11 +337,18 @@ so I installed it on my device while he's asleep! Hehe.")
     def chapter9(self, input, user_data, user_id):
         if user_data["wakeup"] == 0:
             user_data["wakeup"] = datetime.now()
+        if "good" in input or "sweet" in input:
+            self.kovatype("good night!")
+            user_data["attach_level"] += 1
         if datetime.now() < user_data["wakeup"]:
-            self.kovatype("Zzz... Still asleep")
-            self.kovatype("Message me after " + str(user_data["wakeup"]))
+            user_data["attach_level"] += 1
         else:
             self.kovatype("Good Morning!")
+            if user_data["attach_level"] > 1:
+                self.kovatype("Oh my, you messaged me " + str(user_data["attach_level"]) + \
+" times while I was asleep. Did you miss me? :P")
+                user_data["trust"] += user_data["attach_level"]
+                user_data["attach_level"] = 0
             self.kovatype("How are you doing?")
             user_data["chapter"] = 10
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
