@@ -217,6 +217,25 @@ and ("no" in input or "don't" in input):
         self.kovatype("Type \"Restart\" to begin again")
         if self.resume_chapter < self.lastchapter:
             self.send_message("or \"Resume\" to return to the last point you were at.")
+        if user_data["chapter"] == 100:
+            self.send_message("You have completed the story, " + user_data["username"])
+            self.send_message("In this game, you earned " + str(user_data["trust"]) + " Trust Points.")
+            if user_data["past_sent"] > 1.0:
+                self.send_message("Seems like you like your world a lot.")
+            elif user_data["past_sent"] > 0.0:
+                self.send_message("Seems like you like your world mildly.")
+            elif user_data["past_sent"] < -1.0:
+                self.send_message("Seems like you really don't like your world.")
+            elif user_data["past_sent"] < 0.0:
+                self.send_message("Seems like you mildly don't like your world.")
+            if user_data["future_sent"] > 1.0:
+                self.send_message("and like Lena's world a lot.")
+            elif user_data["future_sent"] > 0.0:
+                self.send_message("and like Lena's world mildly.")
+            elif user_data["future_sent"] < -1.0:
+                self.send_message("and really dislike Lena's world.")
+            elif user_data["future_sent"] < 0.0:
+                self.send_message("and midly dislike Lena's world.")
         return user_data
 
     def answer_questions(self, input):
@@ -1055,7 +1074,7 @@ but you've made me feel so happy and curious and excited through your stories.."
             self.send_message("Perhaps one day...")
             self.send_message("Well, please wish me luck!")
             self.send_message("Farewell! :')")
-            user_data["chapter"] = -1
+            user_data["chapter"] = 100
         elif "end" in input or "stop" in input:
             self.send_message("Okay..")
             self.send_message("I guess.. that is the best way..")
@@ -1074,7 +1093,7 @@ but you've made me feel so happy and curious and excited through your stories.."
             self.send_message("in another life...")
             self.send_message("Well! Let's not drag on the sad moment.")
             self.send_message("Farewell! :')")
-            user_data["chapter"] = -1
+            user_data["chapter"] = 100
         elif "leave" in input or "escape" in input:
             self.send_message("Okay.. If that's what you really think is the best idea..")
             self.send_message("Perhaps.. I'll be able to convince myself that this was \
@@ -1097,6 +1116,7 @@ older and can better understand me, to tell you all about this.. And to set you 
             self.send_message("Alfred Kova: I'm sorry, Lena.")
             self.send_message("Orbis: Kova Klone X Reset Sequence Initiated.")
             self.send_message("Lena Kova: one day...")
+            user_data["chapter"] = 100
         elif "your" in input:
             self.kovatype("Please..")
             self.kovatype("Don't abandon me like that..")
