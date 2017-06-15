@@ -537,9 +537,9 @@ better than anyone here.")
     def chapter17(self, input, user_data, user_id):
         sentiment = self.sentiment(input)
         if sentiment.score >= 0:
-            self.kovatype("I'm really excited! 🌺🌸") 
+            self.kovatype("I'm really excited!") 
         if sentiment.score < 0:
-            self.kovatype("Okay, but I'm really excited! 🌺🌸")
+            self.kovatype("Okay, but I'm really excited!")
         self.kovatype("Ah crap") 
         self.kovatype("I forgot to turn off my Starbucks setting.") 
         self.kovatype("Just got a notification that my Frappucino is ready, cuz \
