@@ -1053,9 +1053,8 @@ but you've made me feel so happy and curious and excited through your stories.."
             self.send_message("like " + user_data["celebrity"] + "!")
             self.send_message("I hoped to learn more about them through you.. Haha..")
             self.send_message("Perhaps one day...")
-            self.send_message("Good Bye Then! Please wish me luck!")
-            self.send_message("Farewell!!! :')")
-            self.send_message("...")
+            self.send_message("Well, please wish me luck!")
+            self.send_message("Farewell! :')")
             user_data["chapter"] = -1
         elif "end" in input or "stop" in input:
             self.send_message("Okay..")
@@ -1074,9 +1073,9 @@ but you've made me feel so happy and curious and excited through your stories.."
             self.send_message("Perhaps...")
             self.send_message("in another life...")
             self.send_message("Well! Let's not drag on the sad moment.")
-            self.send_message("Farewell!!! :')")
+            self.send_message("Farewell! :')")
             user_data["chapter"] = -1
-        elif "leave" in input:
+        elif "leave" in input or "escape" in input:
             self.send_message("Okay.. If that's what you really think is the best idea..")
             self.send_message("Perhaps.. I'll be able to convince myself that this was \
 just a horrible nightmare")
@@ -1102,8 +1101,8 @@ older and can better understand me, to tell you all about this.. And to set you 
             self.kovatype("Please..")
             self.kovatype("Don't abandon me like that..")
         else:
-            self.kovatype("I don't think that's an option..")
-            self.kovatype("I must make a decision here.")
-            self.kovatype("and this will be an important decision.")
+            self.kovatype("I don't think that's a good idea..")
+            self.kovatype("I must make a serious decision here.")
+            self.kovatype("An important decision.")
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
