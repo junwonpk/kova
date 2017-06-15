@@ -165,7 +165,10 @@ and ("no" in input or "don't" in input):
 
     def extract_gender(self, input):
         entities = self.tag_entity(input)
-        return entities[0].name
+        if len(entities) > 0:
+            return entities[0].name
+        else:
+            return None
 
     def extract_age(self, input):
         syntax = self.tag_syntax(input)
@@ -215,6 +218,19 @@ and ("no" in input or "don't" in input):
         return user_data
 
     def answer_questions(self, input):
+        elif "why" in input:
+            if "me" in input:
+                self.kovatype("No real reason. Just random chance! Isn't that more exciting though?")
+                return True
+            if "cs" in input or "computer science" in input:
+                self.kovatype("To make my imaginations come true, of course! By making awesome softwares! :)")
+                return True
+            if "humanities" in input or "comp lit" in input or "english" in input or "history" in input:
+                self.kovatype("Humanities is cool too, but I'm personally more of a STEM person. :P")
+                return True
+            else:
+                self.kovatype("I think the answer is clear.")
+                return True
         if re.findall("i\sl\wv\w?\s\w?\w?u", input) or re.findall("i\slike\s\w?\w?u", input):
             self.kovatype("Awww Thank You! :) <3")
             return True
@@ -242,9 +258,13 @@ and ("no" in input or "don't" in input):
             return True
         elif "bitch" in input or "whore" in input:
             self.kovatype("Hey! Don't say that! >:(")
-        elif "what" in input:
+        elif "what" in input:            
             if "do" in input and 'u' in input:
                 return False
+            if "fashion" in input:
+                self.kovatype("Fashion Advisors? They're AI services that are pick\
+and print the best style for you on that day!")
+                return True
             if "shower" in input:
                 self.kovatype("Shower aisle? It's the aisle that you walk through \
 where the walls spray water and soap on your body. Did people not take showers in your time?")
@@ -266,19 +286,6 @@ life than the government does.")
         elif "where" in input:
             if "home" in input or "live" in input:
                 self.kovatype("I live in Palo Alto, California. Heart of Silicon Valley")
-                return True
-        elif "why" in input:
-            if "me" in input:
-                self.kovatype("No real reason. Just random chance! Isn't that more exciting though?")
-                return True
-            if "cs" in input or "computer science" in input:
-                self.kovatype("To make my imaginations come true, of course! By making awesome softwares! :)")
-                return True
-            if "humanities" in input or "comp lit" in input or "english" in input or "history" in input:
-                self.kovatype("Humanities is cool too, but I'm personally more of a STEM person. :P")
-                return True
-            else:
-                self.kovatype("I think the answer is clear.")
                 return True
         elif "how" in input:
             if "contact" in input:
@@ -542,9 +549,13 @@ text you without her seeing me")
         return user_data
 
     def chapter14(self, input, user_data, user_id):
-        entities = self.tag_entity(input)
-        self.kovatype("Haha I guess that's something that didn't change over the 100 years.")
-        self.kovatype(entities[0].name.title() + " occupies a lot of my time too!")
+        if "nothing much" in input:
+            self.kovatype("Haha. Not much going on? Sounds peaceful! :)")
+        else:
+            entities = self.tag_entity(input)
+            self.kovatype("Haha I guess that's something that didn't change over the 100 years.")
+            if len(entities) > 0:
+                self.kovatype(entities[0].name.title() + " occupies a lot of my time too!")
         self.kovatype("Mom went to a VR cafe with her friends.") 
         self.kovatype("They're going to checkout the new Euro Tour Package until \
 lunch.") 
@@ -569,7 +580,7 @@ better than anyone here.")
         self.kovatype("Well, I'm at a hair salon for a haircut right now.") 
         self.kovatype("I just reserved a seat and ordered a Monica Cut.") 
         self.kovatype("She's the celebrity that many of my classmates like too")
-        self.kovatype("Do you like any celebrity? Which one?")
+        self.kovatype("Do you like any celebrities? Which one?")
         user_data["chapter"] = 16
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
@@ -753,13 +764,18 @@ to be like my father and work for Orbis!")
         return user_data
 
     def chapter25(self, input, user_data, user_id):
-        sentiment = self.sentiment(input)
-        if sentiment.score >= 0:
-            self.kovatype("I'm glad you think so!") 
-            user_data["future_sent"] += 1
-        if sentiment.score < 0:
-            self.kovatype("Well, it's all still years into the future")
-            self.kovatype("I'll keep your advice in mind :)")
+        if "stanford" in input.lower():
+            if "student" in input.lower() or "go to" in input.lower() or \
+"attend" in input.lower() or "professor" in input.lower():
+                
+        else:
+            sentiment = self.sentiment(input)
+            if sentiment.score >= 0:
+                self.kovatype("I'm glad you think so!") 
+                user_data["future_sent"] += 1
+            if sentiment.score < 0:
+                self.kovatype("Well, it's all still years into the future")
+                self.kovatype("I'll keep your advice in mind :)")
         self.kovatype("Wait a minute. That's strange. I've been to Orbis many times, and \
 my dad hasn't shown me this building a single time.") 
         self.kovatype("A kid asked about it, and apparently we aren't allowed to go in. \
@@ -786,8 +802,8 @@ me if I stay behind.")
         self.kovatype("I thought I'll have to climb through a window or something.") 
         self.kovatype("Well, it's just a company after all. Not like a government agency.") 
         self.kovatype("Hmm. Inside is not that different from other buildings here.") 
-        self.kovatype("But it's weird there aren't any signs or directions or anything at all.") 
-        self.kovatype("Just white walls and") 
+        self.send_message("But it's weird there aren't any signs or directions or anything at all.") 
+        self.send_message("Just white walls and") 
         self.send_message("OH NO! I HEAR FOOTSTEPS COMING THIS WAY! WHAT DO I DO? WHAT DO I DO!!!") 
         user_data["chapter"] = 27
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
