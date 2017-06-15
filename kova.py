@@ -273,7 +273,7 @@ where the walls spray water and soap on your body. Did people not take showers i
         return user_data
 
     def chapter3(self, input, user_data, user_id):
-        year = extract_age(input)
+        year = self.extract_age(input)
         if self.curr_year == year:
             self.kovatype("Wow! This time portal is actually working then!")
             self.kovatype("I'm texting you from " + str(self.curr_year + 100) + ". :P")
