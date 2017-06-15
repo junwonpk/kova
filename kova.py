@@ -229,6 +229,12 @@ class Kova:
                 self.kovatype("Shower aisle? It's the aisle that you walk through \
 where the walls spray water and soap on your body. Did people not take showers in your time?")
                 return True
+            if "orbis" in input:
+                self.kovatype("Orbis?")
+                self.kovatype("Only the biggest company in the world???")
+                self.kovatype("It practically wields more influence on our daily \
+life than the government does.")
+                return True
         elif "who" in input:
             if "father" in input:
                 self.kovatype("My father is Alfred Kova, VP of Data Science at Orbis")
@@ -356,7 +362,7 @@ so I installed it on my device while he's asleep! Hehe.")
             self.kovatype("You are " + str(age) + "?")
             self.kovatype("Sweet. I'm 16!")
         self.kovatype("I live in Palo Alto, California.")
-        self.kovatype("It probably looks very different from your wolrd's Palo Alto though.")
+        self.kovatype("It probably looks very different from your world's Palo Alto though.")
         self.kovatype("Also, I kinda can infer from your name, but don't wanna make assumptions.")
         self.kovatype("What gender do you identify with?")
         user_data["chapter"] = 7
@@ -608,7 +614,7 @@ exciting!")
             self.kovatype("Wow, this place is like a giant playground.") 
             self.kovatype("There are so many fun things going on everywhere.")
             self.kovatype("All these robots that must be at least a decade ahead of \
-    what I see out in the city.")
+what I see out in the city.")
             user_data["chapter"] = 20
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
@@ -664,12 +670,21 @@ neural link")
         self.kovatype("However, that's the only way to keep growing human population.") 
         self.kovatype("Dad says we're already running out of land space, depsite utilizing \
 all in-land resources, unlike your time when people lived mostly along the coasts.") 
-        self.kovatype("Distopian. Isn't it?") 
+        self.kovatype("What's your opinion on humans migrating to VR?") 
         user_data["chapter"] = 23
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
     def chapter23(self, input, user_data, user_id):
+        sentiment = self.sentiment(input)
+        if sentiment.score >= 0:
+            self.kovatype("Yeah, I can see your point. It's not all that bad.") 
+            self.kovatype("It's scary to think about radically changing my lifestyle, \
+but humans do that all the time when new technology comes out, right? Haha") 
+            user_data["future_sent"] += 1
+        if sentiment.score < 0:
+            self.kovatype("I agree. It's not a thing I'm looking forward to either.")
+            user_data["future_sent"] -= 1
         self.kovatype("Now we're going into the Advanced Research building. \
 This is where my dad works.") 
         self.kovatype("As the Vice President of Data Science, he helps Orbis \
