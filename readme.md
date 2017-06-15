@@ -7,6 +7,6 @@ memorize contextual information with each conversation. dont let chat with one i
 
 recognizing text info using reg ex.
 
-getting around heroku 30 sec timeout
-
 ignoring messages sent to kova before she finished speaking: she processes incoming messages after she's done so it seems lk messages that interrupted her were responses to her last ansewrs. solved by checking message time and ignoring things before her last time.
+
+sleeping for hours when i only have 30 sec until timeout. solved through datetime.
