@@ -69,7 +69,7 @@ class Kova:
         if time < user_data["msg_time"]:
             user_data['abort_plot'] = 1
             return user_data
-        if re.findall(".*you", input):
+        if re.findall("\syou$", input):
             self.kovatype(input + " too")
             user_data['abort_plot'] = 1
         if 'jump' in input.lower():
