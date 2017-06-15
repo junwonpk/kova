@@ -49,9 +49,9 @@ class Kova:
             user_data = self.epilogue(input, user_data)
         else:
             chapter = self.chapters[user_data['chapter']]
-            chapter(input, user_data, user_id)
+            user_data = chapter(input, user_data, user_id)
+            self.resume_chapter = user_data['chapter']
         
-        self.resume_chapter = user_data['chapter']
         user_data['talking'] = 0
         self.setData(user_id, user_data)
         return
@@ -824,7 +824,7 @@ I'm gonna crawl out through this vent.")
             self.kovatype("I think I'm a little scared...")
         else:
             self.kovatype("Yeah! I got this! :)")
-        self.kovatype("Oh! I hear my father's voice coming from the left vent.") 
+        self.kovatype("Oh! I hear my father's voice coming from the left.") 
         self.kovatype("I should go ask him for help!")
         self.kovatype("Oh, I'm so getting grounded for this...")
         user_data["chapter"] = 29
@@ -833,8 +833,8 @@ I'm gonna crawl out through this vent.")
 
     def chapter29(self, input, user_data, user_id):
         #if hide
-        self.kovatype("Oh wow. This IS a really cool place.") 
-        self.kovatype("There seem to be a hundred scientists, all working in one room.") 
+        self.kovatype("Oh wow.. This IS a really cool place.") 
+        self.kovatype("There must be a hundred scientists in that one gigantic room.") 
         self.kovatype("\"Room\" doesn't do this place justice. It's a giant dome that are all screens.") 
         self.kovatype("What are they watching? Each screen seems to be just ordinary people's days.") 
         user_data["chapter"] = 30
