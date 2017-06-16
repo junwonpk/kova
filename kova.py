@@ -480,8 +480,7 @@ so I installed it on my device while he's asleep! Hehe.")
         if "no" in input.lower() and "you" in input.lower():
             self.kovatype("Please?")
             self.kovatype("Come on!")
-        if gender != None:
-            gender = self.extract_gender(input).lower()        
+        gender = self.extract_gender(input)        
         if not gender:
             if "you" in input.lower():
                 self.kovatype("Well, I'm a female and identify myself as a girl. She, her pronouns.")
@@ -490,6 +489,7 @@ so I installed it on my device while he's asleep! Hehe.")
             self.kovatype("No No That's not what I'm asking")
             self.kovatype("I mean, what's your gender?")
         if gender:
+            gender = gender.lower()
             user_data["gender"] = gender
             self.kovatype("Nice nice. Good to have a " + gender + " friend from a hundred years ago!")
             if "you" in input.lower():
