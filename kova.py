@@ -526,7 +526,6 @@ so I installed it on my device while he's asleep! Hehe.")
         self.kovatype("I had to wait until my dad fell asleep, so... kinda late")
         self.kovatype("Tomorrow's an exciting day for me, so I'm gonna go sleep.")
         self.kovatype("Thanks for being my friend, and talk to you in the morning! <3")
-        self.kovatype("Message me in like 8 hours. I'll check for your message as soon as I wake up :)")
         user_data["wakeup"] = datetime.now() + timedelta(hours=8)
         user_data["chapter"] = 9
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
