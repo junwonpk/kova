@@ -267,6 +267,8 @@ and ("no" in input or "don't" in input):
                 self.kovatype("I think the answer is clear.")
                 return True
         elif "what" in input:
+            if "your gender" in input or "your sex" in input:
+                self.kovatype("I'm a female, and I identify myself as a girl. :)")
             if "going to do" in input:
                 return False
             if "fashion" in input:
@@ -341,6 +343,9 @@ life than the government does.")
                 self.kovatype("June 14th, 2101. Why do you ask? Will you give me a birthday present?")
                 return True
         elif "where" in input:
+            if "from" in input or "live" in input:
+                self.kovatype("I'm from Palo Alto, California. Heart of Silicon Valley")
+                return True
             if "home" in input or "live" in input:
                 self.kovatype("I live in Palo Alto, California. Heart of Silicon Valley")
                 return True
