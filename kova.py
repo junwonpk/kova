@@ -51,7 +51,7 @@ class Kova:
         else:
             chapter = self.chapters[user_data['chapter']]
             user_data = chapter(input, user_data, user_id)
-            if user_data['chapter'] in self.chapters.keys():
+            if user_data['chapter'] > 0 and user_data['chapter'] < self.lastchapter:
                 self.resume_chapter = user_data['chapter']
         
         user_data['talking'] = 0
@@ -287,7 +287,7 @@ life than the government does.")
                 self.kovatype("but then I'd have to kill you...")
                 self.kovatype("Haha Just Kidding!")
                 self.kovatype("But I actually do think it's unethical to share that info with you,")
-                self.kovatype("so I'll keep that info from you, my friend. :) for your safety..")
+                self.kovatype("so I'll keep that info from you, my friend. For your safety.. :)")
                 return True
         if re.findall("i\sl\wv\w?\s\w?\w?u", input) or re.findall("i\slike\s\w?\w?u", input):
             self.kovatype("Awww Thank You! :) <3")
