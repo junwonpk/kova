@@ -71,8 +71,7 @@ class Kova:
             user_data = self.getData(user_id)
             user_data["chapter"] = user_data["resume"] - 1
             self.setData(user_id, user_data)
-            self.kovatype("resuming")
-            self.kovatype(str(user_data["chapter"]))
+            self.kovatype("ORBIS TIME PORTAL IS REWINDING TIME")
         if user_id not in self.redis.keys(): # if user first time
             self.initUser(user_id)
 
