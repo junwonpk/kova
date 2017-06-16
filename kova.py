@@ -16,6 +16,7 @@ class Kova:
     def __init__(self):
         self.redis = redis.from_url(os.environ.get("REDISCLOUD_URL"))
         self.curr_year = 2017
+        self.curr_chapter = 0
         self.user_id = 0
         self.next = 0
         self.time = 0
@@ -40,6 +41,7 @@ class Kova:
             return
         user_data['lastmsg'] = input
         user_data['talking'] = 1
+        self.curr_chapter = user_data['chapter']
         user_data = self.catch(input, user_data, time)
         if user_data['abort_plot'] == 1:
             user_data['abort_plot'] = 0
@@ -352,18 +354,19 @@ life than the government does.")
         elif "sweet dreams" in input:
             self.kovatype("good night~")
             return True
-        elif "bye" in input:
-            self.kovatype("see you later!")
-            return True
-        elif "later" in input:
-            self.kovatype("ttyl!")
-            return True
-        elif "get back to you" in input:
-            self.kovatype("see you!")
-            return True
-        elif "ttyl" in input:
-            self.kovatype("bye bye!")
-            return True
+        elif self.curr_chapter != -1:
+            if "bye" in input:
+                self.kovatype("see you later!")
+                return True
+            elif "later" in input:
+                self.kovatype("ttyl!")
+                return True
+            elif "get back to you" in input:
+                self.kovatype("see you!")
+                return True
+            elif "ttyl" in input:
+                self.kovatype("bye bye!")
+                return True
         return False
 
     """ ACT 1 """
