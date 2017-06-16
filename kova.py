@@ -267,8 +267,16 @@ and ("no" in input or "don't" in input):
                 self.kovatype("I think the answer is clear.")
                 return True
         elif "what" in input:
+            if "portal" in input and "do" in input:
+                self.kovatype("The time portal lets me communicate with another time.")
+                self.kovatype("It's letting me talk to you right now!")
+                return True
+            if "what are you" in input:
+                self.kovatype("I'm Lena! and I just wanna be your friend..")
+                return True
             if "your gender" in input or "your sex" in input:
                 self.kovatype("I'm a female, and I identify myself as a girl. :)")
+                return True
             if "going to do" in input:
                 return False
             if "fashion" in input:
@@ -335,6 +343,14 @@ life than the government does.")
         elif "bitch" in input or "whore" in input:
             self.kovatype("Hey! Don't say that! >:(")
         elif "who" in input:
+            if "president" in input and "2020" not in input:
+                self.kovatype("The president of United State is Libera Haya right now.")
+                self.kovatype("Haha. Why do you ask? You wouldn't know her. :P")
+                return True
+            if "president" in input and ("2020" in input or "election" in input or "become" in input):
+                self.kovatype("Huh? What is this? A history quiz?")
+                self.kovatype("I can't remember the president from a century ago from the top of my head!")
+                return True
             if "father" in input:
                 self.kovatype("My father is Alfred Kova, VP of Data Science at Orbis")
                 return True
