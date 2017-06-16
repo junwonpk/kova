@@ -686,21 +686,25 @@ better than anyone here.")
         return user_data
 
     def chapter16(self, input, user_data, user_id):
-        self.kovatype("Sorry... One sec...") 
-        self.kovatype("Getting a haircut...") 
-        self.kovatype("Done!") 
-        entities = self.tag_entity(input)
-        self.kovatype("Awesome! I'll remember that you like " + entities[0].name.title() + "! :)") 
-        user_data["celebrity"] = entities[0].name.title()
-        self.kovatype("I always wonder when individual households will be able to purchase \
-these haircut drones.")
-        self.kovatype("It's still illegal, because they're equipped with sharp \
-blades and can be used as weapons.")
-        self.kovatype("Maybe someone from my future will talk to me one day to \
-chat with me about each other's worlds!")
-        self.kovatype("Guess what? I'm visiting dad's workplace today! That's why \
-I got my haircut. :)")
-        user_data["chapter"] = 17
+        if "no" in input.lower():
+            self.kovatype("Oh, come on~") 
+            self.kovatype("Tell me just one! From your time! :)")
+        else:
+            self.kovatype("Sorry... One sec...") 
+            self.kovatype("Getting a haircut...") 
+            self.kovatype("Done!") 
+            entities = self.tag_entity(input)
+            self.kovatype("Awesome! I'll remember that you like " + entities[0].name.title() + "! :)") 
+            user_data["celebrity"] = entities[0].name.title()
+            self.kovatype("I always wonder when individual households will be able to purchase \
+    these haircut drones.")
+            self.kovatype("It's still illegal, because they're equipped with sharp \
+    blades and can be used as weapons.")
+            self.kovatype("Maybe someone from my future will talk to me one day to \
+    chat with me about each other's worlds!")
+            self.kovatype("Guess what? I'm visiting dad's workplace today! That's why \
+    I got my haircut. :)")
+            user_data["chapter"] = 17
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
 
