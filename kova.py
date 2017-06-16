@@ -264,9 +264,7 @@ and ("no" in input or "don't" in input):
                 self.kovatype("I think the answer is clear.")
                 return True
         elif "what" in input:
-            if "going to do":
-                return False
-            if "do" in input and 'u' in input:
+            if "going to do" in input:
                 return False
             if "fashion" in input:
                 self.kovatype("Fashion Advisors? They're AI services that are pick\
@@ -281,6 +279,15 @@ where the walls spray water and soap on your body. Did people not take showers i
                 self.kovatype("Only the biggest company in the world???")
                 self.kovatype("It practically wields more influence on our daily \
 life than the government does.")
+                return True
+            if "do" in input and 'u' in input:
+                return False
+            if "happen" in input and ("future" in input or "then" in input):
+                self.kovatype("I could tell you")
+                self.kovatype("but then I'd have to kill you...")
+                self.kovatype("Haha Just Kidding!")
+                self.kovatype("But I actually do think it's unethical to share that info with you,")
+                self.kovatype("so I'll keep that info from you, my friend. :) for your safety..")
                 return True
         if re.findall("i\sl\wv\w?\s\w?\w?u", input) or re.findall("i\slike\s\w?\w?u", input):
             self.kovatype("Awww Thank You! :) <3")
@@ -644,7 +651,7 @@ if it's before or after your year.")
 
     def chapter15(self, input, user_data, user_id):
         input = input.lower()
-        if "y" in input or "do" in input or "know" in input or "of course" in input:
+        if "y" in input or "do" in input or "know" in input or "of course" in input or "duh" in input:
             self.kovatype("Alright! Then you know what I'm talking about!") 
             self.kovatype("although my world's VR is probably a lot more advanced than \
 yours. Haha.") 
