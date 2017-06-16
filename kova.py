@@ -21,7 +21,6 @@ class Kova:
         self.next = 0
         self.time = 0
         self.typespeed = 0.05
-        self.resume_chapter = 0
         self.lastchapter = 40
         self.chapters = {}
         for chapter in xrange(self.lastchapter + 1):
@@ -53,8 +52,8 @@ class Kova:
         else:
             chapter = self.chapters[user_data['chapter']]
             user_data = chapter(input, user_data, user_id)
-            if user_data['chapter'] > 0 and user_data['chapter'] < self.lastchapter:
-                self.resume_chapter = user_data['chapter']
+            if user_data['chapter'] in range(1, self.lastchapter):
+                user_data['resume'] = user_data['chapter']
         
         user_data['talking'] = 0
         self.setData(user_id, user_data)
@@ -70,8 +69,10 @@ class Kova:
             self.restart(user_id)
         if input.lower() == 'resume':
             user_data = self.getData(user_id)
-            user_data["chapter"] = self.resume_chapter - 1
+            user_data["chapter"] = user_data["resume"] - 1
             self.setData(user_id, user_data)
+            self.kovatype("resuming")
+            self.kovatype(str(user_data["chapter"]))
         if user_id not in self.redis.keys(): # if user first time
             self.initUser(user_id)
 
@@ -136,7 +137,8 @@ and ("no" in input or "don't" in input):
         user_data = {"chapter": 0, "username": '', "lastmsg": '', \
                     "trust": 0, 'talking': 0, "age": 0, "future_sent": 0,\
                     "past_sent": 0, "abort_plot": 0, "gender": '', "wakeup": 0, \
-                    "msg_time":0, "attach_level": 0, "flag": 0, "celebrity": ''}
+                    "msg_time":0, "attach_level": 0, "flag": 0, "celebrity": '', \
+                    "resume":0}
         self.redis.set(user_id, cPickle.dumps(user_data))
 
     def getData(self, user_id):
@@ -217,7 +219,7 @@ and ("no" in input or "don't" in input):
         self.kovatype("Thank you for chatting with Lena Kova")
         self.kovatype("Lena Kova is developed by Junwon Park at Stanford University")
         self.kovatype("Type \"Restart\" to begin again")
-        if self.resume_chapter < self.lastchapter:
+        if user_data["resume"] < self.lastchapter:
             self.send_message("or \"Resume\" to return to the last point you were at.")
         if user_data["chapter"] == 100:
             self.send_message("You have completed the story, " + user_data["username"])
