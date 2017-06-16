@@ -302,13 +302,6 @@ life than the government does.")
                 self.kovatype("Not awkward at all..")
                 return True
         if re.findall("\w*u\s\w?r\w?\s([\w\s]+)", input):
-            if "real" in input:
-                self.kovatype("Well, of course! Stop being silly, Hahaha.")
-                return True
-            if "bot" in input or "algorithm" in input or "fake" in input:
-                self.kovatype("What? Don't be ridiculous. Hahaha.")
-                self.kovatype("I am a real breathing person. :)")
-                return True
             thing = re.findall("\w*u\s\w?r\w?\s([\w\s]+)", input)[0]
             if self.sentiment(input).score <= 0.1:
                 self.kovatype("What??? Not sure why you would say I am " + thing + "...")
@@ -316,6 +309,13 @@ life than the government does.")
                 self.kovatype("Haha! Thank you! I'd like to think I'm " + thing + "!")
             return True
         if re.findall("\w?r\w?\s\w*u\s([\w\s]+)", input):
+            if "real" in input:
+                self.kovatype("Well, of course! Stop being silly, Hahaha.")
+                return True
+            if "bot" in input or "algorithm" in input or "fake" in input:
+                self.kovatype("What? Don't be ridiculous. Hahaha.")
+                self.kovatype("I am a real breathing person. :)")
+                return True
             thing = re.findall("\w?r\w?\s\w*u\s([\w\s]+)", input)[0]
             if self.sentiment(input).score <= 0.1:
                 self.kovatype("No... I am not " + thing + "...")
