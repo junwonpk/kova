@@ -526,6 +526,8 @@ so I installed it on my device while he's asleep! Hehe.")
         self.kovatype("I had to wait until my dad fell asleep, so... kinda late")
         self.kovatype("Tomorrow's an exciting day for me, so I'm gonna go sleep.")
         self.kovatype("Thanks for being my friend, and talk to you in the morning! <3")
+        self.kovatype("Junwon: In production, Lena won't respond for 8 hours. \
+I disabled it for now so you don't have to wait!")
         user_data["wakeup"] = datetime.now() + timedelta(hours=8)
         user_data["chapter"] = 9
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
@@ -544,8 +546,6 @@ so I installed it on my device while he's asleep! Hehe.")
         # if datetime.now() < user_data["wakeup"]:
         #     user_data["attach_level"] += 1
         else:
-            self.kovatype("Junwon: In production, Lena won't respond for 8 hours. \
-I disabled it for now so you don't have to wait!")
             self.kovatype("Good Morning!")
             if user_data["attach_level"] > 1:
                 self.kovatype("Oh my, you messaged me " + str(user_data["attach_level"] - 1) + \
@@ -609,6 +609,8 @@ for breakfast.")
         self.kovatype("I'm gonna turn this chat off while I'm with mom, so I don't \
 get caught")
         self.kovatype("See you after breakfast!")
+        self.kovatype("Junwon: In production, Lena won't respond for 2 hours. \
+I disabled it for now so you don't have to wait!")
         user_data["wakeup"] = datetime.now() + timedelta(hours=2)
         user_data["chapter"] = 13
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
@@ -624,8 +626,6 @@ get caught")
         # if datetime.now() < user_data["wakeup"]:
         #     user_data["attach_level"] += 1
         else:
-            self.kovatype("Junwon: In production, Lena won't respond for 2 hours. \
-I disabled it for now so you don't have to wait!")
             self.kovatype("Hey, Sorry I got back late") 
             self.kovatype("Mom and I came to Downtown Palo Alto and I couldn't find the time to \
 text you without her seeing me") 
@@ -725,6 +725,8 @@ leave for a sec.")
         self.kovatype("They'll show me some advanced research today too, so should be \
 exciting!")
         self.kovatype("Bye!")
+        self.kovatype("Junwon: In production, Lena won't respond for 2 hours. \
+I disabled it for now so you don't have to wait!")
         user_data["chapter"] = 19
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         user_data["wakeup"] = datetime.now() + timedelta(hours=2)
@@ -740,8 +742,6 @@ exciting!")
         # if datetime.now() < user_data["wakeup"]:
         #     user_data["attach_level"] += 1
         else:
-            self.kovatype("Junwon: In production, Lena won't respond for 2 hours. \
-I disabled it for now so you don't have to wait!")
             self.kovatype("Hey") 
             self.kovatype("I was just about to text you too!") 
             self.kovatype("I arrived at Orbis about half an hour ago, but I couldn't \
