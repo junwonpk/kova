@@ -571,8 +571,8 @@ so I installed it on my device while he's asleep! Hehe.")
             user_data["attach_level"] += 1
         elif datetime.now() < user_data["wakeup"]:
             self.send_message("Lena's Virtual Assistant: Lena is asleep right now.")
-            self.send_message("Lena's Virtual Assistant: Please message her after " + str((user_data["wakeup"] - datetime.now()))[0] + "hour(s) and " + \
-            str((user_data["wakeup"] - datetime.now()))[2:4] + "minute(s) later!")
+            self.send_message("Lena's Virtual Assistant: Please message her after " + str((user_data["wakeup"] - datetime.now()))[0] + " hour(s) and " + \
+            str((user_data["wakeup"] - datetime.now()))[2:4] + " minute(s) later!")
             user_data["attach_level"] += 1
         else:
             self.kovatype("Good Morning!")
@@ -638,9 +638,7 @@ for breakfast.")
         self.kovatype("I'm gonna turn this chat off while I'm with mom, so I don't \
 get caught")
         self.kovatype("See you after breakfast!")
-        self.kovatype("Junwon: In production, Lena won't respond for 2 hours. \
-I disabled it for now so you don't have to wait!")
-        user_data["wakeup"] = datetime.now() + timedelta(hours=2)
+        user_data["wakeup"] = datetime.now() + timedelta(hours=1)
         user_data["chapter"] = 13
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         return user_data
@@ -648,12 +646,10 @@ I disabled it for now so you don't have to wait!")
     """ ACT 3 """
 
     def chapter13(self, input, user_data, user_id):
-        if 1 == 2:
-            self.kovatype("delete this after debug")
-        # if user_data["wakeup"] == 0:
-        #     user_data["wakeup"] = datetime.now()
-        # if datetime.now() < user_data["wakeup"]:
-        #     user_data["attach_level"] += 1
+        if user_data["wakeup"] == 0:
+            user_data["wakeup"] = datetime.now()
+        if datetime.now() < user_data["wakeup"]:
+            user_data["attach_level"] += 1
         else:
             self.kovatype("Hey, Sorry I got back late")
             self.kovatype("Mom and I came to Downtown Palo Alto and I couldn't find the time to \
@@ -758,8 +754,6 @@ leave for a sec.")
         self.kovatype("They'll show me some advanced research today too, so should be \
 exciting!")
         self.kovatype("Bye!")
-        self.kovatype("Junwon: In production, Lena won't respond for 2 hours. \
-I disabled it for now so you don't have to wait!")
         user_data["chapter"] = 19
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
         user_data["wakeup"] = datetime.now() + timedelta(hours=2)
@@ -768,12 +762,10 @@ I disabled it for now so you don't have to wait!")
     """ ACT 4 """
 
     def chapter19(self, input, user_data, user_id):
-        if 1 == 2:
-            self.kovatype("delete this after debug")
-        # if user_data["wakeup"] == 0:
-        #     user_data["wakeup"] = datetime.now()
-        # if datetime.now() < user_data["wakeup"]:
-        #     user_data["attach_level"] += 1
+        if user_data["wakeup"] == 0:
+            user_data["wakeup"] = datetime.now()
+        if datetime.now() < user_data["wakeup"]:
+            user_data["attach_level"] += 1
         else:
             self.kovatype("Hey")
             self.kovatype("I was just about to text you too!")
