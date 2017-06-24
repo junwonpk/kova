@@ -555,8 +555,7 @@ so I installed it on my device while he's asleep! Hehe.")
         self.kovatype("I had to wait until my dad fell asleep, so... kinda late")
         self.kovatype("Tomorrow's an exciting day for me, so I'm gonna go sleep.")
         self.kovatype("Thanks for being my friend, and talk to you in the morning! <3")
-        self.kovatype("Junwon: In production, Lena won't respond for 8 hours. \
-I disabled it for now so you don't have to wait!")
+        self.kovatype("Text me later!)
         user_data["wakeup"] = datetime.now() + timedelta(hours=8)
         user_data["chapter"] = 9
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
@@ -565,15 +564,15 @@ I disabled it for now so you don't have to wait!")
     """ ACT 2 """
 
     def chapter9(self, input, user_data, user_id):
-        if 1 == 2:
-            self.kovatype("delete this after debug")
-        # if user_data["wakeup"] == 0:
-        #     user_data["wakeup"] = datetime.now()
-        # if "good" in input or "sweet" in input or "well" in input:
-        #     self.kovatype("good night!")
-        #     user_data["attach_level"] += 1
-        # if datetime.now() < user_data["wakeup"]:
-        #     user_data["attach_level"] += 1
+        if user_data["wakeup"] == 0:
+            user_data["wakeup"] = datetime.now()
+        if "good" in input or "sweet" in input or "well" in input:
+            self.kovatype("good night!")
+            user_data["attach_level"] += 1
+        elif datetime.now() < user_data["wakeup"]:
+            self.send_message("Lena's Virtual Assistant: Lena is asleep right now.")
+            self.send_message("Lena's Virtual Assistant: Please message her after " + str(user_data["wakeup"].date) + ".")
+            user_data["attach_level"] += 1
         else:
             self.kovatype("Good Morning!")
             if user_data["attach_level"] > 1:
