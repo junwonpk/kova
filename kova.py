@@ -383,7 +383,7 @@ life than the government does.")
         elif "sweet dreams" in input:
             self.kovatype("good night~")
             return True
-        elif self.curr_chapter != -1:
+        elif self.curr_chapter != -1 and self.curr_chapter != 100:
             if "bye" in input:
                 self.kovatype("see you later!")
                 return True
