@@ -571,7 +571,8 @@ so I installed it on my device while he's asleep! Hehe.")
             user_data["attach_level"] += 1
         elif datetime.now() < user_data["wakeup"]:
             self.send_message("Lena's Virtual Assistant: Lena is asleep right now.")
-            self.send_message("Lena's Virtual Assistant: Please message her after " + str(user_data["wakeup"].time()) + ".")
+            self.send_message("Lena's Virtual Assistant: Please message her after " + str((user_data["wakeup"] - datetime.now()).hour()) + "hour(s) and " + \
+            str((user_data["wakeup"] - datetime.now()).minute()) + "minute(s) later!")
             user_data["attach_level"] += 1
         else:
             self.kovatype("Good Morning!")
