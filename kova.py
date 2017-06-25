@@ -730,11 +730,11 @@ better than anyone here.")
         self.kovatype("I forgot to turn off my Starbucks setting.")
         self.kovatype("Just got a notification that my Frappucino is ready, cuz \
 last time, I told them to prepare a Frappucino everytime I approach Starbucks.")
-        self.kovatype("I should pick it up, since I shouldn't waste good coffee, \
+        self.send_message("I should pick it up, since I shouldn't waste good coffee, \
 even if it's all paid for by the government through universal income.")
         self.kovatype("You know, when I was still a young girl, we still had some \
 shops in downtown where human staffs greeted me.")
-        self.kovatype("It'd be cruel to ask any human to spend their time at a shop \
+        self.send_message("It'd be cruel to ask any human to spend their time at a shop \
 working these days, but I miss human service sometimes.")
         user_data["chapter"] = 18
         user_data["msg_time"] = int(datetime.now().strftime('%s'))*1000
