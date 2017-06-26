@@ -1148,6 +1148,7 @@ And also customers will get what they paid for..")
         return user_data
 
     def chapter40(self, input, user_data, user_id):
+        input = input.lower()
         if "free" in input:
             self.send_message("Okay.. I will do it..")
             self.send_message("I will tell them the truth! and we'll flee!")
@@ -1188,7 +1189,7 @@ but you've made me feel so happy and curious and excited through your stories.."
             self.send_message("Well! Let's not drag on the sad moment.")
             self.send_message("Farewell! :')")
             user_data["chapter"] = 100
-        elif "leave" in input or "escape" in input:
+        elif "leave" in input or "escape" in input or "just go" in input:
             self.send_message("Okay.. If that's what you really think is the best idea..")
             self.send_message("Perhaps.. I'll be able to convince myself that this was \
 just a horrible nightmare")
