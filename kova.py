@@ -216,7 +216,7 @@ and ("no" in input or "don't" in input):
     def epilogue(self, input, user_data):
         self.kovatype("Story Over")
         self.kovatype("Thank you for chatting with Vora Kova")
-        self.kovatype("Vora Kova is developed by Junwon Park at Stanford University")
+        self.kovatype("If you enjoyed the chat, please consider sharing Vora with a friend! :)")
         self.kovatype("Type \"Restart\" to begin again")
         if user_data["resume"] < self.lastchapter:
             self.send_message("or \"Resume\" to return to the last point you were at.")
